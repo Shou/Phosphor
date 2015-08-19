@@ -1,0 +1,74 @@
+<script>
+
+var qsa = Document.prototype.querySelectorAll.bind(document)
+
+function views(vs) {
+    var fs = ["", "k", "m", "b"]
+
+    function viewFormat(s) {
+        var ss = s.split("<br>")
+        var cs = ss[0].split(/,/g)
+        var v = cs[0].trim() + fs[cs.length - 1]
+        var w = ss[1] ? "\n\uf06e " + ss[1].split(' ')[0] : ""
+
+        return v + w
+    }
+
+    for (var i = 0, l = vs.length; i < l; i++) {
+        vs[i].dataset.desc = vs[i].innerHTML.split("<br>")[0].trim()
+        vs[i].textContent = viewFormat(vs[i].innerHTML)
+    }
+}
+
+function tf() {
+    time += 100
+
+    var vs = qsa(".c_cat-replies > a, .c_cat-views")
+    if (vs.length > 0) views(vs)
+    else if (time < maxTime)
+        tu = setTimeout(tf, 100)
+}
+
+// this is super dumb but let's pretend it's not
+var maxTime = 1000
+var time = 0
+var tu = setTimeout(tf, 100)
+
+</script>
+
+<div id="realtop">
+<!-- HEADER -->
+<!-- TOPMENU -->
+</div>
+
+<script>
+
+var ns = qsa( "#menu_rcp > a > strong > small"
+           + ", #menu_pm > a > strong > small")
+  , topBar = qsa("#top_bar")[0]
+
+for (var i = 0, l = ns.length; i < l; i++)
+    if (parseInt(ns[i].textContent) > 0)
+        topBar.classList.add("glow")
+
+</script>
+
+<div id="subhuman">
+<!-- NAV -->
+<input id="toggle-submenu" type="checkbox">
+<label for="toggle-submenu"><div></div></label>
+<!-- SUBMENU -->
+</div>
+
+<div id="wrap">
+<!-- BOARD -->
+</div>
+
+<script>
+
+var cs = document.getElementsByTagName("code")
+for (var i = 0, l = cs.length; i < l; i++) cs[i].classList.add("prettyprint")
+
+</script>
+
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
