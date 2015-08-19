@@ -1,5 +1,5 @@
 # Phosphor
-Dark material and responsive theme for Zetaboards, intended successor of the brighter [Monochrome](https://github.com/Shou/Monochrome). Currently undergoing heavy development, it is based on Monochrome's core and already in a barable state.
+Dark material and responsive theme for Zetaboards, intended successor of the brighter [Monochrome](https://github.com/Shou/Monochrome). Currently undergoing heavy development, it is based on Monochrome's core and already in a bearable state.
 
 ## Changes
 
@@ -7,6 +7,7 @@ Dark material and responsive theme for Zetaboards, intended successor of the bri
 * New input animations
 * Input and description consolidation
 * Footer content consolidation
+* Submenu click toggle, replacing hover
 
 ## Features
 
