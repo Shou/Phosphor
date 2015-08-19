@@ -3,11 +3,14 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 
 ## Changes
 
-* New button animations
-* New input animations
-* Input and description consolidation
-* Footer content consolidation
+* [New button animations](https://u.teknik.io/Gvpov9.webm)
+* [New input animations](https://u.teknik.io/wYrF9v.webm)
+* Input and description consolidation (above)
+* [Footer content consolidation](http://i.imgur.com/Nmyrzjb.png)
 * Submenu click toggle, replacing hover
+
+## Planned
+* Better mobile thread view, i.e. leveraging vertical space
 
 ## Features
 
