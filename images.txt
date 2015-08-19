@@ -1,0 +1,209 @@
+
+Navigation Divider
+<span class=nav-div></span>
+
+Navigation Marker
+<span class=nav-mark></span>
+
+Goto Top
+<span class=bunk-button title="who actually uses this button">&uarr;</span>
+
+Forum Rules
+
+
+Report Post
+<span class=bunk-button data-desc="REQUESTING IMMEDIATE SLASHING">report</span>
+
+Default Avatar
+<img src='http://z3.ifrm.com/static/1/default_av.png' alt='No Avatar' class='member' />
+
+Pip Rank Image
+<span class=pip-rank>&#x25CF;</span>
+
+Starting Pip Rank Image
+<span class="pip-rank init-pip-rank">&#x25CF;</span>
+
+Ending Pip Rank Image
+<span class="pip-rank end-pip-rank">&#x25CF;</span>
+
+Avatar Gallery Folder
+
+
+User Preferences Badge
+
+
+Profile Preferences Badge
+
+
+Upload Form Badge
+
+
+PM Manager Badge
+
+
+PM Controls Badge
+
+
+Forward PM
+<span class=bunk-button>forward</span>
+
+Admin CP Menu Icon
+
+
+Report CP Menu Icon
+
+
+PM Menu Icon
+
+
+Preferences Menu Icon
+
+
+Events Icon
+
+
+Stats Icon
+
+
+Active Users Icon
+
+
+Expand
+
+
+Collapse
+
+
+Attachment Icon
+
+
+Board Clock Icon
+
+
+Forum Marker
+<i class="fa fa-folder"></i>
+
+Forum Marker (No New Posts)
+<i class="fa fa-folder-open"></i>
+
+Password Protected Forum
+<i class="fa fa-unlock-alt"></i>
+
+Read-only Forum
+<i class="fa fa-book"></i>
+
+Redirect Forum
+<i class="fa fa-share"></i>
+
+Trash Can
+<i class="fa fa-trash"></i>
+
+New Topic Button
+<span class="bunk-big-butt bunk-plus">new topic</span>
+
+Add Reply Button
+<span class="bunk-big-butt bunk-plus">reply</span>
+
+Locked Post Button
+<span class="bunk-big-butt bunk-jail">closed </span>
+
+Poll Only Post Button
+<span class="bunk-big-butt">poll only</span>
+
+Add Repeating Calendar Event
+<span class="bunk-big-butt">add repeat</span>
+
+Add Calendar Event
+<span class="bunk-big-butt">add event</span>
+
+Plain Folder
+<span class="fa fa-plus-square plain-new folder"></span>
+
+Plain Folder (No new posts)
+<span class="fa fa-plus-square plain folder"></span>
+
+Hot Topic Folder
+<span class="fa fa-fire hot-new folder"></span>
+
+Hot Topic Folder (No new posts)
+<span class="fa fa-fire hot folder"></span>
+
+Poll Folder
+<span class="fa fa-bar-chart poll-new folder"></span>
+
+Poll Folder (No new posts)
+<span class="fa fa-bar-chart poll folder"></span>
+
+Locked Folder
+<span class="fa fa-lock locked folder"></span>
+
+Moved Folder
+<span class="fa fa-share moved folder"></span>
+
+Replied Marker
+<span class="replied-marker"></span>
+
+Delete Post
+<span class=bunk-button>delete</span>
+
+Edit Post
+<span class=bunk-button>edit</span>
+
+Quote Post
+<span class=bunk-button>quote</span>
+
+Multiquote (Inactive)
+
+
+Multiquote (Active)
+
+
+Online Member PM Icon
+<span class="bunk-button online">pm</span>
+
+Online Member (No PM)
+<span class="bunk-button online">on</span>
+
+Offline Member PM Icon
+<span class="bunk-button offline">pm</span>
+
+Offline Member (No PM)
+<span class="bunk-button offline">off</span>
+
+Profile Icon
+<span class=bunk-button>profile</span>
+
+No warnings
+<span>&nbsp;</span>
+
+Warn (Level 1)
+<span class=warning>&#x25A0;</span>
+
+Warn (Level 2)
+<span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span>
+
+Warn (Level 3)
+<span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span>
+
+Warn (Level 4)
+<span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span>
+
+Full warn level
+<span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span><span class=warning>&#x25A0;</span>
+
+Increase Warning
+<i class="fa fa-plus"></i>
+
+Decrease Warning
+<i class="fa fa-minus"></i>
+
+Warning Note
+<i class="fa fa-pencil-square"></i>
+
+Warn Note Marker
+
+
+Warn Level Up Marker
+
+
+Warn Level Down Marker
