@@ -214,7 +214,8 @@ html, body
 #foot_datetime > a,
 #foot_datetime,
 #foot_datetime::after,
-.notice, .error
+.notice, .error,
+.meta_menu > ul
 { display: flex }
 
 .forums
@@ -302,20 +303,23 @@ form[action$="/tasks/"]
 .c_postfoot > td:first-of-type,
 .c_post-attachment,
 .posting > tbody,
-#foot > tbody > tr
+#foot > tbody > tr,
+.meta_menu > ul
 { flex-wrap: wrap }
 
 #top
 { flex-wrap: nowrap
 }
 
-#top
+#top,
+.c_cat-title > ul + a
 { flex: 1 }
 
 .c_cat-title
 { flex: 2 }
 
-.cat-pages > li
+.cat-pages > li,
+.meta_menu > ul > li
 { flex-grow: 1 }
 
 .warning,
@@ -358,12 +362,12 @@ blockquote dl,
 .notice,
 .error,
 .spoiler_toggle,
-.meta_menu a,
 .editby,
 .queued,
 .c_username > a,
 .c_user > .usertitle,
-.topic .user_info > dd:first-of-type
+.topic .user_info > dd:first-of-type,
+.meta_menu > h3
 { font-family: "Quicksand", sans-serif }
 
 code
@@ -397,7 +401,8 @@ label
 thead > tr > th small,
 .c_forum div a,
 .c_last-title,
-.c_last-title ~ strong
+.c_last-title ~ strong,
+.meta_menu > h3
 { font-weight: 400 }
 
 .c_user > .usertitle,
@@ -553,7 +558,8 @@ textarea,
 #foot_links > a:first-child::before,
 #foot_links > a:last-child::before,
 #foot_datetime > a,
-input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus
+input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
+.meta_menu > ul > li > a:hover
 { background-color: #1F1F1F }
 
 .c_sig,
@@ -569,7 +575,6 @@ code,
 .bunk-big-butt:hover
 { background-color: #2D2D2D }
 
-.meta_menu h3,
 #emot_end,
 .c_post-attachment
 { background-color: #424242 }
@@ -608,7 +613,8 @@ html, body
 
 #logo,
 .bunk-big-butt,
-.bunk-button:hover
+.bunk-button:hover,
+.meta_menu a
 { background-color: #FFECB3 }
 
 #emot_end:hover, #emot_end:focus,
@@ -705,7 +711,7 @@ input[type="button"]:hover, .c_foot a:hover,
 .notice a, .error a,
 .c_post-attachment,
 .meta_menu a,
-.meta_menu h3,
+.meta_menu > h3,
 .c_username > a,
 .c_user > .usertitle,
 blockquote dl,
@@ -782,7 +788,8 @@ input[type="text"], input[type="password"], input:not([type])
 
 #logo > a,
 .bunk-big-butt,
-.bunk-button:hover
+.bunk-button:hover,
+.meta_menu a
 { color: #101010 }
 
 .cat-pages a:hover,
@@ -792,7 +799,8 @@ input[type="text"], input[type="password"], input:not([type])
 #fast-reply > dd > textarea::before
 { color: #F0F0F0 }
 
-.bunk-big-butt:hover
+.bunk-big-butt:hover,
+.meta_menu > ul > li > a:hover
 { color: #FFECB3 }
 
 .warning
@@ -1385,25 +1393,23 @@ button, a.btn_fake, input[type="button"]
 { display: block
 ; margin: 0.5em 1em
 ; padding: 0.5em
-; border-top: 0.1em solid #2d2d2d
-; border-bottom: 0.1em solid #4d4d4d
-; border-radius: 0.5em
+; border: 0.1rem solid transparent
 ; text-align: center
+; position: relative
+; transition: all 0.3s
 }
 
-.meta_menu h3
-{ border: 0.1em solid #666
-; clear: both
-; font-weight: 700
-; text-align: center
+.meta_menu > h3
+{ text-align: center
 ; padding: 0.5em 0
 ; margin: 0 0.5em
-; text-transform: uppercase
 }
 
+.meta_menu > ul > li
+{ min-width: 50% }
+
 .meta_menu img
-{ display: none
-}
+{ display: none }
 
 ul li.cat-pageshead
 { display: none }
@@ -3445,7 +3451,8 @@ padding:0;
 ; position: relative
 }
 
-.bunk-big-butt::before, .bunk-big-butt::after
+.bunk-big-butt::before, .bunk-big-butt::after,
+.meta_menu > ul > li > a::before, .meta_menu > ul > li > a::after
 { content: ""
 ; border-style: solid
 ; position: absolute
@@ -3453,7 +3460,8 @@ padding:0;
 ; transition: all 0.3s
 }
 
-.bunk-big-butt::before
+.bunk-big-butt::before,
+.meta_menu > ul > li > a::before
 { width: 0
 ; height: 100%
 ; border-width: 0.1rem 0 0.1rem 0
@@ -3461,7 +3469,8 @@ padding:0;
 ; right: 0
 }
 
-.bunk-big-butt::after
+.bunk-big-butt::after,
+.meta_menu > ul > li > a::after
 { height: 0
 ; width: 100%
 ; border-width: 0 0.1rem 0 0.1rem
@@ -3470,10 +3479,12 @@ padding:0;
 ; transition-delay: 0.3s
 }
 
-.bunk-big-butt:hover::before
+.bunk-big-butt:hover::before,
+.meta_menu > ul > li > a:hover::before
 { width: 100% }
 
-.bunk-big-butt:hover::after
+.bunk-big-butt:hover::after,
+.meta_menu > ul > li > a:hover::after
 { height: 100% }
 
 .usertitle img
