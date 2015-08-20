@@ -324,7 +324,8 @@ form[action$="/tasks/"]
 
 .warning,
 .t_lastpostdate,
-#foot_links
+#foot_links,
+#toggle-topmenu + label
 { order: 1 }
 
 .warn > a:last-of-type
@@ -456,7 +457,8 @@ h2, h3
 { font-size: 1.5em }
 
 #foot_links > a:first-child::before,
-#foot_links > a:last-child::before
+#foot_links > a:last-child::before,
+#toggle-topmenu + label
 { font-size: 1.5rem }
 
 h1, #top_bar::before,
@@ -504,7 +506,7 @@ h1, #top_bar::before,
 /* {{{ Links */
 
 a
-{ color: #F0F0F0
+{ color: #CCC
 ; text-decoration: none
 }
 
@@ -535,7 +537,7 @@ blockquote blockquote blockquote blockquote blockquote blockquote blockquote blo
 #error_box > tbody,
 input, select, button, a.btn_fake, td.c_foot a,
 textarea,
-.cat-pages a, .cat-pagesjump i, .cat-topicpages a,
+.cat-pages a, .cat-pagesjump i,
 .category > .forums,
 #topic_viewer > tbody > tr,
 .topic > tbody > tr,
@@ -572,7 +574,8 @@ code,
 #subhuman,
 .calendar .cal_inactive,
 #acplogin,
-.bunk-big-butt:hover
+.bunk-big-butt:hover,
+ .cat-topicpages a
 { background-color: #2D2D2D }
 
 #emot_end,
@@ -766,10 +769,9 @@ textarea,
 input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus
 { color: #CCC }
 
-html, body
-{ color: #F0F0F0 }
+html, body, td
+{ color: #CCC }
 
-td,
 .topic h2, #portal h2, #portal_foot h2, thead th,
 td.c_foot a
 .c_forum strong a, .c_last strong a,
@@ -853,7 +855,8 @@ thead,
 #error_box > tbody
 { border-color: #101010 }
 
-.c_sig
+.c_sig,
+ .cat-topicpages a
 { border-color: #272727 }
 
 .spoiler
@@ -869,7 +872,6 @@ textarea:focus
 input[type="text"], input[type="password"], input:not([type])
 { border-color: #4D4D4D }
 
-.cat-topicpages a:hover,
 .cat-pagesjump i:hover
 { border-color: #424242 }
 
@@ -878,7 +880,9 @@ input[type="text"], input[type="password"], input:not([type])
 
 .bunk-big-butt::after, .bunk-big-butt::before,
 .bunk-button::after, .bunk-button::before,
-.cat-pages a::before, .cat-pages a::after
+.cat-pages a::before, .cat-pages a::after,
+.meta_menu > ul > li > a,
+.cat-topicpages a:hover
 { border-color: #FFECB3 }
 
 .offline
@@ -1073,6 +1077,19 @@ input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus
 ; margin-bottom: 0
 }
 
+input[type="text"] + small, input[type="password"] + small,
+input:not([type]) + small
+{ position: absolute
+; margin-top: -4.5rem
+; margin-left: 1rem
+; color: #4D4D4D
+; transition: all 0.3s
+}
+
+input[type="text"]:focus + small, input[type="password"]:focus + small,
+input:not([type]):focus + small
+{ margin-top: -5rem }
+
 input[type="checkbox"]:checked
 { animation: 0.5s circle cubic-bezier(.55,0,0.1,1)
 }
@@ -1163,18 +1180,26 @@ button, a.btn_fake, input[type="button"]
 ; border-bottom-style: solid
 }
 
-#top_bar::before
-{ content: "\2261"
+#toggle-topmenu + label
+{ margin: 1rem
+; cursor: pointer
+; transform: rotate(0deg)
+; transition: margin 0.3s cubic-bezier(.55,0,0.1,1)
 ; position: absolute
-; padding: 0 0.25em
 ; top: 0
 ; right: 0
 }
 
-#top_bar:hover + #top > #top_menu, #top_bar:focus + #top > #top_menu
+#toggle-topmenu:checked + label
+{ margin-right: 12rem
+; transform: rotate(-360deg)
+; transition: all 1s cubic-bezier(.55,0,0.1,1)
+}
+
+#toggle-topmenu:checked ~ #top > #top_menu
 { right: 0
 ; visibility: visible
-; transition: 0.5s right cubic-bezier(.55,0,0.1,1)
+; transition: 1s right cubic-bezier(.55,0,0.1,1)
 }
 
 #top
@@ -1191,8 +1216,8 @@ button, a.btn_fake, input[type="button"]
 ; right: -12em
 ; z-index: 2
 ; border-left: 0.1em solid #4d4d4d
-; transition: 0.5s right cubic-bezier(.55,0,0.1,1),
-              0.5s visibility 0.5s cubic-bezier(.55,0,0.1,1)
+; transition: 0.3s right cubic-bezier(.55,0,0.1,1),
+              0.3s visibility 0.5s cubic-bezier(.55,0,0.1,1)
 }
 
 #top_menu:hover, #top_menu:focus
@@ -1309,7 +1334,7 @@ button, a.btn_fake, input[type="button"]
 ; border-bottom-style: solid
 }
 
-#subhuman > input
+#toggle-submenu, #toggle-topmenu
 { display: none }
 
 #subhuman > label
@@ -1393,7 +1418,8 @@ button, a.btn_fake, input[type="button"]
 { display: block
 ; margin: 0.5em 1em
 ; padding: 0.5em
-; border: 0.1rem solid transparent
+; border-bottom-width: 0.1rem
+; border-bottom-style: solid
 ; text-align: center
 ; position: relative
 ; transition: all 0.3s
@@ -1464,6 +1490,9 @@ ul li.cat-pageshead
 { display: block
 ; text-align: center
 }
+
+.cat-topicpages > li > a
+{ transition: all 0.3s }
 
 .c_head, .c_foot, .c_sort
 { line-height: 1.8
