@@ -29,3 +29,4 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 ## Screenshots
 
 <img src="http://i.imgur.com/kk3VDDN.png" />
+<img src="http://i.imgur.com/gmLgYBb.png" />
