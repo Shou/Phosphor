@@ -19,7 +19,6 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * Responsive design for your handy mobile devices
 * Material design for that modern aesthetic
 * Smooth animations and smart transitions
-* Hamburger menu **is going away** *!!!!!*
 * Beautiful fonts for your delicate eyes
 * Small and meaningful color usage
 * Quirky hipster rounded avatars
