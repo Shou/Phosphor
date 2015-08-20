@@ -12,6 +12,7 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 
 ## Planned
 * Better mobile thread view, i.e. leveraging vertical space
+* Different topmenu design
 
 ## Features
 
