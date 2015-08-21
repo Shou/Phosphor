@@ -751,7 +751,7 @@ blockquote dl dt,
 .plain, .hot, .poll, .locked,
 select, input, button, a.btn_fake,
 .c_desc,
-.drop_menu a,
+.drop_menu a
 { color: #CCC }
 
 th, h2, th a, th a:hover,
