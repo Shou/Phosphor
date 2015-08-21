@@ -562,7 +562,8 @@ textarea,
 #foot_links > a:last-child::before,
 #foot_datetime > a,
 input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
-.meta_menu > ul > li > a:hover
+.meta_menu > ul > li > a:hover,
+#top_menu
 { background-color: #1F1F1F }
 
 .c_sig,
@@ -596,7 +597,6 @@ input[type="button"]:hover, .c_foot a:hover,
 blockquote dl,
 .spoiler_toggle,
 .c_next > a,
-#top_menu,
 .nav-mark,
 .c_topicfoot > [href$="/old/"]::before,
 .c_topicfoot > [href$="/old/"] + a ::before,
@@ -628,9 +628,6 @@ html, body
 
 .error
 { background-color: #1D0100 }
-
-.drop_menu a:focus, .drop_menu a:hover
-{ background-color: #546E7A }
 
 #c_post-close,
 #pmclose,
@@ -724,8 +721,6 @@ blockquote dl dt,
 .c_next > a,
 #top_menu > li:first-child::before,
 #top_info,
-.drop_menu li[id^='menu'] a:hover,
-.drop_menu a,
 #c_post-close,
 #emot_end,
 #cal_current,
@@ -755,7 +750,8 @@ blockquote dl dt,
 .replied-marker,
 .plain, .hot, .poll, .locked,
 select, input, button, a.btn_fake,
-.c_desc
+.c_desc,
+.drop_menu a,
 { color: #CCC }
 
 th, h2, th a, th a:hover,
@@ -821,6 +817,9 @@ input[type="text"], input[type="password"], input:not([type])
 
 .c_post:hover a, .c_post:focus a
 { color: #B39DDB }
+
+.drop_menu li[id^='menu'] a:hover
+{ color: #9575CD }
 
 .topic h2, #portal h2, #portal_foot h2, thead th
 { text-shadow: -0.04em 0.04em 0 #D0D0D0 }
@@ -1192,7 +1191,7 @@ button, a.btn_fake, input[type="button"]
 }
 
 #toggle-topmenu:checked + label
-{ margin-right: 12rem
+{ margin-right: 15rem
 ; transform: rotate(-360deg)
 ; transition: all 1s cubic-bezier(.55,0,0.1,1)
 }
@@ -1213,24 +1212,12 @@ button, a.btn_fake, input[type="button"]
 ; margin-top: 0
 ; visibility: hidden
 ; position: fixed
-; top: 0
-; right: -12em
+; top: 3.3rem
+; right: -14em
 ; z-index: 2
-; border-left: 0.1em solid #4d4d4d
+; border-left: 0.1em solid #101010
 ; transition: 0.3s right cubic-bezier(.55,0,0.1,1),
               0.3s visibility 0.5s cubic-bezier(.55,0,0.1,1)
-}
-
-#top_menu:hover, #top_menu:focus
-{ transition: 0.5s right cubic-bezier(.55,0,0.1,1)
-; visibility: visible
-; right: 0
-}
-
-#top_menu > li:first-child::before
-{ content: "Menu"
-; padding: 1em
-; border-bottom: 0.1em solid #4d4d4d
 }
 
 #top_info > strong > a
@@ -1292,11 +1279,6 @@ button, a.btn_fake, input[type="button"]
 { text-align: center
 }
 
-.drop_menu > li a, .drop_menu ul > li a
-{ border-bottom: 0.1em solid #4d4d4d
-; border-top: 0.1em solid #2d2d2d
-}
-
 .drop_menu li:last-child > ul > li:last-child a
 { border-bottom: none
 }
@@ -1307,14 +1289,9 @@ button, a.btn_fake, input[type="button"]
 
 .drop_menu a
 { display: block
-; padding: 1em
+; padding: 1em 2.5em
 ; position: relative
 ; transition: 0.5s background-color cubic-bezier(0,0.70,0.85,1)
-}
-
-.drop_menu a:focus, .drop_menu a:hover
-{ border-top: 0.1em solid #485F69
-; border-bottom: 0.1em solid #607D8B
 }
 
 .drop_menu ul
@@ -2521,10 +2498,6 @@ select
 border:0;
 cursor:pointer;
 padding:0;
-}
-
-.drop_menu a img {
-vertical-align: bottom
 }
 
 .drop_menu .hover ul {
