@@ -319,7 +319,8 @@ form[action$="/tasks/"]
 { flex: 2 }
 
 .cat-pages > li,
-.meta_menu > ul > li
+.meta_menu > ul > li,
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3)
 { flex-grow: 1 }
 
 .warning,
@@ -1507,6 +1508,9 @@ ul li.cat-pageshead
 { position: absolute
 ; margin: 1rem 0 0 1rem
 }
+
+.c_desc > small
+{ margin-left: .5rem }
 
 .pm_new > td
 { font-weight: 700 }
@@ -3271,6 +3275,19 @@ vertical-align:top;
 { padding: 2em 0
 ; border-bottom: 0.2em solid #D0D0D0
 }
+
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3)
+{ width: 33%
+; min-width: 20rem
+}
+
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3) > td
+{ width: 100%
+; margin-right: 1rem
+}
+
+input[name="mode"][value="1"] ~ .posting > tbody > tr > td > input[type="text"]
+{ width: 100% }
 
 #c_postbtn
 { padding-top: 2em }
