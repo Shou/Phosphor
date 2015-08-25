@@ -587,6 +587,7 @@ input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
 #wrap,
 blockquote,
 code,
+blockquote > code.prettyprint,
 #subhuman,
 .calendar .cal_inactive,
 #acplogin,
@@ -595,12 +596,10 @@ code,
 .c_next > a,
 .c_topicfoot > [href$="/old/"]::before,
 .c_topicfoot > [href$="/old/"] + a ::before,
-.c_topicfoot > [href$="/new/"]::before
-{ background-color: #2D2D2D }
-
+.c_topicfoot > [href$="/new/"]::before,
 #emot_end,
 .c_post-attachment
-{ background-color: #424242 }
+{ background-color: #2D2D2D }
 
 [data-desc]:hover::after,
 #top_info a[href$="/multi_login/"]:hover::after,
@@ -610,8 +609,6 @@ code,
 button:hover, a.btn_fake:hover, select:hover, option:hover,
 input[type="button"]:hover, .c_foot a:hover,
 .meta_menu a,
-.c_user > .usertitle,
-blockquote dl,
 .spoiler_toggle,
 .nav-mark
 { background-color: #3D3D3D }
@@ -729,7 +726,6 @@ input[type="button"]:hover, .c_foot a:hover,
 .meta_menu a,
 .meta_menu > h3,
 .c_username > a,
-.c_user > .usertitle,
 blockquote dl,
 blockquote dl dt,
 .spoiler_toggle,
@@ -765,7 +761,8 @@ blockquote dl dt,
 .replied-marker,
 select, input, button, a.btn_fake,
 .c_desc,
-.drop_menu a
+.drop_menu a,
+.c_user > .usertitle
 { color: #CCC }
 
 html, body, td
@@ -852,7 +849,6 @@ thead > tr > th small,
 #top_info a[href$="/multi_login/"]:focus::after,
 #top_info a[href$="/logout/"]:hover::after,
 #top_info a[href$="/logout/"]:focus::after,
-blockquote,
 thead,
 #realtop,
 #subhuman,
@@ -876,8 +872,11 @@ thead,
 .c_topicfoot > [href$="/new/"]::before
 { border-color: #101010 }
 
+blockquote,
 .c_sig,
- .cat-topicpages a
+ .cat-topicpages a,
+.spoiler_toggle,
+.c_post-attachment
 { border-color: #272727 }
 
 .spoiler
@@ -885,10 +884,6 @@ thead,
 
 textarea:focus
 { border-color: #999 }
-
-.spoiler_toggle,
-.c_post-attachment
-{ border-color: #666 }
 
 textarea,
 input[type="text"], input[type="password"], input:not([type])
@@ -899,6 +894,9 @@ input[type="text"], input[type="password"], input:not([type])
 
 .submit_error
 { border-color: #333 }
+
+.c_user > .usertitle
+{ border-color: #2D2D2D }
 
 .bunk-big-butt::after, .bunk-big-butt::before,
 .bunk-button::after, .bunk-button::before,
@@ -918,7 +916,7 @@ input[type="text"], input[type="password"], input:not([type])
 { border-color: #0299AE }
 
 .c_post:hover .c_post-attachment, .c_post:focus .c_post-attachment
-{ border-color: #42A5F5 }
+{ border-color: #7E57C2 }
 
 #profile_menu a:hover, #profile_menu a:focus,
 .bunk-big-butt, .bunk-button
@@ -1717,11 +1715,24 @@ td.c_user div:first-child img
 { margin: calc(1rem + 5px) 0 1em
 ; padding: 0.5em
 ; overflow: hidden
+; border-bottom-style: solid
+; border-top-style: solid
+; border-bottom-width: 0.25rem
+; border-top-width: 0.25rem
 
 ; text-overflow: ellipsis
 ; text-align: center
 ; white-space: nowrap
-; font-size: 1.2em
+; font-size: 1rem
+; transition: all 0.3s
+; max-height: 3rem
+}
+
+
+.c_user > .usertitle:hover
+{ white-space: initial
+; transition: all 0.3s
+; max-height: 7rem
 }
 
 .usertitle > br
@@ -1899,7 +1910,7 @@ blockquote
 }
 
 blockquote dl
-{ border-bottom: 0.1em solid #666
+{ border-bottom: 0.1em solid #272727
 ; padding: 0.3em 0.5em
 }
 
@@ -1908,13 +1919,16 @@ blockquote dl dt
 }
 
 .c_post > blockquote > div > blockquote > div
-{ padding: 0.5em }
+{ padding: .5em 1em }
 
 code
 { display: block
 ; white-space: pre-wrap
 ; width: inherit !important
 }
+
+blockquote > code.prettyprint
+{ border-radius: 0 }
 
 .spoiler
 { border-width: 0.1rem
@@ -2864,7 +2878,8 @@ html td.c_poll-bar span {
 margin-top:3px;
 }
 
-.c_post, #topic_review > tbody > tr > .c_desc + td
+.c_post, #topic_review > tbody > tr > .c_desc + td,
+#c_post-preview
 { line-height: 1.7
 ; vertical-align: top
 ; word-wrap: break-word
