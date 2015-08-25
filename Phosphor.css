@@ -215,7 +215,11 @@ html, body
 #foot_datetime,
 #foot_datetime::after,
 .notice, .error,
-.meta_menu > ul
+.meta_menu > ul,
+#emot_wrap,
+#emot_list,
+#emot_end,
+.c_next
 { display: flex }
 
 .forums
@@ -224,7 +228,10 @@ html, body
 #main,
 #c_post, #edit_sig > tbody, #c_notes > form, #acplogin, #acplogin table,
 #acplogin thead, #acplogin tbody, #top_menu, .drop_menu > li,
-#subhuman
+#subhuman,
+input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(1),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(4),
+#topic_review > tbody > tr
 { flex-direction: column }
 
 .c_sig blockquote,
@@ -257,7 +264,9 @@ blockquote > dl,
 #foot_links > a:first-child::before,
 #foot_links > a:last-child::before,
 #foot > tbody > tr,
-#foot_datetime > a
+#foot_datetime > a,
+#emot_end,
+.c_next
 { justify-content: center }
 
 #c_notes > form, #top_info, .c_foot > span, #acplogin,
@@ -276,7 +285,8 @@ blockquote > dl,
 #foot_links > a:last-child::before,
 #foot > tbody > tr,
 #foot_datetime > a,
-#foot_datetime::after
+#foot_datetime::after,
+#emot_end
 { align-items: center }
 
 #realtop, #top
@@ -304,7 +314,8 @@ form[action$="/tasks/"]
 .c_post-attachment,
 .posting > tbody,
 #foot > tbody > tr,
-.meta_menu > ul
+.meta_menu > ul,
+#emot_list
 { flex-wrap: wrap }
 
 #top
@@ -326,10 +337,12 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3)
 .warning,
 .t_lastpostdate,
 #foot_links,
-#toggle-topmenu + label
+#toggle-topmenu + label,
+#c_post-close
 { order: 1 }
 
-.warn > a:last-of-type
+.warn > a:last-of-type,
+#c_post-preview
 { order: 2 }
 
 .warn > a
@@ -447,7 +460,8 @@ td, textarea, #profile_menuwrap, button, .btn_fake, input[type="button"],
 h2, h3
 { font-size: 1.1em }
 
-.c_forum strong a
+.c_forum strong a,
+.category h2
 { font-size: 1.25em }
 
 .c_next > a
@@ -577,7 +591,11 @@ code,
 .calendar .cal_inactive,
 #acplogin,
 .bunk-big-butt:hover,
- .cat-topicpages a
+ .cat-topicpages a,
+.c_next > a,
+.c_topicfoot > [href$="/old/"]::before,
+.c_topicfoot > [href$="/old/"] + a ::before,
+.c_topicfoot > [href$="/new/"]::before
 { background-color: #2D2D2D }
 
 #emot_end,
@@ -589,18 +607,13 @@ code,
 #top_info a[href$="/multi_login/"]:focus::after,
 #top_info a[href$="/logout/"]:hover::after,
 #top_info a[href$="/logout/"]:focus::after,
-.category h2,
 button:hover, a.btn_fake:hover, select:hover, option:hover,
 input[type="button"]:hover, .c_foot a:hover,
 .meta_menu a,
 .c_user > .usertitle,
 blockquote dl,
 .spoiler_toggle,
-.c_next > a,
-.nav-mark,
-.c_topicfoot > [href$="/old/"]::before,
-.c_topicfoot > [href$="/old/"] + a ::before,
-.c_topicfoot > [href$="/new/"]::before
+.nav-mark
 { background-color: #3D3D3D }
 
 #copyright
@@ -611,6 +624,9 @@ html, body
 
 .notice
 { background-color: #1D1D1D }
+
+.category h2
+{ background-color: #ccc }
 
 #fast-reply > dd > textarea::before
 { background-color: rgba(240, 240, 240, 0.7) }
@@ -704,7 +720,6 @@ input[type="text"], input[type="password"], input:not([type])
 #top_info a[href$="/multi_login/"]:focus::after,
 #top_info a[href$="/logout/"]:hover::after,
 #top_info a[href$="/logout/"]:focus::after,
-.category h2 > a, .category h2,
 button:hover, a.btn_fake:hover, select:hover, option:hover,
 input[type="button"]:hover, .c_foot a:hover,
 .notice, .error,
@@ -748,12 +763,12 @@ blockquote dl dt,
 .c_cat-lastpost,
 .c_cat-lastpost > a,
 .replied-marker,
-.plain, .hot, .poll, .locked,
 select, input, button, a.btn_fake,
 .c_desc,
 .drop_menu a
 { color: #CCC }
 
+html, body, td
 th, h2, th a, th a:hover,
 textarea,
 .cat-pages a, .cat-pagesjump i, .cat-topicpages a,
@@ -763,11 +778,12 @@ textarea,
 #foot a, #foot a:hover, #foot label,
 #copyright,
 .calendar td a, .calendar a:hover, #faq dd a, #faq dd a:hover,
-input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus
+input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
+.hot-new, .plain-new, .poll-new
 { color: #CCC }
 
-html, body, td
-{ color: #CCC }
+.plain, .hot, .poll, .locked
+{ color: #444 }
 
 .topic h2, #portal h2, #portal_foot h2, thead th,
 td.c_foot a
@@ -777,9 +793,6 @@ td.c_foot a
 .c_sig blockquote > dl > dd,
 #findposts .c_mark,
 #pmtoast > a,
-.hot-new,
-.plain-new,
-.poll-new
 { color: #F0F0F0 }
 
 input[type="text"], input[type="password"], input:not([type])
@@ -788,7 +801,8 @@ input[type="text"], input[type="password"], input:not([type])
 #logo > a,
 .bunk-big-butt,
 .bunk-button:hover,
-.meta_menu a
+.meta_menu a,
+.category h2 > a, .category h2
 { color: #101010 }
 
 .cat-pages a:hover,
@@ -852,7 +866,14 @@ thead,
 #foot_links > a:first-child::before,
 #foot_links > a:last-child::before,
 #foot_datetime > a,
-#error_box > tbody
+#error_box > tbody,
+.posting > tbody,
+#topic_review > tbody > tr,
+#acplogin > #loginform tbody,
+.c_next > a,
+.c_topicfoot > [href$="/old/"]::before,
+.c_topicfoot > [href$="/old/"] + a ::before,
+.c_topicfoot > [href$="/new/"]::before
 { border-color: #101010 }
 
 .c_sig,
@@ -869,6 +890,7 @@ textarea:focus
 .c_post-attachment
 { border-color: #666 }
 
+textarea,
 input[type="text"], input[type="password"], input:not([type])
 { border-color: #4D4D4D }
 
@@ -1047,6 +1069,24 @@ select[multiple]
 label[for="setskin"]
 { display: none }
 
+label
+{ position: relative }
+
+#main label
+{ margin: .5rem }
+
+label > input[type="text"], label > input[type="password"],
+label > input:not([type])
+{ position: absolute
+; top: 0
+; left: 0
+; margin: -.75rem 0 0 -.5rem
+}
+
+label > input[type="text"]:focus, label > input[type="password"]:focus,
+label > input:not([type]):focus
+{ margin-top: -1.25rem }
+
 textarea
 { border-width: 0.3em
 ; border-style: solid
@@ -1056,6 +1096,7 @@ textarea
 ; width: 100%
 ; transition: 0.5s all ease
 ; box-sizing: border-box
+; outline: none
 }
 
 input[type="text"], input[type="password"], input:not([type])
@@ -1159,11 +1200,11 @@ button, a.btn_fake, input[type="button"]
 ; margin-bottom: 10pt
 }
 
-.cat-pages
+.cat-pages, #top ul
 { list-style: none }
 
 #nav, .cat-topicpages, .calendar ul, .meta_menu ul,
-#pm_folderlist, #profile_menuwrap ul, #top ul
+#pm_folderlist, #profile_menuwrap ul
 { list-style: none
 ; padding: 0
 }
@@ -1188,12 +1229,14 @@ button, a.btn_fake, input[type="button"]
 ; position: absolute
 ; top: 0
 ; right: 0
+; z-index: 2
 }
 
 #toggle-topmenu:checked + label
-{ margin-right: 15rem
+{ margin-right: 12rem
 ; transform: rotate(-360deg)
 ; transition: all 1s cubic-bezier(.55,0,0.1,1)
+; position: fixed
 }
 
 #toggle-topmenu:checked ~ #top > #top_menu
@@ -1210,11 +1253,12 @@ button, a.btn_fake, input[type="button"]
 #top_menu
 { min-height: 100vh
 ; margin-top: 0
+; padding: 3.4rem 0 0 0
 ; visibility: hidden
 ; position: fixed
-; top: 3.3rem
+; top: 0
 ; right: -14em
-; z-index: 2
+; z-index: 1
 ; border-left: 0.1em solid #101010
 ; transition: 0.3s right cubic-bezier(.55,0,0.1,1),
               0.3s visibility 0.5s cubic-bezier(.55,0,0.1,1)
@@ -1770,7 +1814,7 @@ margin-bottom:1px;
 { height: 100% }
 
 .profile:nth-of-type(4) > tbody > tr:nth-child(2)
-{ border-bottom: 0.2rem solid #d0d0d0 }
+{ border-bottom: 0.25rem solid #d0d0d0 }
 
 .profile:nth-of-type(4) > tbody > tr:nth-child(2) > th:first-child
 { min-width: 192px; max-width: 192px }
@@ -1864,17 +1908,7 @@ blockquote dl dt
 }
 
 .c_post > blockquote > div > blockquote > div
-{ max-height: 0
-; padding: 0 0.5em
-; transition-delay: 0.1s
-}
-
-.c_post > blockquote > div > blockquote:hover > div,
-.c_post > blockquote > div > blockquote:focus > div
-{ padding: 0.5em
-; max-height: 100%
-; transition-delay: 0.1s
-}
+{ padding: 0.5em }
 
 code
 { display: block
@@ -1988,10 +2022,14 @@ code
 { width: 100% }
 
 .c_next
-{ margin: 3rem 0 2rem 0 }
+{ margin: 2rem 0 0 0
+; width: 100%
+}
 
 .c_next > a
 { padding: 1rem 8.9rem
+; border-bottom-width: 0.25rem
+; border-bottom-style: solid
 }
 
 .c_view
@@ -2030,40 +2068,38 @@ code
 ; max-width: calc(50% - 1em)
 }
 
+#c_post
+{ width: 100%
+; margin: 1rem 0
+}
+
 #c_post-close
 { display: block
 ; float: none !important
 ; top: inherit !important
 ; right: inherit !important
-; font-size: 1.5em
+; font-size: 1.5rem
 ; text-align: center
-; padding: 0.5em
-; width: 750px
+; padding: 0.5rem
+; margin: 0.5rem
+; max-width: 750px
 }
 
 #c_post-preview
-{ padding: 1em 0.5em
-; margin: 0 0 1em 0
-; width: 750px
+{ padding: 0 0.5rem
+; margin: 0.5rem 0.5rem 1rem 0.5rem
+; max-width: 750px
 ; text-align: left
 }
 
-#c_post-resize span
-{ cursor: pointer
-; font-size: 2em
-; padding: 20px 5px 0
-}
-
 #emot_wrap h3
-{ text-align: center
-}
+{ display: none }
 
 #emot_end
-{ display: block
-; padding: 1em 0
+{ padding: 1em
 ; font-weight: 700
 ; text-transform: uppercase
-; text-align: center
+; min-width: 8rem
 }
 
 .row1, .row2, #who_posted > tbody > tr,
@@ -2835,8 +2871,13 @@ margin-top:3px;
 }
 
 #topic_review > tbody > tr
-{ margin: 1em 0 }
+{ border-bottom-width: 0.25rem
+; border-bottom-style: solid
+; margin: .5rem 0
+}
 
+#topic_review > tbody > tr > .c_desc
+{ position: initial }
 .c_post ul {
 list-style-type:square;
 margin-left:10px;
@@ -2923,67 +2964,58 @@ padding:0 5% 10px;
 text-align:left;
 }
 
+#c_post-text
+{ height: 18em }
+
 #c_post-text, #txt_quote
-{ height: 18em
-; width: 750px
-; max-width: calc(100% - 1em)
+{ max-width: 750px
+; width: calc(100% - 1em)
 ; display: block
 }
 
-#c_post-resize {
-float:right;
-margin-top:-1px;
-padding:4px 0 0;
-text-align:right;
-}
+#txt_quote
+{ height: 10em }
 
+#c_post-resize,
 #btn_preview
-{ margin: 1em 0
-}
+{ display: none }
 
 #c_emot
 { vertical-align: top
-; width: 180px
-; position: absolute
+; margin-top: 1rem
 }
 
 #c_bbcode
-{ margin-left: 180px }
-
-#c_bbcode > *
-{ margin: 0 1em 1em 0
+{ margin-top: 1rem
 }
+
+#c_bbcode > br
+{ display: none }
 
 #c_bbcode input[name="helpbox"]
 { max-width: 50vw
 }
 
-#c_bbcode input[name="helpbox"] + a
-{ display: block
-}
-
 #emot_list
-{ height: 25em
-; margin: 0 auto
+{ max-height: 6rem
+; margin: 0
+; padding: 0
 ; overflow: auto
-; padding: 0.5em 0
 ; text-align: center
 }
 
-#emot_list {
-padding:0;
-}
-
-#emot_list li {
-display:inline;
-padding:4px 10px;
-}
+#emot_list > li
+{ list-style: none }
 
 #emot_list > li > img
 { cursor: pointer
-; max-width: 48px
-; margin: 0.5em 0.3em
+; max-width: 3rem
+; max-height: 3rem
+; margin: 0.5rem .75rem
 }
+
+.pollsetup:nth-child(n+8) > .c_desc
+{ display: none }
 
 .pm {
 margin-bottom:1em;
@@ -3158,7 +3190,8 @@ margin:5px 0;
 }
 
 #acplogin > #loginform tbody
-{ border-bottom: 0.2em solid #D0D0D0
+{ border-bottom-width: 0.2em
+; border-bottom-style: solid
 ; padding: 2em
 }
 
@@ -3203,6 +3236,8 @@ font-weight:700;
 { padding: 0.5em 2em
 ; margin: 0 1em
 ; font-size: 1.5rem
+; border-bottom-width: 0.25rem
+; border-bottom-style: solid
 }
 
 .meta_box h3, #meta_welcome strong
@@ -3249,7 +3284,8 @@ vertical-align:top;
 
 .posting > tbody
 { padding: 2em 0
-; border-bottom: 0.2em solid #D0D0D0
+; border-bottom-width: 0.2em
+; border-bottom-style: solid
 }
 
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3)
@@ -3262,15 +3298,38 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3) > td:last-
 ; margin-right: 1rem
 }
 
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3) > td:last-child > small
+{ display: none }
+
 input[name="mode"][value="1"] ~ .posting > tbody > tr > td > input[type="text"]
 { width: 100% }
 
+input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(2),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(5),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(9),
+input[name="type"] ~ .posting > tbody > tr:nth-child(4),
+input[name="type"] ~ .posting > tbody > tr:nth-child(4) > td:last-child
+{ width: 100% }
+
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6) > th
+{ font-size: 0 }
+
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6) > th > a::before
+{ content: "Add poll"
+; font-size: 1rem
+}
+
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(10),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(12),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(14),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(15) > td:first-child,
+input[name="type"] ~ .posting > tbody > tr:nth-child(3),
+input[name="type"] ~ .posting > tbody > tr:nth-child(4) > .c_desc
+{ display: none }
+
 #c_postbtn
 { padding-top: 2em }
-
-#c_post
-{ margin-left: 180px
-}
 
 #files_upload input,.pm .row1 a,.pm .row2 a, #ucp_gallery button img,
 #findposts td a {

@@ -9,7 +9,7 @@ function views(vs) {
         var ss = s.split("<br>")
         var cs = ss[0].split(/,/g)
         var v = cs[0].trim() + fs[cs.length - 1]
-        var w = ss[1] ? "\n\uf06e " + ss[1].split(' ')[0] : ""
+        var w = ss[1] ? "\n\uf007 " + ss[1].split(' ')[0] : ""
 
         return v + w
     }
@@ -66,7 +66,36 @@ for (var i = 0, l = ns.length; i < l; i++)
 <!-- BOARD -->
 </div>
 
+<style>
+.c_post > blockquote > div > blockquote > div { display: none }
+.c_post > blockquote > div > blockquote > dl { cursor: pointer }
+</style>
+
 <script>
+
+// quotePyramid :: Elem -> IO ()
+function quotePyramid(s) {
+    var qdls = document.querySelectorAll(".c_post > blockquote > div > blockquote > dl")
+    for (var i = 0, l = qdls.length; i < l; i++)
+        qdls[i].addEventListener("click", toggleQuote)
+}
+
+// toggleQuote :: Event -> IO ()
+function toggleQuote(e) {
+    var e = this.nextElementSibling
+    e.style.display = e.style.display !== "block" ? "block" : "none"
+}
+
+quotePyramid()
+
+var pretimeout = null
+$("#c_post-text").bind("input", function(e) {
+  if (pretimeout === null)
+    pretimeout = setTimeout(function() {
+      $("#btn_preview").trigger("click")
+      pretimeout = null
+    }, 250)
+})
 
 var cs = document.getElementsByTagName("code")
 for (var i = 0, l = cs.length; i < l; i++) cs[i].classList.add("prettyprint")
