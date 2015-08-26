@@ -89,13 +89,100 @@ function toggleQuote(e) {
 quotePyramid()
 
 var pretimeout = null
-$("#c_post-text").bind("input", function(e) {
+var preve = null
+var texte = document.querySelector("#c_post-text")
+
+$(texte).bind("scroll input", function(e) {
+  scrollEquilibrate(preve, texte)
+})
+
+$(texte).bind("input focusout", makePreview)
+
+// makePreview :: IO ()
+function makePreview() {
   if (pretimeout === null)
     pretimeout = setTimeout(function() {
-      $("#btn_preview").trigger("click")
+      var p = document.querySelector("#c_post-text").value
+
+      preview(p, function(data) {
+        if (preve === null) {
+          preve = document.createElement("div")
+          preve.id = "c_post-preview"
+          preve.innerHTML = data
+
+          document.querySelector("#c_post").appendChild(preve)
+
+        } else preve.innerHTML = data
+      })
+
+      try {
+      scrollEquilibrate(preve, texte)
+      } catch (e) { console.log("FUCK YOU " + e.toString()) }
+
       pretimeout = null
     }, 250)
-})
+}
+
+// preview :: String -> (XHR -> IO ()) -> IO ()
+function preview(p, f) {
+  var fd = new FormData()
+  fd.append("task", '5')
+  fd.append("post", p)
+
+  var x = new XMLHttpRequest()
+  x.addEventListener("load", function() { f(this.responseText) })
+  x.open("POST", '/' + location.pathname.split('/')[1] + "/tasks/", true)
+  x.send(fd)
+
+  return x
+}
+
+// get total height of e1's nodes, treat non-text as one line.
+// the old algorithm should become much more precise
+// scrollEquilibrate :: Elem -> Elem -> IO ()
+function scrollEquilibrate(e0, e1) {
+  var h = 0
+  var holes = []
+  for (var i = 0, ns = e0.childNodes, l = ns.length; i < l; i++) {
+    if (ns[i].nodeType === document.TEXT_NODE) h += textHeight(ns[i])
+    else {
+      // check if image, object, so forth, mark current height
+      // then skip those coordinates
+      if (ns[i].tagName === "IMG") {
+        holes.push([h, h + ns[i].clientHeight])
+
+        var fs = parseFloat(window.getComputedStyle(ns[i]).fontSize)
+        var lh = parseFloat(window.getComputedStyle(ns[i]).lineHeight)
+        h += fs * ((lh - 1) / 2 + 1)
+
+      }
+    }
+  }
+
+  var offset = Math.round(Math.cos(Math.PI * e1.scrollTop / (e1.scrollHeight - e1.clientHeight)) * 5) * -1 * 7
+  // TODO FIXME account for image holes and actually use `h`?
+  var scroll = (e1.scrollTop + offset) * ((e0.scrollHeight - e0.clientHeight) / (e1.scrollHeight - e1.clientHeight))
+
+  // This is a one-liner in Haskell
+  var b = false
+  for (var i = 0, l = holes.length; i < l; i++)
+    if (holes[i][0] > scroll && holes[i][1] < scroll) {
+      scroll = holes[i][1]
+      break
+    }
+
+  e0.scrollTop = scroll
+}
+
+// textHeight :: TextNode -> Int
+function textHeight(tn) {
+  var r = document.createRange()
+  r.selectNodeContents(tn)
+  var rect = r.getBoundingClientRect()
+  return rect.bottom - rect.top
+}
+
+makePreview()
 
 var cs = document.getElementsByTagName("code")
 for (var i = 0, l = cs.length; i < l; i++) cs[i].classList.add("prettyprint")

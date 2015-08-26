@@ -230,6 +230,7 @@ html, body
 #acplogin thead, #acplogin tbody, #top_menu, .drop_menu > li,
 #subhuman,
 input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(1),
+input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(1),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(4),
 #topic_review > tbody > tr
 { flex-direction: column }
@@ -286,7 +287,8 @@ blockquote > dl,
 #foot > tbody > tr,
 #foot_datetime > a,
 #foot_datetime::after,
-#emot_end
+#emot_end,
+input[name="mode"]:not([value="1"]) ~ .posting > tbody > tr:nth-child(4)
 { align-items: center }
 
 #realtop, #top
@@ -338,7 +340,8 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3)
 .t_lastpostdate,
 #foot_links,
 #toggle-topmenu + label,
-#c_post-close
+#c_post-close,
+input[name="mode"]:not([value="1"]) ~ .posting > tbody > tr:nth-child(4) > td:first-child
 { order: 1 }
 
 .warn > a:last-of-type,
@@ -420,7 +423,6 @@ thead > tr > th small,
 .meta_menu > h3
 { font-weight: 400 }
 
-.c_user > .usertitle,
 .forums th a,
 .forums th a strong
 { font-weight: 600 }
@@ -452,6 +454,9 @@ ul.cat-topicpages, .c_head, .c_foot, .c_sort, .meta_box
 
 .c_view-list
 { font-size: 0.9em }
+
+.c_user > .usertitle
+{ font-size: 0.9rem }
 
 td, textarea, #profile_menuwrap, button, .btn_fake, input[type="button"],
 .btn_text, #top
@@ -598,7 +603,8 @@ blockquote > code.prettyprint,
 .c_topicfoot > [href$="/old/"] + a ::before,
 .c_topicfoot > [href$="/new/"]::before,
 #emot_end,
-.c_post-attachment
+.c_post-attachment,
+.btn_default
 { background-color: #2D2D2D }
 
 [data-desc]:hover::after,
@@ -869,7 +875,8 @@ thead,
 .c_next > a,
 .c_topicfoot > [href$="/old/"]::before,
 .c_topicfoot > [href$="/old/"] + a ::before,
-.c_topicfoot > [href$="/new/"]::before
+.c_topicfoot > [href$="/new/"]::before,
+.btn_default
 { border-color: #101010 }
 
 blockquote,
@@ -1003,7 +1010,7 @@ tr > *
 
 thead
 { margin-bottom: 1em
-; border-bottom-width: 0.2em
+; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 }
 
@@ -1047,7 +1054,7 @@ thead > tr > th small
 }
 
 input, select, button, a.btn_fake, td.c_foot a
-{ border-bottom-width: 0.2em
+{ border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 ; border-bottom-color: #101010
 ; border-top: 0 solid
@@ -1147,6 +1154,9 @@ button, a.btn_fake, input[type="button"]
 ; cursor: pointer
 }
 
+.btn_default
+{ cursor: pointer }
+
 .notice, .error
 { margin: 3.4em auto
 ; width: 66%
@@ -1167,7 +1177,7 @@ button, a.btn_fake, input[type="button"]
 }
 
 #error_box > tbody
-{ border-bottom-width: 0.2em
+{ border-bottom-width: 0.2rem
 ; border-bottom-style: solid
 }
 
@@ -1555,7 +1565,7 @@ width:20px;
 
 .category > .forums
 { padding: 1em
-; border-bottom-width: 0.2em
+; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 }
 
@@ -1647,7 +1657,7 @@ padding:4px 0 4px 20px;
 #topic_viewer > tbody > tr:last-child,
 #forum_footer,
 .topic > tbody > tr:last-child
-{ border-bottom-width: 0.2em
+{ border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 }
 
@@ -1725,14 +1735,14 @@ td.c_user div:first-child img
 ; white-space: nowrap
 ; font-size: 1rem
 ; transition: all 0.3s
-; max-height: 3rem
+; max-height: 2.6rem
 }
 
 
 .c_user > .usertitle:hover
 { white-space: initial
 ; transition: all 0.3s
-; max-height: 7rem
+; max-height: 5.2rem
 }
 
 .usertitle > br
@@ -1753,7 +1763,7 @@ td.c_user div:first-child img
 }
 
 .warning
-{ padding: 0.2em
+{ padding: 0.25rem
 }
 
 dl.user_profile {
@@ -1878,7 +1888,7 @@ width:15%;
 }
 
 .poll > tbody
-{ border-bottom: 0.2em solid #F0F0F0
+{ border-bottom: 0.25rem solid #101010
 ; margin-bottom: 2em
 ; padding: 2em 1em
 }
@@ -2019,7 +2029,7 @@ blockquote > code.prettyprint
 
 .c_postfoot
 { margin-bottom: 1em
-; border-bottom-width: 0.2em
+; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 }
 
@@ -2040,7 +2050,8 @@ blockquote > code.prettyprint
 ; width: 100%
 }
 
-.c_next > a
+.c_next > a,
+.btn_default
 { padding: 1rem 8.9rem
 ; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
@@ -2097,13 +2108,16 @@ blockquote > code.prettyprint
 ; padding: 0.5rem
 ; margin: 0.5rem
 ; max-width: 750px
+; cursor: pointer
 }
 
 #c_post-preview
 { padding: 0 0.5rem
 ; margin: 0.5rem 0.5rem 1rem 0.5rem
 ; max-width: 750px
+; max-height: 20em
 ; text-align: left
+; overflow-y: scroll
 }
 
 #emot_wrap h3
@@ -2120,7 +2134,7 @@ blockquote > code.prettyprint
 #forum_leaders_global > tbody > tr:nth-child(n+2)
 { padding: 1em 0
 ; margin-bottom: 1em
-; border-bottom: 0.2em solid #D0D0D0
+; border-bottom: 0.25rem solid #101010
 }
 
 .row1 > td, .row2 > td
@@ -2660,7 +2674,7 @@ text-align:center;
 
 #inlinetopic > .posts > tbody > tr
 { margin-bottom: 1em
-; border-bottom-width: 0.2em
+; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 ; padding: 1em 0
 }
@@ -3066,7 +3080,7 @@ text-align:center;
 }
 
 .ucp > tbody
-{ border-bottom: 0.2em solid #D0D0D0
+{ border-bottom: 0.25rem solid #101010
 ; margin: 0 0 2em 0
 }
 
@@ -3205,7 +3219,7 @@ margin:5px 0;
 }
 
 #acplogin > #loginform tbody
-{ border-bottom-width: 0.2em
+{ border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 ; padding: 2em
 }
@@ -3220,7 +3234,7 @@ input,select,td,th
 { font-size: 1em
 }
 
-button.btn_default,.c_post-attachment dt, #c_tos dt {
+.c_post-attachment dt, #c_tos dt {
 font-weight:700;
 }
 
@@ -3299,7 +3313,7 @@ vertical-align:top;
 
 .posting > tbody
 { padding: 2em 0
-; border-bottom-width: 0.2em
+; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 }
 
@@ -3320,11 +3334,13 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr > td > input[type="text"]
 { width: 100% }
 
 input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(2),
+input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(2),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(5),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(9),
-input[name="type"] ~ .posting > tbody > tr:nth-child(4),
-input[name="type"] ~ .posting > tbody > tr:nth-child(4) > td:last-child
+input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(4),
+input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(4) > td:last-child
+input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(4)
 { width: 100% }
 
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6) > th
@@ -3339,8 +3355,8 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(10),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(12),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(14),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(15) > td:first-child,
-input[name="type"] ~ .posting > tbody > tr:nth-child(3),
-input[name="type"] ~ .posting > tbody > tr:nth-child(4) > .c_desc
+input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(3),
+input[name="type"]:not([value="3"]) ~ .posting > tbody > tr:nth-child(4) > .c_desc
 { display: none }
 
 #c_postbtn
