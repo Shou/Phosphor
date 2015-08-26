@@ -9,8 +9,8 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * [Footer content consolidation](http://i.imgur.com/Nmyrzjb.png)
 * Submenu and topmenu click toggle, replacing hover
 * [New topmenu animation](https://u.teknik.io/1lHNfs.webm)
-* Auto-preview with scroll-sync
-* Toggleable nested quotes
+* [Auto-preview with scroll-sync](https://u.teknik.io/N5do0W.mp4)
+* [Toggleable nested quotes](https://u.teknik.io/5nw25p.mp4)
 
 ## Planned
 * Better mobile thread view, i.e. leveraging vertical space
