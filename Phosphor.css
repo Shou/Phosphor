@@ -3356,10 +3356,10 @@ input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(2),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(5),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(9),
-input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(13),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(11),
 input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(4),
 input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(4) > td:last-child,
-input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(6),
+input[name="mode"][value="2"] + input[name="type"][value="1"] ~ .posting > tbody > tr:nth-child(4),
 input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(4)
 { width: 100% }
 
@@ -3378,9 +3378,11 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(14),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(15) > td:first-child,
 input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(3),
 input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(5),
-input[name="mode"][value="2"] + input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6) > td:first-child,
+input[name="mode"][value="2"] + input[name="type"][value="1"] ~ .posting > tbody > tr:nth-child(6) > td:first-child,
 input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(7),
 input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(8) > td:first-child,
+input[name="mode"][value="2"] + input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(9),
+input[name="mode"][value="2"] + input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(10) > td:first-child,
 input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(3),
 input[name="type"]:not([value="3"]) ~ .posting > tbody > tr:nth-child(4) > .c_desc
 { display: none }
