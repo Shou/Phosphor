@@ -102,9 +102,11 @@ $(texte).bind("input focusout", makePreview)
 function makePreview() {
   if (pretimeout === null)
     pretimeout = setTimeout(function() {
-      var p = document.querySelector("#c_post-text").value
+      var q = document.querySelector("#txt_quote")
+        , p = document.querySelector("#c_post-text")
+        , t = (q ? "[quote]" + q.value + "[/quote]" : "") + p.value
 
-      preview(p, function(data) {
+      preview(t, function(data) {
         if (preve === null) {
           preve = document.createElement("div")
           preve.id = "c_post-preview"
@@ -117,7 +119,7 @@ function makePreview() {
 
       try {
       scrollEquilibrate(preve, texte)
-      } catch (e) { console.log("FUCK YOU " + e.toString()) }
+      } catch (e) { console.log("scrollEquilibrate " + e.toString()) }
 
       pretimeout = null
     }, 250)

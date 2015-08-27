@@ -288,7 +288,8 @@ blockquote > dl,
 #foot_datetime > a,
 #foot_datetime::after,
 #emot_end,
-input[name="mode"]:not([value="1"]) ~ .posting > tbody > tr:nth-child(4)
+input[name="mode"]:not([value="1"]) ~ .posting > tbody > tr:nth-child(n+4):nth-child(-n+9),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(n+11):nth-child(-n+16)
 { align-items: center }
 
 #realtop, #top
@@ -341,7 +342,9 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3)
 #foot_links,
 #toggle-topmenu + label,
 #c_post-close,
-input[name="mode"]:not([value="1"]) ~ .posting > tbody > tr:nth-child(4) > td:first-child
+input[name="mode"]:not([value="1"]) ~ .posting > tbody > tr:nth-child(4) > td:first-child,
+input[name="mode"]:not([value="1"]) + input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(6) > td:first-child,
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(11) > td:first-child
 { order: 1 }
 
 .warn > a:last-of-type,
@@ -420,7 +423,8 @@ thead > tr > th small,
 .c_forum div a,
 .c_last-title,
 .c_last-title ~ strong,
-.meta_menu > h3
+.meta_menu > h3,
+#addpoll
 { font-weight: 400 }
 
 .forums th a,
@@ -599,6 +603,7 @@ blockquote > code.prettyprint,
 .bunk-big-butt:hover,
  .cat-topicpages a,
 .c_next > a,
+#addpoll,
 .c_topicfoot > [href$="/old/"]::before,
 .c_topicfoot > [href$="/old/"] + a ::before,
 .c_topicfoot > [href$="/new/"]::before,
@@ -616,7 +621,8 @@ button:hover, a.btn_fake:hover, select:hover, option:hover,
 input[type="button"]:hover, .c_foot a:hover,
 .meta_menu a,
 .spoiler_toggle,
-.nav-mark
+.nav-mark,
+#addpoll:hover
 { background-color: #3D3D3D }
 
 #copyright
@@ -735,7 +741,6 @@ input[type="button"]:hover, .c_foot a:hover,
 blockquote dl,
 blockquote dl dt,
 .spoiler_toggle,
-.c_next > a,
 #top_menu > li:first-child::before,
 #top_info,
 #c_post-close,
@@ -768,7 +773,9 @@ blockquote dl dt,
 select, input, button, a.btn_fake,
 .c_desc,
 .drop_menu a,
-.c_user > .usertitle
+.c_user > .usertitle,
+.c_next > a,
+#addpoll
 { color: #CCC }
 
 html, body, td
@@ -873,6 +880,7 @@ thead,
 #topic_review > tbody > tr,
 #acplogin > #loginform tbody,
 .c_next > a,
+#addpoll,
 .c_topicfoot > [href$="/old/"]::before,
 .c_topicfoot > [href$="/old/"] + a ::before,
 .c_topicfoot > [href$="/new/"]::before,
@@ -1053,7 +1061,7 @@ thead > tr > th small
 ; margin-top: 1em
 }
 
-input, select, button, a.btn_fake, td.c_foot a
+input, select, button, a.btn_fake, td.c_foot a, #addpoll
 { border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 ; border-bottom-color: #101010
@@ -2051,10 +2059,16 @@ blockquote > code.prettyprint
 }
 
 .c_next > a,
-.btn_default
+.btn_default,
+#addpoll
 { padding: 1rem 8.9rem
 ; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
+}
+
+#addpoll
+{ margin: 0 0 1rem 0
+; display: inline-block
 }
 
 .c_view
@@ -2903,10 +2917,14 @@ margin-top:3px;
 { border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 ; margin: .5rem 0
+; padding: 1rem .5rem
 }
 
 #topic_review > tbody > tr > .c_desc
-{ position: initial }
+{ position: initial
+; margin: 0 0 1rem 0
+}
+
 .c_post ul {
 list-style-type:square;
 margin-left:10px;
@@ -3338,8 +3356,10 @@ input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(2),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(5),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(9),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(13),
 input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(4),
-input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(4) > td:last-child
+input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(4) > td:last-child,
+input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(6),
 input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(4)
 { width: 100% }
 
@@ -3353,11 +3373,24 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6) > th > a::bef
 
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(10),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(12),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(13) > td:first-child,
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(14),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(15) > td:first-child,
+input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(3),
+input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(5),
+input[name="mode"][value="2"] + input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(6) > td:first-child,
+input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(7),
+input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(8) > td:first-child,
 input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(3),
 input[name="type"]:not([value="3"]) ~ .posting > tbody > tr:nth-child(4) > .c_desc
 { display: none }
+
+input[name="mode"]:not([value="1"]) ~ .posting > tbody > tr:nth-child(n+4):nth-child(-n+9),
+input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(n+11):nth-child(-n+16)
+{ padding: 1rem 1rem }
+
+input[name="mode"][value="2"] + input[name="type"][value="2"] ~ .posting > tbody > tr:nth-child(4)
+{ padding: 0 }
 
 #c_postbtn
 { padding-top: 2em }
