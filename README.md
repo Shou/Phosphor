@@ -12,7 +12,7 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * [Auto-preview with scroll-sync](https://u.teknik.io/jLFWo1.mp4)
 * [Toggleable nested quotes](https://u.teknik.io/TziPzj.mp4)
 * [Floating Quick Reply with preview](http://i.imgur.com/8EjAvfP.png)
-* Quick reply automatic draft saving
+* Automatic draft saving
 
 ## To do
 * Better mobile thread view, i.e. leveraging vertical space
