@@ -11,6 +11,7 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * [New topmenu animation](https://u.teknik.io/1lHNfs.webm)
 * [Auto-preview with scroll-sync](https://u.teknik.io/jLFWo1.mp4)
 * [Toggleable nested quotes](https://u.teknik.io/TziPzj.mp4)
+* Quick reply automatic draft saving
 
 ## To do
 * Better mobile thread view, i.e. leveraging vertical space
@@ -19,6 +20,8 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * Report control panel
 * Preferences
 * Signature editor
+* Better quick reply field
+* Polls
 
 ## Features
 

@@ -66,12 +66,78 @@ for (var i = 0, l = ns.length; i < l; i++)
 <!-- BOARD -->
 </div>
 
-<style>
-.c_post > blockquote > div > blockquote > div { display: none }
-.c_post > blockquote > div > blockquote > dl { cursor: pointer }
-</style>
-
 <script>
+
+var ls = localStorage
+var DRAFTKEY = "drafts"
+
+// hacky way to get thread ID from /topic/ or /post/
+// FIXME saves forum IDs (not bad), needs separation from thread IDs
+var tid = location.pathname.split('/')[3] || location.search.split('&')[3]
+// preview XHR limit timeout
+var pretimeout = null
+// preview element
+var preve = null
+// textarea element
+var texte = $("#c_post-text")[0] || $("#fast-reply > dd > textarea")[0]
+// relevant textarea container element
+var parnt = $("#c_post")[0] || $("#fast-reply")[0]
+
+function jsonRead(k, a) {
+  try {
+    return JSON.parse(localStorage[k])
+
+  } catch (e) {
+    return a
+  }
+}
+
+function jsonWrite(k, x) {
+  localStorage[k] = JSON.stringify(x)
+}
+
+// | XXX probably really slow
+// draftRead :: String -> a -> Either a String
+function draftRead(k, a) {
+  var ds = jsonRead(DRAFTKEY, {})
+
+  // Months approximation
+  var date = Math.floor(Date.now() / 1000 / 3600 / 24 / 30)
+  // Delete drafts older than a month
+  for (kt in ds) if (date - ds[kt].date > 1) {
+    delete ds[kt]
+    jsonWrite(DRAFTKEY, ds)
+    break
+  }
+
+  if (k in ds) {
+    ds[k].date = date
+    // save access date
+    jsonWrite(DRAFTKEY, ds)
+    return ds[k].text
+
+  } else return a
+}
+
+function draftWrite(k, a) {
+  var ds = jsonRead(DRAFTKEY, {})
+
+  // Months approximation
+  var date = Math.floor(Date.now() / 1000 / 3600 / 24 / 30)
+  // Delete drafts older than a month
+  for (kt in ds) if (date - ds[kt].date > 1) {
+    delete ds[kt]
+    break
+  }
+
+  var o = { date: date, text: a }
+  jsonWrite(DRAFTKEY, (a ? ds[k] = o : delete ds[k], ds))
+}
+
+// saveDraft :: IO ()
+function saveDraft() {
+  draftWrite(tid, this.value)
+}
 
 // quotePyramid :: Elem -> IO ()
 function quotePyramid(s) {
@@ -86,24 +152,13 @@ function toggleQuote(e) {
     e.style.display = e.style.display !== "block" ? "block" : "none"
 }
 
-quotePyramid()
-
-var pretimeout = null
-var preve = null
-var texte = document.querySelector("#c_post-text")
-
-$(texte).bind("scroll input", function(e) {
-  scrollEquilibrate(preve, texte)
-})
-
-$(texte).bind("input focusout", makePreview)
 
 // makePreview :: IO ()
 function makePreview() {
   if (pretimeout === null)
     pretimeout = setTimeout(function() {
-      var q = document.querySelector("#txt_quote")
-        , p = document.querySelector("#c_post-text")
+      var q = $("#txt_quote")[0]
+        , p = $("#c_post-text")[0] || $("#fast-reply > dd > textarea")[0]
         , t = (q ? "[quote]" + q.value + "[/quote]" : "") + p.value
 
       preview(t, function(data) {
@@ -112,7 +167,7 @@ function makePreview() {
           preve.id = "c_post-preview"
           preve.innerHTML = data
 
-          document.querySelector("#c_post").appendChild(preve)
+          $(parnt).append(preve)
 
         } else preve.innerHTML = data
       })
@@ -147,31 +202,49 @@ function scrollEquilibrate(e0, e1) {
   var holes = []
   for (var i = 0, ns = e0.childNodes, l = ns.length; i < l; i++) {
     if (ns[i].nodeType === document.TEXT_NODE) h += textHeight(ns[i])
+
     else {
       // check if image, object, so forth, mark current height
       // then skip those coordinates
-      if (ns[i].tagName === "IMG") {
+      var skips = ["IMG", "OBJECT", "IFRAME"]
+      if (skips.indexOf(ns[i].tagName) !== -1) {
         holes.push([h, h + ns[i].clientHeight])
+        h += ns[i].clientHeight
 
-        var fs = parseFloat(window.getComputedStyle(ns[i]).fontSize)
-        var lh = parseFloat(window.getComputedStyle(ns[i]).lineHeight)
-        h += fs * ((lh - 1) / 2 + 1)
-
+        //var fs = parseFloat(window.getComputedStyle(ns[i]).fontSize)
+        //var lh = parseFloat(window.getComputedStyle(ns[i]).lineHeight)
+        //h += fs * ((lh - 1) / 2 + 1)
       }
     }
   }
 
-  var offset = Math.round(Math.cos(Math.PI * e1.scrollTop / (e1.scrollHeight - e1.clientHeight)) * 5) * -1 * 7
+  // TODO Edge attraction
+  //var offset = Math.round(Math.cos(Math.PI * e1.scrollTop / (e1.scrollHeight - e1.clientHeight)) * 5) * -1 * 7
+  var m = e1.scrollHeight - e1.clientHeight
+    , x = e1.scrollTop
+    , t = 10
+  var offset = Math.trunc(Math.cos(Math.PI / m * x) * -1 * (1 + t / m / (m / 100))) * t
   // TODO FIXME account for image holes and actually use `h`?
   var scroll = (e1.scrollTop + offset) * ((e0.scrollHeight - e0.clientHeight) / (e1.scrollHeight - e1.clientHeight))
 
-  // This is a one-liner in Haskell
+  // FIXME not working?
+  // Hole-skipping loop
+  console.log(holes.map(function(xs) {
+    return Math.floor(xs[0]) + " - " + Math.floor(xs[1])
+  }))
   var b = false
-  for (var i = 0, l = holes.length; i < l; i++)
-    if (holes[i][0] > scroll && holes[i][1] < scroll) {
+  for (var i = 0, l = holes.length; i < l; i++) {
+    // within hole's precinct
+    if (holes[i][0] < scroll && holes[i][1] > scroll) {
+      console.log(holes[i][0] + " < " + scroll + " < " + holes[i][1])
+      // skip to hole's lower edge
       scroll = holes[i][1]
+      console.log("new " + scroll)
+
+      // we only need to match one hole per scroll
       break
     }
+  }
 
   e0.scrollTop = scroll
 }
@@ -184,10 +257,57 @@ function textHeight(tn) {
   return rect.bottom - rect.top
 }
 
-makePreview()
+// | Close [parent] button
+var cb = $("<input>", { type: "button"
+                      , value: "x"
+                      , class: "close-button" 
+                      }).bind("click", function(e) {
+                          this.parentNode.classList.remove("show-bottom")
+                          draftWrite(tid, null)
+                          texte.value = ""
+                          preve.innerHTML = ""
+                      })
 
-var cs = document.getElementsByTagName("code")
-for (var i = 0, l = cs.length; i < l; i++) cs[i].classList.add("prettyprint")
+function main() {
+  quotePyramid()
+
+  // Scroll sync event
+  $(texte).bind("scroll input", function(e) {
+    scrollEquilibrate(preve, texte)
+  })
+
+  // Auto-preview event
+  $(texte).bind("input focusout", makePreview)
+
+  // Draft saving event
+  $(texte).bind("input focusout", saveDraft)
+
+  // Quick Reply spawn event
+  $(".topic-buttons").bind("click", function(e) {
+    if (e.button === 0) {
+      e.preventDefault()
+      $("#fast-reply")[0].classList.add("show-bottom")
+    }
+  })
+
+  // Add closing button to Quick Reply
+  $("#fast-reply").prepend(cb)
+
+  // Open Quick Reply on load if a draft exists
+  if (draftRead(tid)) parnt.classList.add("show-bottom")
+
+  console.log("Loading draft " + tid)
+  // Add saved draft to textarea if applicable
+  texte.value = draftRead(tid, texte.value)
+
+  makePreview()
+
+  $("code").each(function(c) {
+    c.classList.add("prettyprint")
+  })
+}
+
+main()
 
 </script>
 
