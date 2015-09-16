@@ -21,18 +21,28 @@ function views(vs) {
 }
 
 function tf() {
-    time += 100
+  time += 100
 
-    var vs = qsa(".c_cat-replies > a, .c_cat-views")
-    if (vs.length > 0) views(vs)
-    else if (time < maxTime)
-        tu = setTimeout(tf, 100)
+  var vs = qsa(".c_cat-replies > a, .c_cat-views")
+  if (vs.length > 0) {
+    views(vs)
+    mo.observe($("#inlinetopic")[0], { childList: true })
+
+  } else if (time < maxTime)
+    tu = setTimeout(tf, 100)
 }
 
 // this is super dumb but let's pretend it's not
 var maxTime = 1000
 var time = 0
 var tu = setTimeout(tf, 100)
+
+var mo = new MutationObserver(function(ms) {
+  ms.forEach(function(m) {
+    var vs = qsa(".c_cat-replies > a, .c_cat-views")
+    views(vs)
+  }
+}
 
 </script>
 
@@ -47,7 +57,7 @@ var tu = setTimeout(tf, 100)
 
 var ns = qsa( "#menu_rcp > a > strong > small"
            + ", #menu_pm > a > strong > small")
-  , topBar = qsa("#top_bar")[0]
+  , topBar = $("#toggle-topmenu + label")[0]
 
 for (var i = 0, l = ns.length; i < l; i++)
     if (parseInt(ns[i].textContent) > 0)

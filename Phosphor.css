@@ -2425,7 +2425,6 @@ margin:0;
 #pmtoast > a
 { display: flex
 ; justify-content: center
-; max-width: 1024px
 ; width: 100%
 }
 
