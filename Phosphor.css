@@ -240,8 +240,7 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(4),
 { flex-direction: column }
 
 .c_sig blockquote,
-.profile > thead > tr,
-.user_info
+.profile > thead > tr
 { flex-direction: column-reverse }
 
 .posting > tbody
@@ -324,7 +323,8 @@ form[action$="/tasks/"]
 #foot > tbody > tr,
 .meta_menu > ul,
 #emot_list,
-#fast-reply
+#fast-reply,
+.user_info
 { flex-wrap: wrap }
 
 #top
@@ -393,8 +393,8 @@ blockquote dl,
 .queued,
 .c_username > a,
 .c_user > .usertitle,
-.topic .user_info > dd:first-of-type,
-.meta_menu > h3
+.user_info,
+.meta_menu > h3,
 { font-family: "Quicksand", sans-serif }
 
 code
@@ -430,16 +430,16 @@ thead > tr > th small,
 .c_last-title,
 .c_last-title ~ strong,
 .meta_menu > h3,
-#addpoll
+#addpoll,
+.forums th
 { font-weight: 400 }
 
 .forums th a,
 .forums th a strong
-{ font-weight: 600 }
+{ font-weight: 700 }
 
 #findposts .c_mark,
-.c_next > a,
-.forums th
+.c_next > a
 { font-weight: 700 }
 
 #top_info > strong > a,
@@ -669,6 +669,9 @@ html, body
 .username_ok
 { background-color: lime }
 
+.c_username
+{ background-color: rgba(240, 240, 240, 0.75) }
+
 #profile_menu a:hover, #profile_menu a:focus,
 input[type="text"], input[type="password"], input:not([type])
 { background-color: transparent }
@@ -744,7 +747,6 @@ input[type="button"]:hover, .c_foot a:hover,
 .c_post-attachment,
 .meta_menu a,
 .meta_menu > h3,
-.c_username > a,
 blockquote dl,
 blockquote dl dt,
 .spoiler_toggle,
@@ -814,6 +816,9 @@ td.c_foot a
 
 input[type="text"], input[type="password"], input:not([type])
 { color: rgba(208, 208, 208, 0.3) }
+
+.c_username > a
+{ color: rgba(30, 30, 30, 0.9) }
 
 #logo > a,
 .bunk-big-butt,
@@ -943,9 +948,6 @@ input[type="text"], input[type="password"], input:not([type])
 #profile_menu a:hover, #profile_menu a:focus,
 .bunk-big-butt, .bunk-button
 { border-color: transparent }
-
-.c_user > div:first-child, .c_user > a > div:first-child
-{ box-shadow: 0 0 0 0.3rem #F0F0F0 }
 
 .profile .c_mark > div
 { box-shadow: 0 0 0 0.3em #3D3D3D }
@@ -1578,6 +1580,12 @@ width:20px;
 { display: none !important
 }
 
+.forums > tbody > tr > th
+{ text-align: left }
+
+.forums > tbody > tr:nth-child(n+2) > th
+{ margin-top: 1rem }
+
 .category > .forums
 { padding: 1em
 ; border-bottom-width: 0.25rem
@@ -1680,8 +1688,7 @@ padding:4px 0 4px 20px;
 }
 
 .c_username
-{ margin: 0 0 calc(1rem + 5px) 0
-; padding: .5em 1em
+{ padding: .5em 1em
 ; text-align: center
 ; min-width: 192px
 ; max-width: 192px
@@ -1700,67 +1707,68 @@ padding:4px 0 4px 20px;
 ; min-width: 192px
 ; max-width: 192px
 ; padding: 0
+; overflow: hidden
 ; vertical-align: top
 ; word-wrap: break-word
 ; text-overflow: ellipsis
 }
 
 .c_user > div:first-child, .c_user > a > div:first-child
-{ border-radius: 50%
-; border-width: 0.5rem
-; border-style: solid
-; overflow: hidden
-; min-width: 150px
-; max-width: 150px !important
-; min-height: 150px
-; max-height: 150px !important
-; transition: 0.3s border-radius cubic-bezier(.55,0,0.1,1)
-}
-
-td.c_user div:first-child:hover
-{ border-radius: 1%
+{ max-width: 192px !important
+; max-height: 384px !important
+; position: relative
+; display: inline-flex
+; margin: 0 !important
 ; transition: 0.3s border-radius cubic-bezier(.55,0,0.1,1)
 }
 
 td.c_user div:first-child img
-{ max-width: 140px !important; max-height: 140px !important }
+{ max-width: 192px !important
+; min-width: 192px !important
+; max-height: 384px !important
+; min-height: 7.2rem !important
+}
 
 .topic .user_info
-{ font-size: 0 }
+{ max-height: 0
+; overflow: hidden
+; transition: .3s all .01s
+; z-index: 1
+; position: absolute
 
-.topic .user_info > dd:first-of-type
-{ font-size: 1.5rem
-; text-align: center
-; width: 100%
-; margin: 0
+; color: rgba(30, 30, 30, 0.9)
+; background-color: rgba(240, 240, 240, 0.75)
 }
 
-.topic .user_info > dd:nth-of-type(n + 2),
-.topic .user_info > dt
-{ display: none }
+.topic .c_user:hover > .user_info
+{ max-height: 5rem
+; height: 5rem
+; margin-top: -4.95rem
+; transition: .3s all
+}
 
 .c_user > .usertitle
-{ margin: calc(1rem + 5px) 0 1em
-; padding: 0.5em
+{ margin-top: -2.1rem
+; padding: 0.5em 0
 ; overflow: hidden
-; border-bottom-style: solid
-; border-top-style: solid
-; border-bottom-width: 0.25rem
-; border-top-width: 0.25rem
+; position: absolute
+; z-index: 1
+; width: 192px
 
-; text-overflow: ellipsis
+; color: rgba(30, 30, 30, 0.9)
+; background-color: rgba(240, 240, 240, 0.75)
+
 ; text-align: center
+; font-size: 0.9rem
 ; white-space: nowrap
-; font-size: 1rem
-; transition: all 0.3s
-; max-height: 2.6rem
+; text-overflow: ellipsis
+
+; transition: .3s all
 }
 
-
-.c_user > .usertitle:hover
-{ white-space: initial
-; transition: all 0.3s
-; max-height: 5.2rem
+.c_user:hover > .usertitle
+{ transition: .3s all .01s
+; margin-top: -7.13rem
 }
 
 .usertitle > br
@@ -1792,11 +1800,6 @@ word-wrap:break-word;
 dl.user_profile dd {
 font-style:italic;
 margin-left:8px;
-}
-
-dl.user_info dd {
-font-weight:700;
-margin-bottom:1px;
 }
 
 #profile_menu > li > a
@@ -2894,24 +2897,14 @@ margin:auto;
 dl
 { margin: 0 }
 
-dl.user_info dt,dl.user_info dd {
-padding:.1em;
+.user_info > dt,
+.user_info > dd
+{ width: 49%
+; margin: 0
+; padding: 0 1rem
 }
 
-dl.user_info dt {
-float:left;
-margin:0;
-min-width:4em;
-}
-
-dl.user_info dd.spacer,dl.user_profile dd.spacer {
-clear:both;
-float:none;
-height:1px;
-padding:0;
-}
-
-td.c_poll-choice {
+.c_poll-choice {
 line-height:1.5;
 padding-left:45%;
 }
