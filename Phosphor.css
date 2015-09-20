@@ -156,6 +156,21 @@ html, body
 #fast-reply > #c_post-preview
 { width: 100% !important }
 
+#topic_viewer > tbody > tr[id] + tr
+{ flex-direction: column }
+
+.c_post
+{ margin-top: 0 !important }
+
+.c_username
+{ margin-left: 5.6rem }
+
+tr > .c_user > div:first-child img
+{ max-width: 5.6rem !important
+; min-width: 5.6rem !important
+; margin-top: -2.8rem
+}
+
 }
 
 /* End of media rules }}} */
@@ -1719,14 +1734,14 @@ padding:4px 0 4px 20px;
 ; position: relative
 ; display: inline-flex
 ; margin: 0 !important
+; overflow: hidden
 ; transition: 0.3s border-radius cubic-bezier(.55,0,0.1,1)
 }
 
-td.c_user div:first-child img
+.c_user > div:first-child img
 { max-width: 192px !important
 ; min-width: 192px !important
-; max-height: 384px !important
-; min-height: 7.2rem !important
+; max-height: initial !important
 }
 
 .topic .user_info
