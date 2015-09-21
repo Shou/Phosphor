@@ -163,13 +163,106 @@ html, body
 { margin-top: 0 !important }
 
 .c_username
-{ margin-left: 5.6rem }
+{ margin-left: 5.6rem
+; max-width: initial !important
+; min-width: initial !important
+; flex: 0 0 auto
+; background-color: inherit !important
+}
 
-tr > .c_user > div:first-child img
+.c_username, .c_postinfo
+{ align-self: baseline }
+
+.c_username > a
+{ color: inherit !important }
+
+.c_username
+{ padding: .5rem .5rem 0 1rem !important }
+
+.c_postinfo
+{ padding: .5rem !important }
+
+.topic .c_user div:first-child img
 { max-width: 5.6rem !important
 ; min-width: 5.6rem !important
-; margin-top: -2.8rem
 }
+
+.topic .c_user > div:first-child,
+.topic .c_user > a > div:first-child
+{ margin-top: -2.8rem !important
+; max-width: 5.6rem !important
+; min-width: 5.6rem
+}
+
+tr > .c_user
+{ display: flex
+; max-width: initial
+; min-width: initial
+; max-height: 3rem
+; transition: .3s all cubic-bezier(.55,0,0.1,1)
+}
+
+tr > .c_user:hover
+{ max-height: 5.6rem
+; transition: .3s all 1s cubic-bezier(.55,0,0.1,1)
+}
+
+.topic .c_user > .usertitle
+{ white-space: initial
+; display: flex
+; padding: 0 1rem
+; align-items: baseline
+; flex: 0 0 auto
+; width: initial
+}
+
+.topic .c_user > .user_info
+{ flex: 1
+; justify-content: flex-end
+}
+
+.topic .c_user > .usertitle,
+.topic .c_user > .user_info
+{ background-color: inherit
+; color: inherit
+}
+
+.topic .c_user > .usertitle,
+.topic .c_user > .user_info
+{ position: initial !important }
+
+.topic .c_user > .usertitle,
+.topic .c_user:hover > .usertitle,
+.topic .c_user:hover > .user_info
+{ margin-top: 0 !important }
+
+.topic .c_user > .user_info,
+.topic .c_user:hover > .user_info
+{ max-height: initial !important
+; height: initial !important
+}
+
+.user_info > dt,
+.user_info > dd
+{ width: initial !important
+; padding: 0 .25rem !important
+}
+
+.user_info > dt:nth-of-type(n+3),
+.user_info > dd:nth-of-type(n+3)
+{ display: none }
+
+.warn
+{ padding: 0 1rem }
+
+.warn > a
+{ display: none }
+
+.warn > .warning
+{ padding: 0 .25rem }
+
+.c_sig
+{ margin-left: initial !important }
 
 }
 
@@ -244,6 +337,9 @@ html, body
 .forums
 { display: flex !important }
 
+.c_sig blockquote
+{ display: inline-flex }
+
 #main,
 #c_post, #edit_sig > tbody, #c_notes > form, #acplogin, #acplogin table,
 #acplogin thead, #acplogin tbody, #top_menu, .drop_menu > li,
@@ -254,14 +350,17 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(4),
 #topic_review > tbody > tr
 { flex-direction: column }
 
-.c_sig blockquote,
+.c_sig blockquote
+{ flex-direction: row-reverse }
+
 .profile > thead > tr
 { flex-direction: column-reverse }
 
 .posting > tbody
 { flex-direction: row }
 
-.c_foot > span
+.c_foot > span,
+.c_sig blockquote > dl
 { justify-content: flex-start }
 
 #realtop, #top, .c_postinfo, .c_footicons, .c_cat-title,
@@ -314,6 +413,9 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(n+11):nth-child(
 #realtop, #top
 { align-items: flex-start }
 
+.c_sig blockquote > dl
+{ align-items: flex-end }
+
 #edit_sig > tbody > tr:last-child, #c_post > button, .c_cat-replies,
 .c_cat-views, .c_cat-starter, .c_cat-title, .c_cat-lastpost, .replied-marker,
 #pmtoast > a,
@@ -339,12 +441,12 @@ form[action$="/tasks/"]
 .meta_menu > ul,
 #emot_list,
 #fast-reply,
-.user_info
+.user_info,
+.c_sig blockquote
 { flex-wrap: wrap }
 
 #top
-{ flex-wrap: nowrap
-}
+{ flex-wrap: nowrap }
 
 #top,
 .c_cat-title > ul + a
@@ -1705,8 +1807,8 @@ padding:4px 0 4px 20px;
 .c_username
 { padding: .5em 1em
 ; text-align: center
-; min-width: 192px
-; max-width: 192px
+; min-width: 14.4rem
+; max-width: 14.4rem
 }
 
 .c_username > a
@@ -1719,28 +1821,28 @@ padding:4px 0 4px 20px;
 
 .c_user
 { font-size: 0.8em
-; min-width: 192px
-; max-width: 192px
+; min-width: 14.4rem
+; max-width: 14.4rem
 ; padding: 0
-; overflow: hidden
+/* ; overflow: hidden */
 ; vertical-align: top
 ; word-wrap: break-word
 ; text-overflow: ellipsis
 }
 
 .c_user > div:first-child, .c_user > a > div:first-child
-{ max-width: 192px !important
-; max-height: 384px !important
+{ max-width: 14.4rem !important
+; max-height: 28.8rem !important
 ; position: relative
 ; display: inline-flex
 ; margin: 0 !important
 ; overflow: hidden
-; transition: 0.3s border-radius cubic-bezier(.55,0,0.1,1)
+; transition: 0.3s all cubic-bezier(.55,0,0.1,1)
 }
 
-.c_user > div:first-child img
-{ max-width: 192px !important
-; min-width: 192px !important
+.c_user div:first-child img
+{ max-width: 14.4rem !important
+; min-width: 14.4rem !important
 ; max-height: initial !important
 }
 
@@ -1768,7 +1870,7 @@ padding:4px 0 4px 20px;
 ; overflow: hidden
 ; position: absolute
 ; z-index: 1
-; width: 192px
+; width: 14.4rem
 
 ; color: rgba(30, 30, 30, 0.9)
 ; background-color: rgba(240, 240, 240, 0.75)
@@ -1791,6 +1893,9 @@ padding:4px 0 4px 20px;
 
 .c_user > .usertitle:first-child
 { margin: 0 21px }
+
+.c_user > img
+{ display: none }
 
 .warn
 { width: 100% }
@@ -2043,6 +2148,9 @@ blockquote > code.prettyprint
 .c_sig blockquote > dl > dd::before
 { content: ", "
 }
+
+.c_sig blockquote > div
+{ padding: 0 }
 
 .c_sig blockquote > div::before, .c_sig blockquote > div::after
 { font-size: 2em
@@ -2886,7 +2994,7 @@ a + .description
 { content: "\f14b\a0" }
 
 .c_post
-{ padding: 0.5em
+{ padding: 1rem
 /* ↓ Android Chrome is Literally Retarded: The Unwanted Scaling of Fonts */
 ; max-height: 999999px
 ; width: 100%
@@ -3019,9 +3127,9 @@ margin-left:10px;
 
 .c_sig
 { vertical-align: top
-; margin-left: 192px
-; margin-top: 2em
-; padding: 1em 0.5em
+; margin-left: calc(192px + 1rem)
+; margin-top: 1rem
+; padding: 0.5rem
 
 ; border-top-style: solid
 ; border-left-style: solid
