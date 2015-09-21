@@ -13,10 +13,10 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * [Toggleable nested quotes](https://u.teknik.io/TziPzj.mp4)
 * [Floating Quick Reply with preview](http://i.imgur.com/8EjAvfP.png)
 * Automatic draft saving
-* Rectangular avatars with hover effects
+* Mighty rectangular avatars and hover metadata
+* Vertical mobile thread view
 
 ## To do
-* Better mobile thread view, i.e. leveraging vertical space
 * Profile view
 * Inbox and PMs
 * Report control panel
