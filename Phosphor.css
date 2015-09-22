@@ -599,11 +599,15 @@ ul.cat-topicpages, .c_head, .c_foot, .c_sort, .meta_box
 .c_view-list
 { font-size: 0.9em }
 
-td, textarea, #profile_menuwrap, button, .btn_fake, input[type="button"],
+td, #profile_menuwrap, button, .btn_fake, input[type="button"],
 .btn_text, #top
 { font-size: 1em }
 
-h2, h3, .c_post
+h2,
+h3,
+textarea,
+.c_post,
+#fast-reply > #c_post-preview
 { font-size: 1.1em }
 
 .c_forum strong a,
@@ -2281,7 +2285,7 @@ blockquote > code.prettyprint
 }
 
 #fast-reply > #c_post-preview
-{ margin: .5rem 0
+{ margin: .5rem 0 1rem 0
 ; max-height: 13em
 }
 
@@ -2304,7 +2308,7 @@ blockquote > code.prettyprint
 }
 
 #c_post-preview
-{ padding: 0 0.5rem
+{ padding: 0 1rem
 ; margin: 0.5rem 0.5rem 1rem 0.5rem
 ; max-width: 750px
 ; max-height: 20em
