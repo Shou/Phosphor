@@ -18,13 +18,12 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * Mighty rectangular avatars and hover metadata
 * [Vertical mobile thread view](http://i.imgur.com/qOABvzP.png)
 
-## To do
+## To do / developmental focus
 * Profile view
 * Inbox and PMs
 * Report control panel
 * Preferences
 * Signature editor
-* Better quick reply field
 * Polls
 
 ## Features
