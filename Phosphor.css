@@ -341,7 +341,8 @@ html, body
 #emot_list,
 #emot_end,
 .c_next,
-.c_footicons > span
+.c_footicons > span,
+.c_username
 { display: flex }
 
 .forums
@@ -383,19 +384,20 @@ blockquote > dl,
 [align="center"], .warn,
 .c_user > div:first-child,
 .c_user > a > div:first-child,
-#main > table:first-child > tbody > tr,
-#main > script:first-child + table > tbody > tr,
+.c_next,
+.c_username,
 .topic + table:not(.topic) > tbody > tr,
 .profile .c_mark > div,
 .c_topicfoot,
 .c_postfoot > td:first-of-type,
+#main > table:first-child > tbody > tr,
+#main > script:first-child + table > tbody > tr,
 #foot_themechooser > form,
 #foot_links > a:first-child::before,
 #foot_links > a:last-child::before,
 #foot > tbody > tr,
 #foot_datetime > a,
-#emot_end,
-.c_next
+#emot_end
 { justify-content: center }
 
 .c_user > div:first-child,
@@ -406,6 +408,7 @@ blockquote > dl,
 .profile .c_mark > div,
 .c_postfoot > td:first-of-type,
 .c_footicons > span,
+.c_username,
 #c_notes > form, #top_info, .c_foot > span, #acplogin,
 #edit_profile > tbody > tr,
 #subhuman,
@@ -607,7 +610,7 @@ h2,
 h3,
 textarea,
 .c_post,
-#fast-reply > #c_post-preview
+#c_post-preview
 { font-size: 1.1em }
 
 .c_forum strong a,
@@ -701,7 +704,6 @@ blockquote blockquote blockquote blockquote blockquote blockquote blockquote blo
 blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote,
 #error_box > tbody,
 input, select, button, a.btn_fake, td.c_foot a,
-textarea,
 .cat-pages a, .cat-pagesjump i,
 .category > .forums,
 #topic_viewer > tbody > tr,
@@ -726,6 +728,7 @@ textarea,
 #foot_links > a:last-child::before,
 #foot_datetime > a,
 input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
+textarea:focus,
 .meta_menu > ul > li > a:hover,
 #top_menu
 { background-color: #1F1F1F }
@@ -808,7 +811,8 @@ html, body
 { background-color: lime }
 
 #profile_menu a:hover, #profile_menu a:focus,
-input[type="text"], input[type="password"], input:not([type])
+input[type="text"], input[type="password"], input:not([type]),
+textarea
 { background-color: transparent }
 
 .c_sig blockquote
@@ -1217,7 +1221,7 @@ input, select, button, a.btn_fake, td.c_foot a, #addpoll
 ; padding: 0.3em 0.5em 0.1em 0.5em
 ; margin: 0 0.5em
 ; vertical-align: middle
-; transition: .3s all .3s
+; transition: .3s all
 ; position: relative
 }
 
@@ -1253,9 +1257,10 @@ textarea
 ; margin: 0 0.5em
 ; padding: 0.5em
 ; width: 100%
-; transition: .3s all .3s
+; transition: .3s all
 ; box-sizing: border-box
 ; outline: none
+; position: relative
 }
 
 input[type="text"], input[type="password"], input:not([type])
@@ -1283,7 +1288,7 @@ input:not([type]) + small
 ; margin-top: -4.5rem
 ; margin-left: 1rem
 ; color: #4D4D4D
-; transition: .3s all .3s
+; transition: .3s all
 }
 
 input[type="text"]:focus + small, input[type="password"]:focus + small,
