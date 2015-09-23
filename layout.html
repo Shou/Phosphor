@@ -3,6 +3,8 @@
 var qsa = Document.prototype.querySelectorAll.bind(document)
 
 function viewFormat(s) {
+    var fs = ["", "k", "m", "b"]
+
     var ss = s.split("<br>")
     var cs = ss[0].split(/,/g)
     var v = cs[0].trim() + fs[cs.length - 1]
@@ -12,8 +14,6 @@ function viewFormat(s) {
 }
 
 function views(vs) {
-    var fs = ["", "k", "m", "b"]
-
     for (var i = 0, l = vs.length; i < l; i++) {
         vs[i].dataset.desc = vs[i].innerHTML.split("<br>")[0].trim()
         vs[i].textContent = viewFormat(vs[i].innerHTML)
@@ -41,8 +41,8 @@ var mo = new MutationObserver(function(ms) {
   ms.forEach(function(m) {
     var vs = qsa(".c_cat-replies > a, .c_cat-views")
     views(vs)
-  }
-}
+  })
+})
 
 </script>
 

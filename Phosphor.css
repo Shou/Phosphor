@@ -3906,6 +3906,10 @@ span.poll::before, .poll-new::before
 ; cursor: pointer
 }
 
+/* No third-party script buttons */
+#c_post > [onclick]
+{ display: none }
+
 /* BLOWN OUT LMAO */
 .right, .left
 { float: none !important }
