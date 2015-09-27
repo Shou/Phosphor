@@ -67,7 +67,7 @@ input[type="checkbox"]
 {
 
 .c_post, #topic_review .c_desc + td
-{ max-width: 750px }
+{ max-width: 50rem }
 
 .c_post img,
 #c_post-preview img,
@@ -77,7 +77,7 @@ input[type="checkbox"]
 .c_post object,
 .c_post audio,
 .c_post iframe
-{ max-width: 700px }
+{ max-width: 50rem }
 
 }
 
@@ -145,7 +145,7 @@ td.c_user
 { max-width: initial !important
 ; min-width: initial !important
 ; margin-left: 5.6rem
-; padding: .5rem .5rem 0 1rem !important
+; padding: .5rem .5rem .5rem 1rem !important
 ; background-color: inherit !important
 ; flex: 0 0 auto
 }
@@ -154,8 +154,7 @@ td.c_user
 { align-self: baseline }
 
 .c_username > a
-{ color: inherit !important
-; font-size: 1rem !important
+{ font-size: 1rem !important
 }
 
 .c_postinfo
@@ -188,20 +187,17 @@ td.c_user
 ; max-width: 5.6rem !important
 ; min-width: 5.6rem
 ; min-height: initial !important
+; max-height: 5.6rem !important
+; overflow: hidden
 }
 
 tr > .c_user
 { display: flex
-; max-width: initial
-; min-width: initial
+; max-width: 100%
+; min-width: 100%
 ; max-height: 3rem
 ; flex-wrap: wrap
 ; transition: .3s all cubic-bezier(.55,0,0.1,1)
-}
-
-tr > .c_user:hover
-{ max-height: 5.6rem
-; transition: .3s all 1s cubic-bezier(.55,0,0.1,1)
 }
 
 .topic .c_user > .usertitle
@@ -211,12 +207,15 @@ tr > .c_user:hover
 ; align-items: baseline
 ; flex: 0 0 auto
 ; width: initial
+; max-width: 40%
+; text-align: left
 }
 
 .topic .c_user > .user_info
 { flex: 1
 ; justify-content: flex-end
 ; padding: 0
+; min-height: initial
 }
 
 .topic .c_user > .usertitle,
@@ -263,6 +262,18 @@ tr > .c_user:hover
 
 .warn > .warning
 { padding: 0 .25rem }
+
+.c_username,
+.c_postinfo,
+.c_postinfo > .left,
+.c_postinfo > .right > a,
+.c_user
+{ background-color: #101010 !important
+; color: #aaa
+}
+
+td.c_username > a
+{ color: #aaa }
 
 .c_sig
 { margin-left: initial !important }
@@ -352,13 +363,14 @@ html, body
 { display: inline-flex }
 
 #main,
-#c_post, #edit_sig > tbody, #c_notes > form, #acplogin, #acplogin table,
+#edit_sig > tbody, #c_notes > form, #acplogin, #acplogin table,
 #acplogin thead, #acplogin tbody, #top_menu, .drop_menu > li,
 #subhuman,
 input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(1),
 input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(1),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(4),
-#topic_review > tbody > tr
+#topic_review > tbody > tr,
+tr > #c_post
 { flex-direction: column }
 
 .c_sig blockquote
@@ -367,7 +379,8 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(4),
 .profile > thead > tr
 { flex-direction: column-reverse }
 
-.posting > tbody
+.posting > tbody,
+#fast-reply > #c_post
 { flex-direction: row }
 
 .c_foot > span,
@@ -463,7 +476,8 @@ form[action$="/tasks/"]
 { flex-wrap: nowrap }
 
 #top,
-.c_cat-title > ul + a
+.c_cat-title > ul + a,
+.cat-pagesjump
 { flex: 1 }
 
 .c_cat-title
@@ -548,7 +562,6 @@ code
 .collapse::before,
 .uncollapse::before,
 .replied-marker::before,
-#copyright:after,
 #error_box > tbody::before,
 #foot_themechooser > form::before,
 #foot_links > a:first-child::before,
@@ -556,6 +569,9 @@ code
 #foot_datetime::after,
 label
 { font-family: "FontAwesome", "Karla" }
+
+#copyright:after
+{ font-family: "FontAwesome", "Quicksand" }
 
 .c_forum div,
 .forums .forum .c_last
@@ -702,35 +718,38 @@ blockquote blockquote, blockquote blockquote blockquote blockquote,
 blockquote blockquote blockquote blockquote blockquote blockquote,
 blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote,
 blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote,
-#error_box > tbody,
 input, select, button, a.btn_fake, td.c_foot a,
+input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
+textarea:focus,
 .cat-pages a, .cat-pagesjump i,
 .category > .forums,
-#topic_viewer > tbody > tr,
 .topic > tbody > tr,
 .poll > tbody,
+.row1, .row2,
+.exclusivebutton + table > tbody > tr:first-child > td,
+.exclusivebutton + table,
+.topic + table,
+.ucp > tbody,
+.posting > tbody,
+.meta_menu > ul > li > a:hover,
+#topic_viewer > tbody > tr,
+#error_box > tbody,
 #fast-reply,
 #realtop,
 #fast-reply > dd > textarea,
 #c_post-preview,
 #emot_wrap,
-.row1, .row2, #who_posted > tbody > tr,
+#who_posted > tbody > tr,
 #forum_leaders_global > tbody > tr:nth-child(n+2),
 #pmlink,
-.exclusivebutton + table > tbody > tr:first-child > td,
 #main > table:first-child td,
-.exclusivebutton + table,
 #inlinetopic > .posts > tbody > tr,
-.ucp > tbody,
 #acplogin > #loginform tbody,
-.posting > tbody,
 #foot_links > a:first-child::before,
 #foot_links > a:last-child::before,
 #foot_datetime > a,
-input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
-textarea:focus,
-.meta_menu > ul > li > a:hover,
-#top_menu
+#top_menu,
+#conversation
 { background-color: #1F1F1F }
 
 .c_sig,
@@ -745,6 +764,7 @@ blockquote > code.prettyprint,
 .calendar .cal_inactive,
 #acplogin,
 .bunk-big-butt:hover,
+#profile_menu a:hover,
 .cat-topicpages a,
 .c_next > a,
 #addpoll,
@@ -791,6 +811,7 @@ html, body
 #logo,
 .bunk-big-butt,
 .bunk-button:hover,
+#profile_menu a,
 .meta_menu a
 { background-color: #FFECB3 }
 
@@ -873,11 +894,6 @@ textarea
 
 /* }}} */
 
-[data-desc]:hover::after,
-#top_info a[href$="/multi_login/"]:hover::after,
-#top_info a[href$="/multi_login/"]:focus::after,
-#top_info a[href$="/logout/"]:hover::after,
-#top_info a[href$="/logout/"]:focus::after,
 button:hover, a.btn_fake:hover, select:hover, option:hover,
 input[type="button"]:hover, .c_foot a:hover,
 .notice, .error,
@@ -886,8 +902,6 @@ input[type="button"]:hover, .c_foot a:hover,
 .c_post-attachment,
 .meta_menu a,
 .meta_menu > h3,
-blockquote dl,
-blockquote dl dt,
 .spoiler_toggle,
 #top_menu > li:first-child::before,
 #top_info,
@@ -902,15 +916,24 @@ blockquote dl dt,
 .c_topicfoot > [href$="/old/"]::before,
 .c_topicfoot > [href$="/old/"] + a ::before,
 .c_topicfoot > [href$="/new/"]::before,
-#shoutbox dt,
-.bunk-button
+#shoutbox dt
 { color: #F0F0F0 }
 
+html, body, td
+th, h2, th a, th a:hover,
+textarea,
+select, input, button, a.btn_fake,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input:not([type]):focus,
+.cat-pages a, .cat-pagesjump i, .cat-topicpages a,
+.editby, .queued,
+.c_postinfo, .c_postinfo a,
+.calendar td a, .calendar a:hover,
 .description,
 .c_view,
 .c_view-list,
 .nav-div,
-#foot td,
 .c_cat-starter::before,
 .c_cat-starter > a,
 .c_cat-replies > a,
@@ -918,27 +941,22 @@ blockquote dl dt,
 .c_cat-lastpost,
 .c_cat-lastpost > a,
 .replied-marker,
-select, input, button, a.btn_fake,
 .c_desc,
 .drop_menu a,
 .c_user > .usertitle,
 .c_next > a,
-#addpoll
-{ color: #CCC }
-
-html, body, td
-th, h2, th a, th a:hover,
-textarea,
-.cat-pages a, .cat-pagesjump i, .cat-topicpages a,
-.editby, .queued,
-.c_postinfo, .c_postinfo a,
+.hot-new, .plain-new, .poll-new,
+.bunk-button,
 #c_post-resize span,
 #foot a, #foot a:hover, #foot label,
 #copyright,
-.calendar td a, .calendar a:hover, #faq dd a, #faq dd a:hover,
-input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
-.hot-new, .plain-new, .poll-new
+#faq dd a, #faq dd a:hover,
+#foot td,
+#addpoll
 { color: #CCC }
+
+blockquote > dl
+{ color: #AAA }
 
 .plain, .hot, .c_cat-mark > .poll, .locked
 { color: #444 }
@@ -965,6 +983,7 @@ input[type="text"], input[type="password"], input:not([type])
 .bunk-big-butt,
 .bunk-button:hover,
 .meta_menu a,
+#profile_menu a,
 .category h2 > a, .category h2
 { color: #101010 }
 
@@ -976,15 +995,12 @@ input[type="text"], input[type="password"], input:not([type])
 { color: #F0F0F0 }
 
 .bunk-big-butt:hover,
-.meta_menu > ul > li > a:hover
+.meta_menu > ul > li > a:hover,
+#profile_menu a:hover
 { color: #FFECB3 }
 
 .warning
 { color: crimson }
-
-#profile_menu a:hover, #profile_menu a:focus,
-#profile_menu a::before, #profile_menu a::after
-{ color: #0299AE }
 
 #top_bar:hover
 { color: #455A64 }
@@ -1005,6 +1021,9 @@ thead > tr > th small,
 #profile_menu,
 .search_results_post > thead > tr > th > a
 { text-shadow: none }
+
+.c_username > a
+{ text-shadow: none !important }
 
 .c_user > div:first-child, .c_user > a > div:first-child,
 .profile .c_mark > div
@@ -1057,9 +1076,6 @@ textarea,
 input[type="text"], input[type="password"], input:not([type])
 { border-color: #4D4D4D }
 
-.cat-pagesjump i:hover
-{ border-color: #424242 }
-
 .submit_error
 { border-color: #333 }
 
@@ -1069,7 +1085,9 @@ input[type="text"], input[type="password"], input:not([type])
 .bunk-big-butt::after, .bunk-big-butt::before,
 .bunk-button::after, .bunk-button::before,
 .cat-pages a::before, .cat-pages a::after,
+.cat-pages i::before, .cat-pages i::after,
 .meta_menu > ul > li > a::after, .meta_menu > ul > li > a::before,
+#profile_menu a::before, #profile_menu a::after,
 .cat-topicpages a:hover
 { border-color: #FFECB3 }
 
@@ -1079,15 +1097,13 @@ input[type="text"], input[type="password"], input:not([type])
 .online
 { border-color: #8BC34A }
 
-#profile_menu a:hover, #profile_menu a:focus,
-#profile_menu a::before, #profile_menu a::after
-{ border-color: #0299AE }
-
 .c_post:hover .c_post-attachment, .c_post:focus .c_post-attachment
 { border-color: #7E57C2 }
 
-#profile_menu a:hover, #profile_menu a:focus,
-.bunk-big-butt, .bunk-button
+.bunk-big-butt,
+.bunk-button,
+.meta_menu > ul > li > a,
+#profile_menu a
 { border-color: transparent }
 
 .profile .c_mark > div
@@ -1136,7 +1152,8 @@ big > big > big > big > big > big > big > big > big > big > big > big > big > bi
 ; font-size: 1rem
 }
 
-[align="center"]
+[align="center"],
+#pm_quick_reply > thead > tr > th
 { width: 100% }
 
 #logo
@@ -1257,6 +1274,7 @@ textarea
 ; margin: 0 0.5em
 ; padding: 0.5em
 ; width: 100%
+; max-width: 50rem
 ; transition: .3s all
 ; box-sizing: border-box
 ; outline: none
@@ -1361,7 +1379,7 @@ button, a.btn_fake, input[type="button"]
 ; font-weight: normal
 ; white-space: pre-wrap
 ; text-indent: 1em
-; max-width: 512px
+; max-width: 37rem
 ; text-align: left
 ; margin: 0 auto
 ; margin-bottom: 10pt
@@ -1548,7 +1566,6 @@ button, a.btn_fake, input[type="button"]
 
 #subhuman > input:checked ~ #submenu
 { max-height: 10rem
-; max-width: 10rem
 ; transition: .3s all cubic-bezier(.55,0,0.1,1)
 }
 
@@ -1568,7 +1585,7 @@ button, a.btn_fake, input[type="button"]
 
 #wrap
 { margin: 0 auto 4.35rem
-; max-width: 1024px
+; max-width: 73rem
 }
 
 #nav
@@ -1603,13 +1620,18 @@ button, a.btn_fake, input[type="button"]
 ; width: 50%
 }
 
+.meta_menu > ul
+{ margin-top: 0 }
+
 .meta_menu a
 { display: block
-; margin: 0.5em 1em
+; margin: 0.5em
 ; padding: 1em
+; border-width: 0.1rem
+; border-style: solid
 ; text-align: center
 ; position: relative
-; transition: all 0.3s
+; transition: 0.3s all cubic-bezier(.55,0,0.1,1)
 }
 
 .meta_menu > h3
@@ -1632,16 +1654,20 @@ ul li.cat-pageshead
 ; margin: 1rem 10rem -5rem 0
 }
 
-.cat-pages a
+.cat-pages a,
+.cat-pages i
 { position: relative }
 
-.cat-pages a::before
+.cat-pages a::before,
+.cat-pages i::before
 { left: 0 }
 
-.cat-pages a::after
+.cat-pages a::after,
+.cat-pages i::after
 { right: 0 }
 
-.cat-pages a::before, .cat-pages a::after
+.cat-pages a::before, .cat-pages a::after,
+.cat-pages i::before, .cat-pages i::after
 { content: ""
 ; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
@@ -1652,13 +1678,14 @@ ul li.cat-pageshead
 ; top: 0.25rem
 }
 
-.cat-pages a:hover::after, .cat-pages a:hover::before
+.cat-pages a:hover::after, .cat-pages a:hover::before,
+.cat-pages i:hover::before, .cat-pages i:hover::after
 { width: 50% }
 
 .cat-buttons + .cat-pages,
 .topic-buttons + .cat-pages,
 .topic-buttons:last-of-type ~ .cat-pages
-{ margin: -4.63rem 10rem 1rem 0 }
+{ margin: -4.47rem 10rem 1rem 0 }
 
 .cat-pages a, .cat-pagesjump i, .cat-topicpages a
 { border-bottom-width: 0.3em
@@ -1856,7 +1883,7 @@ padding:4px 0 4px 20px;
 }
 
 .c_user > div:first-child,
-.c_user > a > div:first-child
+.c_user > a > div:first-child,
 { max-width: 14.4rem !important
 ; max-height: 28.8rem !important
 ; min-height: 10rem
@@ -1899,10 +1926,11 @@ padding:4px 0 4px 20px;
 }
 
 .c_user > .usertitle
-{ padding: 0.5em 0
+{ padding: 0.5em
 ; overflow: hidden
 ; z-index: 1
 ; width: 14.4rem
+; min-height: 2.2rem
 ; position: relative
 
 ; background-color: #D0D0D0
@@ -1917,15 +1945,12 @@ padding:4px 0 4px 20px;
 .usertitle > br
 { display: none }
 
-.c_user > .usertitle:first-child
-{ margin: 0 21px }
-
 .c_user > img
 { display: none }
 
 .c_user > dl
 { position: absolute
-; bottom: -4rem
+; bottom: -3.8rem
 ; max-height: 6rem
 ; width: 100%
 ; background-color: rgba(240,240,240,0.75)
@@ -1933,7 +1958,7 @@ padding:4px 0 4px 20px;
 }
 
 .c_user:hover > dl
-{ bottom: 1.95rem
+{ bottom: 2.2rem
 ; transition: .3s all
 }
 
@@ -1952,6 +1977,85 @@ padding:4px 0 4px 20px;
 { padding: 0.25rem
 }
 
+.topinfo > td
+{ padding: 0 }
+
+#pm_viewer > thead
+{ margin-bottom: 0
+; border: none
+}
+
+#conversation
+{ margin: 0 !important }
+
+#conversation .c_postinfo
+{ background-color: #101010
+; padding: 0.5rem 1rem
+; align-items: center
+}
+
+#conversation .c_post
+{ padding: 1rem
+; margin-top: 0
+}
+
+.topinfo > td[width]
+{ width: initial !important }
+
+.topinfo > td:first-child > div img
+{ max-width: 5.6rem !important
+; min-width: 5.6rem !important
+}
+
+.topinfo > td:first-child > div
+{ max-width: 5.6rem !important
+; min-width: 5.6rem
+; min-height: initial !important
+}
+
+.topinfo > .c_username
+{ max-height: 2.8rem
+; max-width: initial !important
+; min-width: initial !important
+; padding: .5rem .5rem .5rem 1rem !important
+; margin-left: 0
+; flex: 0 0 auto
+}
+
+.topinfo > .c_username > a
+{ font-size: 1rem }
+
+.topinfo > .c_user > .usertitle
+{ padding: 0 1rem
+; max-width: initial !important
+; min-width: initial
+; width: initial
+}
+
+.topinfo
+{ background-color: #101010 }
+
+.topinfo > .c_username,
+.topinfo > .c_user > .usertitle
+{ background-color: inherit !important }
+
+.topinfo,
+.topinfo > .c_username > a,
+.topinfo > .c_user > .usertitle
+{ color: #aaa }
+
+.topinfo > .c_user
+{ margin: -2.8rem 0 0 5.6rem
+; min-width: initial
+; max-width: initial
+}
+
+.topinfo .user_info
+{ padding: 0.5rem 0 }
+
+.topinfo .warn
+{ padding: 0.5rem }
+
 dl.user_profile {
 overflow:hidden;
 word-wrap:break-word;
@@ -1965,55 +2069,13 @@ margin-left:8px;
 #profile_menu > li > a
 { display: none }
 
-#profile_menu ul
-{ overflow: visible }
-
-#profile_menu li li a
-{ border-top: 0 }
-
 #profile_menu a
 { border: none
-; transition: all 0.3s
-}
-
-#profile_menu a::after
-{ transition: all 0.3s
-}
-
-#profile_menu a::before, #profile_menu a::after
-{ content: ""
+; transition: .3s all cubic-bezier(.55,0,0.1,1)
+; margin: 0 .5rem
+; border-width: 0.1rem
 ; border-style: solid
-; position: absolute
-; z-index: 5
-; border-radius: 0.3em
-; box-sizing: content-box
-; transition: 0.3s all
 }
-
-#profile_menu a::before
-{ width: 0
-; height: 100%
-; border-width: 0.1em 0 0.1em 0
-; top: -0.1em
-; right: 0
-}
-
-#profile_menu a::after
-{ height: 0
-; width: 100%
-; border-width: 0 0.1em 0 0.1em
-; right: -0.1em
-; top: 0
-; transition-delay: 0.5s
-}
-
-#profile_menu a:focus::before,
-#profile_menu a:hover::before
-{ width: 100% }
-
-#profile_menu a:focus::after,
-#profile_menu a:hover::after
-{ height: 100% }
 
 .profile:nth-of-type(4) > tbody > tr:nth-child(2)
 { border-bottom: 0.25rem solid #d0d0d0 }
@@ -2104,13 +2166,7 @@ blockquote
 }
 
 blockquote dl
-{ border-bottom: 0.1em solid #272727
-; padding: 0.3em 0.5em
-}
-
-blockquote dl dt
-{ font-weight: 700
-}
+{ padding: 0.3em 0.5em }
 
 .c_post > blockquote > div > blockquote > div
 { padding: .5em 1em }
@@ -2134,7 +2190,7 @@ blockquote > code.prettyprint
 { border-width: 0.1rem
 ; border-style: solid
 ; border-top: 0
-; padding: 5px 7px
+; padding: 0.5rem
 }
 
 .spoiler_toggle
@@ -2223,8 +2279,8 @@ blockquote > code.prettyprint
 { padding: 1rem .5rem }
 
 .c_postfoot > td:first-of-type
-{ max-width: 192px
-; min-width: 192px
+{ max-width: 14.4rem
+; min-width: 14.4rem
 }
 
 .c_footicons
@@ -2257,8 +2313,12 @@ blockquote > code.prettyprint
 ; left: 0
 ; z-index: 1
 ; width: 100%
-; transition: all 0.2s cubic-bezier(.55,0,0.1,1)
+; transition: bottom 0.2s cubic-bezier(.55,0,0.1,1)
+; opacity: 0
 }
+
+#fast-reply.show-bottom
+{ opacity: 1 }
 
 #fast-reply > dt
 { display: none }
@@ -2308,14 +2368,14 @@ blockquote > code.prettyprint
 ; text-align: center
 ; padding: 0.5rem
 ; margin: 0.5rem
-; max-width: 750px
+; max-width: 50rem
 ; cursor: pointer
 }
 
 #c_post-preview
 { padding: 0 1rem
 ; margin: 0.5rem 0.5rem 1rem 0.5rem
-; max-width: 750px
+; max-width: 50rem
 ; max-height: 20em
 ; text-align: left
 ; overflow-y: scroll
@@ -2358,6 +2418,9 @@ blockquote > code.prettyprint
 { min-width: 100%
 ; max-width: 100%
 }
+
+#who_posted > tbody > tr:last-child > td > a
+{ margin: 0 0.5rem }
 
 #active_list > tbody > tr > td
 { padding: 0 1em }
@@ -2694,10 +2757,9 @@ margin:0;
 }
 
 #copyright:after
-{ content: "made for \f26b"
+{ content: "made for \f179"
 ; float: right
 ; display: block
-; font-style: italic
 }
 
 #c_tos h3 {
@@ -2791,10 +2853,6 @@ form[id^="poll"] + .exclusivebutton > #topic_viewer > thead
 vertical-align:top;
 }
 
-.meta_box,.meta_menu {
-margin:10px 0;
-}
-
 .meta_box li {
 display:list-item;
 list-style-position:inside;
@@ -2809,9 +2867,12 @@ margin-left:10px;
 ; padding: 1rem 0
 }
 
-.cat-pagesjump > form > input
-{ padding: 1em
-; margin-top: -1em
+.cat-pagesjump > form > input,
+.cat-pagesjump > form > input:focus
+{ padding: 0.95em
+; margin: 0
+; width: 100%
+; text-align: center
 }
 
 .cat-pages > li
@@ -2913,6 +2974,9 @@ td.c_cat-mark + td.c_cat-mark
 { min-width: 3em
 ; padding-left: 0
 }
+
+.c_cat-mark:first-child > span
+{ padding: 0 .7rem }
 
 .c_cat-mark
 { text-align: center
@@ -3077,23 +3141,13 @@ dl
 ; text-overflow: ellipsis
 }
 
-.user_info > dd:nth-of-type(2):hover
+.user_info > dd:nth-of-type(2)
 { max-width: 10rem
 ; min-width: 10rem
 }
 
-.user_info > dd:nth-of-type(2):hover + dt + dd
-{ display: none }
-
-.user_info > dd:nth-of-type(2)
-{ max-width: 6rem
-; min-width: 6rem
-}
-
 .user_info > dd:nth-of-type(3)
-{ min-width: 4rem
-; max-width: 4rem
-}
+{ display: none }
 
 .c_poll-choice {
 line-height:1.5;
@@ -3141,7 +3195,7 @@ margin-left:10px;
 
 .c_post img, #topic_review img, .c_post video, .c_post object, .c_post audio,
 .c_post iframe
-{ max-width: 700px
+{ max-width: 50rem
 }
 
 .c_post iframe
@@ -3224,7 +3278,7 @@ text-align:left;
 { height: 18em }
 
 #c_post-text, #txt_quote
-{ max-width: 750px
+{ max-width: 50rem
 ; width: calc(100% - 1em)
 ; display: block
 }
@@ -3283,14 +3337,6 @@ width:200px;
 
 #pm_select
 { text-align: center }
-
-#conversation .c_post {
-padding:2em;
-}
-
-#ucp_profile, #pm_messages {
-float:right;
-}
 
 #ucp_settings img, #ucp_profile img {
 margin:18px 20px;
@@ -3506,11 +3552,6 @@ img,.meta_box button img,td.c_cat-mark input, .c_post-attachment img,.warn img,
 vertical-align:middle;
 }
 
-h1, h2, h3, #boardmeta {
-clear:both;
-margin:0;
-}
-
 #meta_welcome,.search_results {
 clear:both;
 }
@@ -3610,10 +3651,6 @@ input[name="mode"][value="2"] + input[name="type"][value="2"] ~ .posting > tbody
 #files_upload input,.pm .row1 a,.pm .row2 a, #ucp_gallery button img,
 #findposts td a {
 display:block;
-}
-
-#ucp_settings, #pm_settings {
-float:left;
 }
 
 #c_tos dd, #username_response {
@@ -3798,10 +3835,11 @@ padding:0;
 .bunk-big-butt
 { border-width: 0.1rem
 ; border-style: solid
-; font-size: 1.57rem
+; font-size: 1.6rem
 ; padding: 0.6rem 1rem
 ; transition: 0.3s all cubic-bezier(.55,0,0.1,1)
 ; width: 9.5rem
+; min-height: 3.5rem
 ; margin-right: 0.25rem
 ; display: inline-block
 ; text-align: center
@@ -3809,7 +3847,8 @@ padding:0;
 }
 
 .bunk-big-butt::before, .bunk-big-butt::after,
-.meta_menu > ul > li > a::before, .meta_menu > ul > li > a::after
+.meta_menu > ul > li > a::before, .meta_menu > ul > li > a::after,
+#profile_menu > li > ul a::before, #profile_menu > li > ul a::after
 { content: ""
 ; border-style: solid
 ; position: absolute
@@ -3818,30 +3857,35 @@ padding:0;
 }
 
 .bunk-big-butt::before,
-.meta_menu > ul > li > a::before
+.meta_menu > ul > li > a::before,
+#profile_menu > li > ul a::before
 { width: 0
 ; height: 100%
 ; border-width: 0.1rem 0 0.1rem 0
 ; top: -0.1rem
 ; right: 0
+; transition-delay: 0.2s
 }
 
 .bunk-big-butt::after,
-.meta_menu > ul > li > a::after
+.meta_menu > ul > li > a::after,
+#profile_menu > li > ul a::after
 { height: 0
 ; width: 100%
 ; border-width: 0 0.1rem 0 0.1rem
 ; right: -0.1rem
 ; top: 0
-; transition-delay: 0.3s
+; transition-delay: 0.5s
 }
 
 .bunk-big-butt:hover::before,
-.meta_menu > ul > li > a:hover::before
+.meta_menu > ul > li > a:hover::before,
+#profile_menu > li > ul a:hover::before
 { width: 100% }
 
 .bunk-big-butt:hover::after,
-.meta_menu > ul > li > a:hover::after
+.meta_menu > ul > li > a:hover::after,
+#profile_menu > li > ul a:hover::after
 { height: 100% }
 
 .usertitle img
@@ -3907,7 +3951,8 @@ span.poll::before, .poll-new::before
 }
 
 /* No third-party script buttons */
-#c_post > [onclick]
+#c_post > [onclick],
+#c_post-wrap > button[onclick]
 { display: none }
 
 /* BLOWN OUT LMAO */
