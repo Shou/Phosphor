@@ -149,7 +149,7 @@ td.c_user
 ; flex: 0 0 auto
 }
 
-.c_username, .c_postinfo
+.c_username > *, .c_postinfo
 { align-self: baseline }
 
 .c_username > a
@@ -353,7 +353,8 @@ html, body
 #emot_end,
 .c_next,
 .c_footicons > span,
-.c_username
+.c_username,
+#pm_folderlist
 { display: flex }
 
 .forums
@@ -434,6 +435,9 @@ blockquote > dl,
 #foot_datetime > a,
 #foot_datetime::after,
 #emot_end,
+#pm_inbox > tbody > tr > .c_head,
+#pm_quick_reply #c_post,
+#pm_quick_reply > tbody > tr,
 input[name="mode"]:not([value="1"]) ~ .posting > tbody > tr:nth-child(n+4):nth-child(-n+9),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(n+11):nth-child(-n+16)
 { align-items: center }
@@ -570,6 +574,7 @@ code
 #foot_links > a:first-child::before,
 #foot_links > a:last-child::before,
 #foot_datetime::after,
+#pm_folderlist li::before,
 label
 { font-family: "FontAwesome", "Karla" }
 
@@ -1256,7 +1261,7 @@ label > input:not([type])
 { position: absolute
 ; top: 0
 ; left: 0
-; margin: -.75rem 0 0 -.5rem
+; margin: -.3rem 0 0 -.5rem
 }
 
 label > input[type="text"]:focus, label > input[type="password"]:focus,
@@ -1613,6 +1618,7 @@ button, a.btn_fake, input[type="button"]
 
 .meta_menu
 { padding: 0
+; margin-top: 1rem
 ; width: 50%
 }
 
@@ -1734,6 +1740,9 @@ tr
 
 #edit_profile .c_desc[valign=top] + td
 { margin-top: 1rem }
+
+#edit_profile > tbody > tr:nth-last-child(2) > .c_desc
+{ display: none }
 
 #search_form > tbody > tr:nth-child(n+2) > td:first-child,
 #search_form br,
@@ -2463,6 +2472,9 @@ blockquote > code.prettyprint
 #active_list > tbody > tr > td:nth-child(3)
 { min-width: 25%; max-width: 25% }
 
+#pm_inbox > tbody > tr > th:nth-child(n+2)
+{ display: none }
+
 #pm_inbox > tbody > tr[class] > td:nth-child(1)
 { min-width: 40%; max-width: 40% }
 
@@ -2483,8 +2495,22 @@ blockquote > code.prettyprint
 #forum_leaders_global > tbody > tr:nth-child(n+2) > td
 { padding: 0 1em }
 
+#pm_inbox > tbody > tr:nth-child(2)
+{ margin: 0 0 1rem 0
+; border-bottom: 0.25rem solid #101010
+}
+
+#pm_inbox > tbody > tr > .c_foot
+{ padding: 0 0.5rem }
+
 #pm_inbox > tbody > .row1:first-of-type
 { margin-top: 1rem }
+
+#quick_pm_compose > tbody > tr:not(:last-child)
+{ padding: 0.5rem 0
+; margin: 0
+; border: none
+}
 
 #quick_pm_compose > tbody > tr:first-child
 { display: flex
@@ -2492,9 +2518,20 @@ blockquote > code.prettyprint
 }
 
 #quick_pm_compose > tbody > tr:first-child > td
-{ max-width: 50% }
+{ max-width: 50%
+; width: 20rem
+}
 
-#quick_pm_compose > tbody > tr:nth-child(2)
+#quick_pm_compose > tbody > tr:first-child > td > label,
+#quick_pm_compose > tbody > tr:first-child > td > label > input
+{ width: 100% }
+
+#quick_pm_compose > tbody > tr:nth-child(2) > td,
+#quickcompose
+{ max-width: 100%
+; width: 40rem
+; padding-bottom: 1rem
+}
 
 .member_send > input[type="text"]
 { margin-left: -8rem
@@ -2504,18 +2541,17 @@ blockquote > code.prettyprint
 #pm_folders
 { width: 100% }
 
-#pm_folderlist {
-position: relative;
-margin-left:0;
-margin-top:0
+#pm_folderlist
+{ margin: .5rem 0 0 0
 }
 
-#pm_folderlist li {
-background:url(http://z3.ifrm.com/static/1/pmfolder.png) no-repeat 5px;
-display:list-item;
-margin-bottom:4px;
-padding-left:28px;
+#pm_folderlist li::before
+{ content: "\f0e0"
+; margin: 0 .5rem 0 1rem
 }
+
+#pm_folderlist li:first-child::before
+{ margin-left: 0 }
 
 #pm_forwarded {
 border:1px dotted #333;
@@ -2756,11 +2792,20 @@ margin:0;
 ; height: 3rem
 }
 
-#foot_links > a:first-child::before
+#foot_links > a[href*="/announce/"]::before
 { content: "\f0a1" }
 
-#foot_links > a:last-child::before
+#foot_links > a[href*="/comm/"]::before
 { content: "\f09e" }
+
+#foot_links > a[href*="/forward/"]::before
+{ content: "\f064" }
+
+#foot_links > a[href*="/stats/marktopics/"]::before
+{ content: "\f00c \a0 \f016" }
+
+#foot_links > a[href*="/stats/mark/"]::before
+{ content: "\f00c \a0 \f114" }
 
 #foot_datetime > a
 { padding: 0.5rem 1rem
@@ -3293,6 +3338,7 @@ margin-left:10px;
 { vertical-align: top
 ; margin-left: calc(192px + 1rem)
 ; margin-top: 1rem
+; margin-right: -0.1rem
 ; padding: 0.5rem
 
 ; border-top-style: solid

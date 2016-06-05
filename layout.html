@@ -92,7 +92,11 @@ var texte = $("#c_post-text")[0] || $("#fast-reply > dd > textarea")[0]
 // relevant textarea container element
 var parnt = $("#c_post")[0] || $("#fast-reply")[0]
 // quick-reply form
-var qrform = $("form[action='http://s1.zetaboards.com/TidusTest/post/']")
+var qrform = $("form[action$='/post/']")
+
+
+function id(x) { return x }
+
 
 function jsonRead(k, a) {
   try {
@@ -167,6 +171,23 @@ function toggleQuote(e) {
     e.style.display = e.style.display !== "block" ? "block" : "none"
 }
 
+// TODO multiquotes
+function loadQuotes(pid) {
+  var pids = $.zb.get_cache_session("multiquote" + tid).split('|').filter(id)
+    , fid = $("[name=f]").attr("value")
+
+  console.log(pids)
+  if (pids.indexOf(pid) === -1) pids.push(pid)
+
+  var url = $.zb.stat.url + "post/?mode=2&type=4&f=" + fid + "&t=" + tid
+          + "&multiquote_arr=" + pids.join('|')
+
+  $.get(url, "", function(data) {
+    var quotesText = $(data).find("#c_post-text").attr("value")
+    texte.value += quotesText
+    makePreview()
+  })
+}
 
 // TODO requestAnimationFrame
 // makePreview :: IO ()
@@ -247,7 +268,7 @@ function scrollEquilibrate(e0, e1) {
   // TODO FIXME account for image holes and actually use `h`?
   var scroll = (e1.scrollTop + offset) * ((e0.scrollHeight - e0.clientHeight) / (e1.scrollHeight - e1.clientHeight))
 
-  // Use caret position instead; there is no scrollbar for e0
+  // Use caret position instead; there is no scrollbar for e1
   if (e1.scrollHeight <= e1.clientHeight) {
     var acc = -1
     var lines = e1.value.split('\n')
@@ -328,6 +349,17 @@ function main() {
     }
   })
 
+  // Quick Reply quote event
+  $(".right > [href*='mode=2']").off("click").bind("click", function(e) {
+    if (e.button === 0) {
+      e.preventDefault()
+      loadQuotes(this.href.match(/&p=(\d+)/)[1])
+      $("#fast-reply")[0].classList.add("show-bottom")
+    }
+  })
+
+  // XXX this may lead to unwanted deletion because qrform might
+  //     be selected in other parts of the webpage; it's too general
   // Save state as replying onsubmit to prepare for draft discarding
   $(qrform).bind("submit", function(e) {
     localStorage.reply = true
@@ -359,7 +391,6 @@ function main() {
 }
 
 main()
-
 
 </script>
 
