@@ -32,6 +32,7 @@ function tf() {
     tu = setTimeout(tf, 100)
 }
 
+// TODO use MutationObserver on the body instead of a setTimeout loop
 // this is super dumb but let's pretend it's not
 var maxTime = 1000
 var time = 0
@@ -88,7 +89,9 @@ var pretimeout = null
 // preview element
 var preve = null
 // textarea element
-var texte = $("#c_post-text")[0] || $("#fast-reply > dd > textarea")[0]
+var texte = $("#c_post-text")[0]
+         || $("#fast-reply > dd > textarea")[0]
+         || $("#quickcompose")[0]
 // relevant textarea container element
 var parnt = $("#c_post")[0] || $("#fast-reply")[0]
 // quick-reply form
@@ -197,8 +200,7 @@ function makePreview() {
       pretimeout = null
 
       var q = $("#txt_quote")[0]
-        , p = $("#c_post-text")[0] || $("#fast-reply > dd > textarea")[0]
-        , t = (q ? "[quote]" + q.value + "[/quote]" : "") + p.value
+        , t = (q ? "[quote]" + q.value + "[/quote]" : "") + texte.value
 
       preview(t, function(data) {
         if (preve === null) {
@@ -394,4 +396,4 @@ main()
 
 </script>
 
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst"></script>
