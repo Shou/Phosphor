@@ -144,8 +144,7 @@ td.c_user
 .c_username
 { max-width: initial !important
 ; min-width: initial !important
-; margin-left: 5.6rem
-; padding: .5rem .5rem .5rem 1rem !important
+; padding: .5rem .5rem .5rem 6.6rem !important
 ; background-color: inherit !important
 ; flex: 0 0 auto
 }
@@ -183,11 +182,11 @@ td.c_user
 
 .topic .c_user > div:first-child,
 .topic .c_user > a > div:first-child
-{ margin-top: -2.3rem !important
+{ margin-top: -2.207rem !important
 ; max-width: 5.6rem !important
 ; min-width: 5.6rem
 ; min-height: initial !important
-; max-height: 5.6rem !important
+; max-height: 5.214rem !important
 ; overflow: hidden
 }
 
@@ -196,6 +195,7 @@ tr > .c_user
 ; max-width: 100%
 ; min-width: 100%
 ; max-height: 3rem
+; min-height: 3rem
 ; flex-wrap: wrap
 ; transition: .3s all cubic-bezier(.55,0,0.1,1)
 }
@@ -380,7 +380,8 @@ tr > #c_post
 { flex-direction: column-reverse }
 
 .posting > tbody,
-#fast-reply > #c_post
+#fast-reply > #c_post,
+#edit_profile > tbody
 { flex-direction: row }
 
 .c_foot > span,
@@ -443,8 +444,9 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(n+11):nth-child(
 .c_sig blockquote > dl
 { align-items: flex-end }
 
-#edit_sig > tbody > tr:last-child, #c_post > button, .c_cat-replies,
 .c_cat-views, .c_cat-starter, .c_cat-title, .c_cat-lastpost, .replied-marker,
+.c_desc,
+#edit_sig > tbody > tr:last-child, #c_post > button, .c_cat-replies,
 #pmtoast > a,
 form[action$="/tasks/"]
 { align-self: center }
@@ -469,7 +471,8 @@ form[action$="/tasks/"]
 #emot_list,
 #fast-reply,
 .user_info,
-.c_sig blockquote
+.c_sig blockquote,
+#edit_profile > tbody
 { flex-wrap: wrap }
 
 #top
@@ -590,8 +593,7 @@ thead > tr > th small,
 .forums th a strong
 { font-weight: 700 }
 
-#findposts .c_mark,
-.c_next > a
+#findposts .c_mark
 { font-weight: 700 }
 
 #top_info > strong > a,
@@ -634,7 +636,7 @@ textarea,
 { font-size: 1.25em }
 
 .c_next > a
-{ font-size: 1.3em }
+{ font-size: 1.5em }
 
 #logo,
 .profile ~ .profile > thead > tr > th
@@ -659,14 +661,15 @@ h1, #top_bar::before,
 .c_next > a
 { text-align: center }
 
+.c_next > a
+{ text-transform: lowercase }
+
 .forums th,
 .c_forum strong a
-{ text-transform: uppercase
-}
+{ text-transform: uppercase }
 
 .row1 > .c_cat-views, .row2 > .c_cat-views
-{ white-space: nowrap
-}
+{ white-space: nowrap }
 
 .c_username
 { word-wrap: break-word }
@@ -766,7 +769,6 @@ blockquote > code.prettyprint,
 .bunk-big-butt:hover,
 #profile_menu a:hover,
 .cat-topicpages a,
-.c_next > a,
 #addpoll,
 .c_topicfoot > [href$="/old/"]::before,
 .c_topicfoot > [href$="/old/"] + a ::before,
@@ -812,6 +814,7 @@ html, body
 .bunk-big-butt,
 .bunk-button:hover,
 #profile_menu a,
+.c_next > a,
 .meta_menu a
 { background-color: #FFECB3 }
 
@@ -944,7 +947,6 @@ input:not([type]):focus,
 .c_desc,
 .drop_menu a,
 .c_user > .usertitle,
-.c_next > a,
 .hot-new, .plain-new, .poll-new,
 .bunk-button,
 #c_post-resize span,
@@ -982,6 +984,7 @@ input[type="text"], input[type="password"], input:not([type])
 #logo > a,
 .bunk-big-butt,
 .bunk-button:hover,
+.c_next > a,
 .meta_menu a,
 #profile_menu a,
 .category h2 > a, .category h2
@@ -1051,7 +1054,6 @@ thead,
 .posting > tbody,
 #topic_review > tbody > tr,
 #acplogin > #loginform tbody,
-.c_next > a,
 #addpoll,
 .c_topicfoot > [href$="/old/"]::before,
 .c_topicfoot > [href$="/old/"] + a ::before,
@@ -1106,9 +1108,6 @@ input[type="text"], input[type="password"], input:not([type])
 #profile_menu a
 { border-color: transparent }
 
-.profile .c_mark > div
-{ box-shadow: 0 0 0 0.3em #3D3D3D }
-
 .notice
 { box-shadow: 0 0 0 0.4rem #202020, 0 0 0 0.6rem #181818, 0 0 0 0.8rem #202020
             , 0 0 0 1.2rem #2D2D2D, 0 0 0 1.4rem #202020, 0 0 0 1.6rem #272727
@@ -1117,7 +1116,7 @@ input[type="text"], input[type="password"], input:not([type])
 .error
 { box-shadow: 0 0 0 0.4rem #2C0200, 0 0 0 0.6rem #3B0300, 0 0 0 0.8rem #4A0400
             , 0 0 0 1.2rem #860800, 0 0 0 1.4rem #950900, 0 0 0 1.6rem #A40A00
-            , 0 0 0 2rem #E42A25, 0 0 0 2.2rem #F55652, 0 0 0 2.4rem #FFBFBD
+            , 0 0 0 2rem #E42A25, 0 0 0 2.2rem #F55652, 0 0 0 2.4rem transparent
 }
 
 #wrap
@@ -1209,8 +1208,9 @@ td
 { font-weight: normal }
 
 .category h2
-{ padding: 0 1em 0 0
+{ padding: 0 1em
 ; font-weight: 300
+; margin: 0
 }
 
 thead > tr > th
@@ -1240,10 +1240,6 @@ input, select, button, a.btn_fake, td.c_foot a, #addpoll
 ; vertical-align: middle
 ; transition: .3s all
 ; position: relative
-}
-
-select[multiple]
-{ width: 50%
 }
 
 label[for="setskin"]
@@ -1717,10 +1713,55 @@ ul li.cat-pageshead
 ; flex-wrap: wrap
 }
 
-.c_desc
+/* XXX how dangerous is this */
+tr
+{ position: relative }
+
+.exclusivebutton .c_desc,
+#edit_profile .c_desc,
+#name_change_req .c_desc,
+#search_form > tbody > tr > td:first-child,
+#email_change .c_desc,
+#login_page tbody > tr:nth-child(-n+2) > .c_desc
 { position: absolute
-; margin: 1rem 0 0 1rem
+; margin: 1.15rem 0 0 1rem
+; top: 0
+; left: 0
 }
+
+#edit_profile .c_desc[valign=top]
+{ margin: -0.15rem 0 0 1rem }
+
+#edit_profile .c_desc[valign=top] + td
+{ margin-top: 1rem }
+
+#search_form > tbody > tr:nth-child(n+2) > td:first-child,
+#search_form br,
+#login_page br,
+#login_page tr:nth-child(3)
+{ display: none }
+
+#search_form > tbody > tr
+{ margin: 0.5rem 0 }
+
+#search_form select[multiple]
+{ height: 10rem
+}
+
+#photo_settings tr:nth-child(3) > td[align]:first-of-type
+{ display: block }
+
+#photo_settings img
+{ max-width: 20rem
+; margin-bottom: 1rem
+; align-self: center
+}
+
+#email_change input
+{ width: 15rem }
+
+#email_change > tbody > tr
+{ justify-content: center }
 
 .c_desc > small
 { margin-left: .5rem }
@@ -2077,9 +2118,6 @@ margin-left:8px;
 ; border-style: solid
 }
 
-.profile:nth-of-type(4) > tbody > tr:nth-child(2)
-{ border-bottom: 0.25rem solid #d0d0d0 }
-
 .profile:nth-of-type(4) > tbody > tr:nth-child(2) > th:first-child
 { min-width: 192px; max-width: 192px }
 
@@ -2094,16 +2132,6 @@ margin-left:8px;
 ; width: 100%
 ; margin: 0 0 2em 0
 }
-
-.profile .c_mark > div
-{ border-width: 0.3em
-; border-style: solid
-; border-radius: 50%
-; overflow: hidden
-}
-
-.profile .c_mark > div > img
-{ margin: -0.3em }
 
 .profile input[name="status"]
 { max-width: calc(50vw - 9em) }
@@ -2294,8 +2322,6 @@ blockquote > code.prettyprint
 .c_next > a,
 #addpoll
 { padding: 1rem 8.9rem
-; border-bottom-width: 0.25rem
-; border-bottom-style: solid
 }
 
 #addpoll
@@ -2462,8 +2488,11 @@ blockquote > code.prettyprint
 
 #quick_pm_compose > tbody > tr:first-child
 { display: flex
-; flex-direction: column
+; flex-wrap: wrap
 }
+
+#quick_pm_compose > tbody > tr:first-child > td
+{ max-width: 50% }
 
 #quick_pm_compose > tbody > tr:nth-child(2)
 
@@ -2757,7 +2786,7 @@ margin:0;
 }
 
 #copyright:after
-{ content: "made for \f179"
+{ content: "\f268"
 ; float: right
 ; display: block
 }
@@ -2794,6 +2823,24 @@ font-size:120%;
 
 #acplogin > form
 { overflow: hidden
+}
+
+#login_page tbody > tr:nth-child(-n+2) > .c_desc
+{ top: 0
+; left: 0
+}
+
+#login_page tr:nth-child(n+3)
+{ padding: 0.5rem 0 0.5rem 0.5rem }
+
+#login_page .c_desc > small
+{ margin-left: 9rem
+; font-size: 0
+}
+
+#login_page .c_desc > small > a::after
+{ content: "Reset password"
+; font-size: 1rem
 }
 
 a img {
@@ -2933,14 +2980,9 @@ text-align:center;
 ; padding: 1em 0
 }
 
-.c_desc img, .c_desc input {
-float:left;
-vertical-align:middle;
-}
-
 .collapse::before, .uncollapse::before
 { cursor: pointer
-; padding: 0.5em 1em
+; padding: 0.5rem 1rem 0.5rem 0rem
 ; display: inline-block
 }
 
@@ -3369,8 +3411,14 @@ text-align:center;
 
 #avatar_gallery_sys > tbody > tr
 { display: flex
-; justify-content: space-between
+; justify-content: center
 }
+
+#avatar_gallery_sys > tbody > tr:first-child > th:nth-child(2)
+{ display: none }
+
+#avatar_gallery_sys > tbody > tr > td[style]
+{ width: initial !important }
 
 #c_notes
 { width: 100% }
@@ -3514,7 +3562,7 @@ font-weight:700;
 .c_topicfoot
 { text-transform: uppercase
 ; width: 100%
-; margin: 2rem 0 0 0
+; margin: 1.5rem 0 0 0
 ; padding: 0 0 1rem 0
 ; font-size: 0
 }
