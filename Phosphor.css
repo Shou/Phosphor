@@ -350,6 +350,7 @@ html, body
 .meta_menu > ul,
 #emot_wrap,
 #emot_list,
+#emot_list > li,
 #emot_end,
 .c_next,
 .c_footicons > span,
@@ -371,6 +372,7 @@ input[name="mode"][value="2"] ~ .posting > tbody > tr:nth-child(1),
 input[name="mode"][value="3"] ~ .posting > tbody > tr:nth-child(1),
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(4),
 #topic_review > tbody > tr,
+#pm_compose > tbody > tr:nth-child(4),
 tr > #c_post
 { flex-direction: column }
 
@@ -451,6 +453,7 @@ input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(n+11):nth-child(
 .c_cat-views, .c_cat-starter, .c_cat-title, .c_cat-lastpost, .replied-marker,
 .c_desc,
 #edit_sig > tbody > tr:last-child, #c_post > button, .c_cat-replies,
+#emot_list > li,
 #pmtoast > a,
 form[action$="/tasks/"]
 { align-self: center }
@@ -750,6 +753,7 @@ textarea:focus,
 #who_posted > tbody > tr,
 #forum_leaders_global > tbody > tr:nth-child(n+2),
 #pmlink,
+#pm_compose > tbody,
 #main > table:first-child td,
 #inlinetopic > .posts > tbody > tr,
 #acplogin > #loginform tbody,
@@ -779,6 +783,7 @@ blockquote > code.prettyprint,
 .c_topicfoot > [href$="/old/"] + a ::before,
 .c_topicfoot > [href$="/new/"]::before,
 #emot_end,
+#pm_compose > tbody > tr:last-child,
 .c_post-attachment,
 .btn_default,
 .btn_normal
@@ -789,6 +794,10 @@ blockquote > code.prettyprint,
 #top_info a[href$="/multi_login/"]:focus::after,
 #top_info a[href$="/logout/"]:hover::after,
 #top_info a[href$="/logout/"]:focus::after,
+#foot_links a[href$="/mark/"]:hover::after,
+#foot_links a[href$="/mark/"]:focus::after,
+#foot_links a[href$="/marktopics/"]:hover::after,
+#foot_links a[href$="/marktopics/"]:focus::after,
 button:hover, a.btn_fake:hover, select:hover, option:hover,
 input[type="button"]:hover, .c_foot a:hover,
 .meta_menu a,
@@ -1042,6 +1051,10 @@ thead > tr > th small,
 #top_info a[href$="/multi_login/"]:focus::after,
 #top_info a[href$="/logout/"]:hover::after,
 #top_info a[href$="/logout/"]:focus::after,
+#foot_links a[href$="/mark/"]:hover::after,
+#foot_links a[href$="/mark/"]:focus::after,
+#foot_links a[href$="/marktopics/"]:hover::after,
+#foot_links a[href$="/marktopics/"]:focus::after,
 thead,
 #realtop,
 #subhuman,
@@ -1146,7 +1159,11 @@ big > big > big > big > big > big > big > big > big > big > big > big > big > bi
 #top_info a[href$="/multi_login/"]:hover::after,
 #top_info a[href$="/multi_login/"]:focus::after,
 #top_info a[href$="/logout/"]:hover::after,
-#top_info a[href$="/logout/"]:focus::after
+#top_info a[href$="/logout/"]:focus::after,
+#foot_links a[href$="/mark/"]:hover::after,
+#foot_links a[href$="/mark/"]:focus::after,
+#foot_links a[href$="/marktopics/"]:hover::after,
+#foot_links a[href$="/marktopics/"]:focus::after
 { display: block
 ; position: absolute
 ; border-width: 0.1rem
@@ -1496,6 +1513,14 @@ button, a.btn_fake, input[type="button"]
 #top_info a[href$="/multi_login/"]:focus::after
 { content: "Multi-login"
 }
+
+#foot_links a[href$="/mark/"]:hover::after,
+#foot_links a[href$="/mark/"]:focus::after
+{ content: "Mark forums as read" }
+
+#foot_links a[href$="/marktopics/"]:hover::after,
+#foot_links a[href$="/marktopics/"]:focus::after
+{ content: "Mark topics as read" }
 
 #top_info a[href$="/logout/"]::before
 { content: "\f08b"
@@ -2533,8 +2558,20 @@ blockquote > code.prettyprint
 ; padding-bottom: 1rem
 }
 
+#pm_compose > tbody > tr:first-child
+{ padding: 2rem 0 1rem 0 }
+
+#pm_compose > tbody > tr:nth-child(2) > th
+{ display: none }
+
+#pm_compose > tbody > tr:nth-child(3)
+{ margin-top: 1rem }
+
+#pm_compose > tbody > tr:last-child
+{ padding: 1rem 0 3rem }
+
 .member_send > input[type="text"]
-{ margin-left: -8rem
+{ margin: -.7rem 0 0 -.5rem
 ; width: 16rem
 }
 
@@ -3387,7 +3424,8 @@ text-align:left;
 { margin-top: 1rem
 }
 
-#c_bbcode > br
+#c_bbcode > br,
+#pm_compose input[type="radio"] ~ br
 { display: none }
 
 #c_bbcode input[name="helpbox"]
