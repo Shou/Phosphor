@@ -257,8 +257,13 @@ tr > .c_user
 .warn
 { padding: 0 1rem }
 
-.warn > a
-{ display: none }
+.warn > a:last-child
+{ font-size: 0
+; padding: 0
+}
+
+div.warn > a
+{ color: #aaa }
 
 .warn > .warning
 { padding: 0 .25rem }
@@ -394,7 +399,8 @@ tr > #c_post
 #realtop, #top, .c_postinfo, .c_footicons, .c_cat-title,
 blockquote > dl,
 #profile_menu > li > ul,
-#fast-reply
+#fast-reply,
+.topinfo
 { justify-content: space-between }
 
 #acplogin tr, #acplogin th, #submenu, .generic, #fast-reply > dd, #c_postbtn,
@@ -495,6 +501,7 @@ form[action$="/tasks/"]
 
 .cat-pages > li,
 .meta_menu > ul > li,
+.topinfo > .c_username + td,
 input[name="mode"][value="1"] ~ .posting > tbody > tr:nth-child(-n+3)
 { flex-grow: 1 }
 
@@ -2044,8 +2051,7 @@ padding:4px 0 4px 20px;
 { padding: 0.5em }
 
 .warn > br + a:last-of-type
-{ width: 100%
-; text-align: center
+{ text-align: center
 }
 
 .warning
@@ -2077,12 +2083,12 @@ padding:4px 0 4px 20px;
 .topinfo > td[width]
 { width: initial !important }
 
-.topinfo > td:first-child > div img
+.topinfo > td:first-child div > img
 { max-width: 5.6rem !important
 ; min-width: 5.6rem !important
 }
 
-.topinfo > td:first-child > div
+.topinfo > td:first-child div
 { max-width: 5.6rem !important
 ; min-width: 5.6rem
 ; min-height: initial !important
@@ -2095,6 +2101,7 @@ padding:4px 0 4px 20px;
 ; padding: .5rem .5rem .5rem 1rem !important
 ; margin-left: 0
 ; flex: 0 0 auto
+; align-self: baseline
 }
 
 .topinfo > .c_username > a
@@ -2116,7 +2123,8 @@ padding:4px 0 4px 20px;
 
 .topinfo,
 .topinfo > .c_username > a,
-.topinfo > .c_user > .usertitle
+.topinfo > .c_user > .usertitle,
+.topinfo div.warn > a
 { color: #aaa }
 
 .topinfo > .c_user
@@ -2145,8 +2153,7 @@ margin-left:8px;
 { display: none }
 
 #profile_menu a
-{ border: none
-; transition: .3s all cubic-bezier(.55,0,0.1,1)
+{ transition: .3s all cubic-bezier(.55,0,0.1,1)
 ; margin: 0 .5rem
 ; border-width: 0.1rem
 ; border-style: solid
@@ -2165,6 +2172,22 @@ margin-left:8px;
 { order: -1
 ; width: 100%
 ; margin: 0 0 2em 0
+; overflow: hidden
+}
+
+.profile .c_mark > div
+{ max-width: 100% !important
+; transition: 0.3s max-width ease-in-out
+}
+
+.profile .c_mark > div > img
+{ max-width: 100% !important
+; max-height: none !important
+}
+
+.profile .c_mark > div:hover
+{ max-width: 170px !important
+; transition: 0.5s max-width ease-in-out
 }
 
 .profile input[name="status"]
