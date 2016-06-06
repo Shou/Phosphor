@@ -358,6 +358,11 @@ function textHeight(tn) {
 // uploadFiles :: FileList -> IO Void
 function uploadFiles(files) {
   console.info("Uploading files")
+
+  if (files.length > 0) $(ub)[0].classList.add("pulse")
+
+  var done = 0
+
   for (var i = 0, l = files.length; i < l; i++) {
     var api
     var xhr = new XMLHttpRequest()
@@ -375,11 +380,18 @@ function uploadFiles(files) {
     var fd = new FormData()
     fd.append(apis[api].arg, files[i])
 
-    xhr.onload = function(e) {
+    xhr.onload = (function(api) { return function(e) {
       console.info(this.responseText)
       var json = parseDef(this.responseText, null)
       json.api = api
       maybe(null, insertFile, json)
+
+      done++
+      if (done === files.length) $(ub)[0].classList.remove("pulse")
+    }})(api)
+    xhr.ontimeout = function(e) {
+      done++
+      if (done === files.length) $(ub)[0].classList.remove("pulse")
     }
 
     xhr.send(fd)
@@ -413,6 +425,9 @@ var cb = $("<input>", { type: "button"
                           texte.value = ""
                           preve.innerHTML = ""
                       })
+
+// | File upload button
+var ub = $("<label class='btn_fake btn_normal'>\uf093<input type=file hidden multiple></label>")
 
 
 function main() {
@@ -484,6 +499,10 @@ function main() {
 
   // Add closing button to Quick Reply
   $("#fast-reply").prepend(cb)
+  $(parnt).find("dd").append(ub)
+  $(ub).find("input").bind("change", function(e) {
+    uploadFiles(this.files)
+  })
 
   // TODO TODO TODO check for errors
   // Successful reply; discard draft

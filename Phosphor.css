@@ -310,6 +310,18 @@ td.c_username > a
     100% { background-image: radial-gradient(circle, 2em, transparent 1.9em, transparent) }
 }
 
+@-webkit-keyframes pulse {
+    to { background-color: #39C }
+    from { background-color: initial }
+}
+@keyframes pulse {
+    to { background-color: #39C }
+    from { background-color: initial }
+}
+
+.pulse
+{ animation: 1s pulse cubic-bezier(.55,0,0.1,1) infinite alternate }
+
 /* End of animations }}} */
 
 *, *::before, *::after
@@ -736,7 +748,7 @@ blockquote blockquote, blockquote blockquote blockquote blockquote,
 blockquote blockquote blockquote blockquote blockquote blockquote,
 blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote,
 blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote,
-input, select, button, a.btn_fake, td.c_foot a,
+input, select, button, .btn_fake, td.c_foot a,
 input[type="text"]:focus, input[type="password"]:focus, input:not([type]):focus,
 textarea:focus,
 .cat-pages a, .cat-pagesjump i,
@@ -805,7 +817,7 @@ blockquote > code.prettyprint,
 #foot_links a[href$="/mark/"]:focus::after,
 #foot_links a[href$="/marktopics/"]:hover::after,
 #foot_links a[href$="/marktopics/"]:focus::after,
-button:hover, a.btn_fake:hover, select:hover, option:hover,
+button:hover, .btn_fake:hover, select:hover, option:hover,
 input[type="button"]:hover, .c_foot a:hover,
 .meta_menu a,
 .spoiler_toggle,
@@ -918,7 +930,7 @@ textarea
 
 /* }}} */
 
-button:hover, a.btn_fake:hover, select:hover, option:hover,
+button:hover, .btn_fake:hover, select:hover, option:hover,
 input[type="button"]:hover, .c_foot a:hover,
 .notice, .error,
 .notice dt, .error dt,
@@ -946,7 +958,7 @@ input[type="button"]:hover, .c_foot a:hover,
 html, body, td
 th, h2, th a, th a:hover,
 textarea,
-select, input, button, a.btn_fake,
+select, input, button, .btn_fake,
 input[type="text"]:focus,
 input[type="password"]:focus,
 input:not([type]):focus,
@@ -1257,7 +1269,7 @@ thead > tr > th small
 ; margin-top: 1em
 }
 
-input, select, button, a.btn_fake, td.c_foot a, #addpoll
+input, select, button, .btn_fake, td.c_foot a, #addpoll
 { border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 ; border-bottom-color: #101010
@@ -1345,7 +1357,7 @@ input[type="checkbox"]:checked
 input[type="file"]
 { max-width: 40vw }
 
-button, a.btn_fake, input[type="button"]
+button, .btn_fake, input[type="button"]
 { overflow: visible
 ; width: auto
 }
@@ -2425,11 +2437,12 @@ blockquote > code.prettyprint
 ; max-width: calc(100% - 1em)
 }
 
-#fast-reply > dd > button
-{ width: 24em
-; max-width: calc(50% - 1em)
-; margin-bottom: 1rem
+#fast-reply > dd > button,
+#fast-reply > dd > label
+{ width: calc(33% - 1em)
+; margin: 0 .5rem 1rem .5rem
 ; padding: .5rem 0
+; text-align: center
 }
 
 #fast-reply > #c_post-preview
