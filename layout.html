@@ -239,26 +239,33 @@ function preview(p, f) {
 // scrollEquilibrate :: Elem -> Elem -> IO ()
 function scrollEquilibrate(e0, e1) {
   var h = 0
+    , th = 0
   // Coordinates to skip
   var holes = []
   var skips = ["IMG", "OBJECT", "IFRAME", "BLOCKQUOTE"]
 
   for (var i = 0, ns = e0.childNodes, l = ns.length; i < l; i++) {
-    if (ns[i].nodeType === document.TEXT_NODE) h += textHeight(ns[i])
+    if (ns[i].nodeType === document.TEXT_NODE)
+      h += textHeight(ns[i]), th += textHeight(ns[i])
 
     else {
       // check if image, object, so forth, mark current height
-      // then skip those coordinates
+      // to skip those coordinates
       if (skips.indexOf(ns[i].tagName) !== -1) {
         holes.push([h, h + ns[i].clientHeight])
         h += ns[i].clientHeight
+      
+      } else {
+        if (ns[i-1] && ns[i-1].tagName === "BR" && ns[i].tagName === "BR") {
+          h += textHeight(ns[i])
+          th += textHeight(ns[i])
 
-        //var fs = parseFloat(window.getComputedStyle(ns[i]).fontSize)
-        //var lh = parseFloat(window.getComputedStyle(ns[i]).lineHeight)
-        //h += fs * ((lh - 1) / 2 + 1)
+        } else h += ns[i].clientHeight, th += ns[i].clientHeight
       }
     }
   }
+
+  console.log("h = " + h + ", th = " + th)
 
   // TODO Edge attraction
   //var offset = Math.round(Math.cos(Math.PI * e1.scrollTop / (e1.scrollHeight - e1.clientHeight)) * 5) * -1 * 7
@@ -272,13 +279,14 @@ function scrollEquilibrate(e0, e1) {
 
   // Use caret position instead; there is no scrollbar for e1
   if (e1.scrollHeight <= e1.clientHeight) {
+    // hacky way to account for newline dividers quantity `lines.length - 1`
     var acc = -1
     var lines = e1.value.split('\n')
 
     for (var i = 0, l = lines.length; i < l; i++) {
         acc += lines[i].length + 1
         if (e1.selectionStart <= acc) {
-          scroll = i / l * (e0.scrollHeight - e0.clientHeight)
+          scroll = Math.min(1, i) * ((i + 1) / l) * h // (e0.scrollHeight - e0.clientHeight)
           break
         }
     }
@@ -301,6 +309,7 @@ function scrollEquilibrate(e0, e1) {
       console.log("new " + scroll)
 
       // we only need to match one hole per scroll
+      // XXX or do we?
       break
     }
   }
