@@ -82,6 +82,22 @@ for (var i = 0, l = ns.length; i < l; i++)
 var ls = localStorage
 var DRAFTKEY = "drafts"
 
+var apis = { imgur: { url: "https://api.imgur.com/3/image"
+                    , key: "5370f18a9f4d459"
+                    , arg: "image"
+                    , path: "data"
+                    , link: "link"
+                    , type: "type"
+                    }
+           , teknik: { url: "https://api.teknik.io/v1/Upload"
+                     , key: ""
+                     , arg: "file"
+                     , path: "result"
+                     , link: "url"
+                     , type: "contentType"
+                     }
+           }
+
 // Thread ID; is nullable
 var tid = $("[name=t]").attr("value")
 // preview XHR limit timeout
@@ -98,18 +114,31 @@ var parnt = $("#c_post")[0] || $("#fast-reply")[0]
 var qrform = $("form[action$='/post/']")
 
 
+// id :: a -> a
 function id(x) { return x }
 
-
-function jsonRead(k, a) {
+// parseDef :: String -> a -> a
+function parseDef(s, d) {
   try {
-    return JSON.parse(localStorage[k])
-
-  } catch (e) {
-    return a
+    return JSON.parse(s)
+  } catch(e) {
+    return d
   }
 }
 
+// maybe :: b -> (a -> b) -> Maybe a -> b
+function maybe(a, f, m) {
+  if (m) return f(m)
+  else return a
+}
+
+
+// jsonRead :: String -> a -> IO a
+function jsonRead(k, a) {
+  return parseDef(localStorage[k], a)
+}
+
+// jsonWrite :: String -> a -> IO Void
 function jsonWrite(k, x) {
   localStorage[k] = JSON.stringify(x)
 }
@@ -179,7 +208,6 @@ function loadQuotes(pid) {
   var pids = $.zb.get_cache_session("multiquote" + tid).split('|').filter(id)
     , fid = $("[name=f]").attr("value")
 
-  console.log(pids)
   if (pids.indexOf(pid) === -1) pids.push(pid)
 
   var url = $.zb.stat.url + "post/?mode=2&type=4&f=" + fid + "&t=" + tid
@@ -265,7 +293,7 @@ function scrollEquilibrate(e0, e1) {
     }
   }
 
-  console.log("h = " + h + ", th = " + th)
+  //console.log("h = " + h + ", th = " + th)
 
   // TODO Edge attraction
   //var offset = Math.round(Math.cos(Math.PI * e1.scrollTop / (e1.scrollHeight - e1.clientHeight)) * 5) * -1 * 7
@@ -291,19 +319,21 @@ function scrollEquilibrate(e0, e1) {
         }
     }
 
-    console.log("Line: " + i + "; Scroll: " + scroll)
+    //console.log("Line: " + i + "; Scroll: " + scroll)
   }
 
   // FIXME not working?
   // Hole-skipping loop
+  /*
   console.log(holes.map(function(xs) {
     return Math.floor(xs[0]) + " - " + Math.floor(xs[1])
   }))
+  */
   var b = false
   for (var i = 0, l = holes.length; i < l; i++) {
     // within hole's precinct
     if (holes[i][0] < scroll && holes[i][1] > scroll) {
-      console.log(holes[i][0] + " < " + scroll + " < " + holes[i][1])
+      //console.log(holes[i][0] + " < " + scroll + " < " + holes[i][1])
       // skip to hole's lower edge
       scroll = holes[i][1]
       console.log("new " + scroll)
@@ -325,6 +355,52 @@ function textHeight(tn) {
   return rect.bottom - rect.top
 }
 
+// uploadFiles :: FileList -> IO Void
+function uploadFiles(files) {
+  console.info("Uploading files")
+  for (var i = 0, l = files.length; i < l; i++) {
+    var api
+    var xhr = new XMLHttpRequest()
+
+    if (files[i].type.match(/^image/) && files[i].size < 10 ** 7) {
+      api = "imgur"
+      xhr.open("POST", apis.imgur.url)
+      xhr.setRequestHeader("Authorization", "Client-ID " + apis.imgur.key)
+
+    } else {
+      api = "teknik"
+      xhr.open("POST", apis.teknik.url)
+    }
+
+    var fd = new FormData()
+    fd.append(apis[api].arg, files[i])
+
+    xhr.onload = function(e) {
+      console.info(this.responseText)
+      var json = parseDef(this.responseText, null)
+      json.api = api
+      maybe(null, insertFile, json)
+    }
+
+    xhr.send(fd)
+  }
+}
+
+// insertFile :: Object (Object _) -> IO Void
+function insertFile(o) {
+  var api = apis[o.api]
+  var data = o[api.path]
+  console.info(api), console.info(data), console.info(data[api.link])
+
+  if (data[api.type].match(/^image/i))
+    texte.value += "[img]" + data[api.link] + "[/img]"
+
+  else texte.value += data[api.link]
+
+  makePreview()
+  saveDraft()
+}
+
 // | Close [parent] button
 var cb = $("<input>", { type: "button"
                       , value: "x"
@@ -337,6 +413,7 @@ var cb = $("<input>", { type: "button"
                           texte.value = ""
                           preve.innerHTML = ""
                       })
+
 
 function main() {
   quotePyramid()
@@ -374,6 +451,35 @@ function main() {
   // Save state as replying onsubmit to prepare for draft discarding
   $(qrform).bind("submit", function(e) {
     localStorage.reply = true
+  })
+
+  window.addEventListener("dragover", function(e) {
+    e.stopPropagation()
+    e.preventDefault()
+
+    texte.style.backgroundColor = "#39C"
+
+    var dt = e.dataTransfer
+    dt.dropEffect = 'copy'
+  })
+
+  window.addEventListener("dragleave", function(e) {
+    texte.style.backgroundColor = null
+  })
+
+  window.addEventListener("drop", function(e) {
+    e.stopPropagation()
+    e.preventDefault()
+  })
+
+  $(texte).bind("drop", function(e) {
+    e.stopPropagation()
+    e.preventDefault()
+
+    this.style.backgroundColor = null
+
+    var dt = e.originalEvent.dataTransfer
+    uploadFiles(dt.files)
   })
 
   // Add closing button to Quick Reply
