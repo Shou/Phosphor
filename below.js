@@ -407,6 +407,7 @@ function main() {
     e.preventDefault()
   })
 
+  // Drag & drop files
   $(texte).bind("drop", function(e) {
     e.stopPropagation()
     e.preventDefault()
@@ -417,13 +418,14 @@ function main() {
     uploadFiles(dt.files)
   })
 
+  // Paste files
   texte.addEventListener("paste", function(e) {
     var items = e.clipboardData.items
     for (var k in items) if (items[k].kind === "file") {
       var b = items[k].getAsFile()
       uploadFiles([b])
     }
-  }
+  })
 
   // Add closing button to Quick Reply
   $("#fast-reply").prepend(cb)
