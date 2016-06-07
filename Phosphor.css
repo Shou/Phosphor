@@ -20,7 +20,9 @@ html, body
 { font-size: 28px }
 
 input[type="checkbox"]
-{ zoom: 2.5 }
+{ zoom: 2.5
+; margin: 0
+}
 
 .topic h2, #portal h2, #portal_foot h2, thead th
 { font-size: 1.5em }
@@ -29,6 +31,9 @@ input[type="checkbox"]
 .c_topicfoot > a[href$="/old/"] + a ::before,
 .c_topicfoot > a[href$="/new/"]::before
 { font-size: 1rem }
+
+.c_post
+{ max-width: 50rem }
 
 .c_username > a
 { font-size: 1rem !important }
@@ -254,6 +259,11 @@ tr > .c_user
 ; background-color: initial !important
 }
 
+.c_user > *
+{ margin-left: .5rem
+; margin-right: .5rem
+}
+
 .warn
 { padding: 0 1rem }
 
@@ -273,8 +283,7 @@ div.warn > a
 .c_postinfo > .left,
 .c_postinfo > .right > a,
 .c_user
-{ background-color: #101010 !important
-; color: #aaa
+{ color: #aaa
 }
 
 td.c_username > a
@@ -686,10 +695,9 @@ h1, #top_bar::before,
 { line-height: 1.8 }
 
 .c_next > a
-{ text-align: center }
-
-.c_next > a
-{ text-transform: lowercase }
+{ text-align: center
+; white-space: nowrap
+}
 
 .forums th,
 .c_forum strong a
@@ -3422,7 +3430,7 @@ margin-left:10px;
 
 blockquote dl dt,
 blockquote dl dd
-{ padding:2px 4px }
+{ white-space: nowrap }
 
 blockquote > div, blockquote > code
 { margin: 0

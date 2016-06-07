@@ -367,7 +367,7 @@ function uploadFiles(files) {
     var api
     var xhr = new XMLHttpRequest()
 
-    if (files[i].type.match(/^image/) && files[i].size < 10 ** 7) {
+    if (files[i].type.match(/^image/) && files[i].size < Math.pow(10, 7)) {
       api = "imgur"
       xhr.open("POST", apis.imgur.url)
       xhr.setRequestHeader("Authorization", "Client-ID " + apis.imgur.key)
