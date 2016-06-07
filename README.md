@@ -17,14 +17,7 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * Automatic draft saving
 * Mighty rectangular avatars and hover metadata
 * [Vertical mobile thread view](http://i.imgur.com/qOABvzP.png)
-
-## To do / developmental focus
-* Profile view
-* Inbox and PMs
-* Report control panel
-* Preferences
-* Signature editor
-* Polls
+* Fast reply: drag & drop and/or paste to upload images and files
 
 ## Features
 
@@ -32,6 +25,7 @@ Modern dark material and responsive CSS3 purist theme for Zetaboards, intended s
 * Material design for that modern aesthetic
 * Smooth animations and smart transitions
 * Beautiful fonts for your delicate eyes
+* Convenient fast-reply file uploading
 * Small and meaningful color usage
 * Quirky hipster square avatars
 * Literally Awesome font icons
