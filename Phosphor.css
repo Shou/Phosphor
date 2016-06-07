@@ -32,9 +32,6 @@ input[type="checkbox"]
 .c_topicfoot > a[href$="/new/"]::before
 { font-size: 1rem }
 
-.c_post
-{ max-width: 50rem }
-
 .c_username > a
 { font-size: 1rem !important }
 
@@ -71,7 +68,7 @@ input[type="checkbox"]
 @media (min-width: 1039px)
 {
 
-.c_post, #topic_review .c_desc + td
+body td.c_post, #topic_review .c_desc + td
 { max-width: 50rem }
 
 .c_post img,
@@ -120,7 +117,7 @@ input[type="checkbox"]
 ; max-width: 11em
 }
 
-.c_post, #topic_review .c_desc + td
+body td.c_post, #topic_review .c_desc + td
 { max-width: 100% }
 
 .c_post img,
