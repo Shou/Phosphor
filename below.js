@@ -376,9 +376,9 @@ var cb = $("<input>", { type: "button"
                           preve.innerHTML = ""
 
                           // Reset from possible edit-mode
-                          $(parnt).find("[type=submit]")[0].value = "Add Reply"
+                          $(parnt).find("[type=submit]:first").text("Add Reply")
                           var form = parnt.parentNode
-                          $(form).children("name=mode]").attr("value", 2)
+                          $(form).children("[name=mode]").attr("value", 2)
                           $(form).remove("[name=p]")
                           editPID = null
                       })
@@ -427,7 +427,7 @@ function main() {
       var form = parnt.parentNode
       $(form).children("[name=mode]").attr("value", "3")
       $(form).append($("<input type=hidden name=p>").attr("value", editPID))
-      $(parnt).find("[type=submit]")[0].value = "Edit Post"
+      $(parnt).find("[type=submit]:first").text("Edit Post")
       $("#fast-reply")[0].classList.add("show-bottom")
     }
   })
