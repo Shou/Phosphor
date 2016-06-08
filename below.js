@@ -161,7 +161,7 @@ function makePreview() {
         } else preve.innerHTML = data
 
         // High octave
-        if (window.high) high(e)
+        if (window.high) high(preve)
       })
 
       try {
