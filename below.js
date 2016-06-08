@@ -333,7 +333,7 @@ function insertFile(o) {
   var ss = texte.selectionStart
     , se = texte.selectionEnd
   texte.value = texte.value.substr(0, ss)
-              + data[api.link]
+              + link
               + texte.value.substr(se, texte.value.length)
 
   makePreview()
