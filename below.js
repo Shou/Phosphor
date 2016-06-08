@@ -159,6 +159,9 @@ function makePreview() {
           $(parnt).append(preve)
 
         } else preve.innerHTML = data
+
+        // High octave
+        if (window.high) high(e)
       })
 
       try {
