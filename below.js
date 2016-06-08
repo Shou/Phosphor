@@ -327,10 +327,14 @@ function insertFile(o) {
   var data = o[api.path]
   console.info(api), console.info(data), console.info(data[api.link])
 
-  if (data[api.type].match(/^image/i))
-    texte.value += "[img]" + data[api.link] + "[/img]"
+  var link = data[api.link]
+  if (data[api.type].match(/^image/i)) link = "[img]" + link + "[/img]"
 
-  else texte.value += data[api.link]
+  var ss = texte.selectionStart
+    , se = texte.selectionEnd
+  texte.value = texte.value.substr(0, ss)
+              + data[api.link]
+              + texte.value.substr(se, texte.value.length)
 
   makePreview()
   saveDraft()
@@ -394,6 +398,9 @@ function main() {
   window.addEventListener("dragover", function(e) {
     e.stopPropagation()
     e.preventDefault()
+
+    // Show fast-reply
+    $("#fast-reply")[0].classList.add("show-bottom")
 
     texte.style.backgroundColor = "#39C"
 
