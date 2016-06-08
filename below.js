@@ -379,7 +379,7 @@ var cb = $("<input>", { type: "button"
                           $(parnt).find("[type=submit]:first").text("Add Reply")
                           var form = parnt.parentNode
                           $(form).children("[name=mode]").attr("value", 2)
-                          $(form).remove("[name=p]")
+                          $(form).children("[name=p]").remove()
                           editPID = null
                       })
 
