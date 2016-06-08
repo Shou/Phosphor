@@ -428,7 +428,7 @@ function main() {
       $(form).children("[name=mode]").attr("value", "3")
       $(form).append($("<input type=hidden name=p>").attr("value", editPID))
       $(parnt).find("[type=submit]")[0].value = "Edit Post"
-      $("#fast-reply")[0].classlist.add("show-bottom")
+      $("#fast-reply")[0].classList.add("show-bottom")
     }
   })
 
