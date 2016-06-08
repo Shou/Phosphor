@@ -22,6 +22,9 @@ var apis = { imgur: { url: "https://api.imgur.com/3/image"
 var tid = $("[name=t]").attr("value")
 // preview XHR limit timeout
 var pretimeout = null
+// edit-mode post ID; nullable
+var editPID = null
+
 // preview element
 var preve = null
 // textarea element
@@ -135,11 +138,25 @@ function loadQuotes(pid) {
 
   $.get(url, "", function(data) {
     var quotesText = $(data).find("#c_post-text").attr("value")
-    texte.value += quotesText
+    insertText(quotesText)
     makePreview()
   })
 }
 
+function loadEdit(pid) {
+  var fid = $("[name=f]").attr("value")
+
+  var url = $.zb.stat.url + "post/?mode=3&type=1&f=" + fid + "&t=" + tid
+          + "&p=" + pid
+
+  $.get(url, "", function(data) {
+    var editText = $(data).find("#c_post-text").attr("value")
+    insertText(editText)
+    makePreview()
+  })
+}
+
+// FIXME
 // TODO requestAnimationFrame
 // makePreview :: IO ()
 function makePreview() {
@@ -160,6 +177,7 @@ function makePreview() {
 
         } else preve.innerHTML = data
 
+        // FIXME videos and embeds should not be updated unless they're changed
         // High octave
         if (window.high) high(preve)
       })
@@ -330,14 +348,19 @@ function insertFile(o) {
   var link = data[api.link]
   if (data[api.type].match(/^image/i)) link = "[img]" + link + "[/img]"
 
-  var ss = texte.selectionStart
-    , se = texte.selectionEnd
-  texte.value = texte.value.substr(0, ss)
-              + link
-              + texte.value.substr(se, texte.value.length)
+  insertText(link)
 
   makePreview()
   saveDraft()
+}
+
+// insertText :: String -> IO Void
+function insertText(s) {
+  var ss = texte.selectionStart
+    , se = texte.selectionEnd
+  texte.value = texte.value.substr(0, ss)
+              + s
+              + texte.value.substr(se, texte.value.length)
 }
 
 // | Close [parent] button
@@ -351,6 +374,13 @@ var cb = $("<input>", { type: "button"
                           draftWrite(tid, null)
                           texte.value = ""
                           preve.innerHTML = ""
+
+                          // Reset from possible edit-mode
+                          $(parnt).find("[type=submit]")[0].value = "Add Reply"
+                          var form = parnt.parentNode
+                          $(form).children("name=mode]").attr("value", 2)
+                          $(form).remove("[name=p]")
+                          editPID = null
                       })
 
 // | File upload button
@@ -385,6 +415,20 @@ function main() {
       e.preventDefault()
       loadQuotes(this.href.match(/&p=(\d+)/)[1])
       $("#fast-reply")[0].classList.add("show-bottom")
+    }
+  })
+
+  // Quick Reply edit event
+  $(".left > [href*='mode=3']").bind("click", function(e) {
+    if (e.button === 0) {
+      e.preventDefault()
+      editPID = this.href.match(/&p=(\d+)/)[1]
+      loadEdit(editPID)
+      var form = parnt.parentNode
+      $(form).children("[name=mode]").attr("value", "3")
+      $(form).append($("<input type=hidden name=p>").attr("value", editPID))
+      $(parnt).find("[type=submit]")[0].value = "Edit Post"
+      $("#fast-reply")[0].classlist.add("show-bottom")
     }
   })
 
