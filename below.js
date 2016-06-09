@@ -112,7 +112,8 @@ function draftWrite(k, a) {
 
 // saveDraft :: IO ()
 function saveDraft() {
-  draftWrite(tid, this.value)
+  // Don't save edits
+  if (! editPID) draftWrite(tid, this.value)
 }
 
 // quotePyramid :: Elem -> IO ()
@@ -382,6 +383,7 @@ var cb = $("<input>", { type: "button"
                           var form = parnt.parentNode
                           $(form).children("[name=mode]").attr("value", 2)
                           $(form).children("[name=p]").remove()
+                          $(form).children("[name=pg]").remove()
                           editPID = null
                       })
 
