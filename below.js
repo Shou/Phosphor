@@ -20,6 +20,8 @@ var apis = { imgur: { url: "https://api.imgur.com/3/image"
 
 // Thread ID; is nullable
 var tid = $("[name=t]").attr("value")
+// Page number; nullable
+var pg = location.pathname.split('/')[4].match(/^\d+$/).toString() || null
 // preview XHR limit timeout
 var pretimeout = null
 // edit-mode post ID; nullable
@@ -427,6 +429,7 @@ function main() {
       var form = parnt.parentNode
       $(form).children("[name=mode]").attr("value", "3")
       $(form).append($("<input type=hidden name=p>").attr("value", editPID))
+      $(form).append($("<input type=hidden name=pg>").attr("value", pg))
       $(parnt).find("[type=submit]:first").text("Edit Post")
       $("#fast-reply")[0].classList.add("show-bottom")
     }
