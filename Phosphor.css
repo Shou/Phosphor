@@ -1462,7 +1462,7 @@ button, .btn_fake, input[type="button"]
 ; animation: slide-down 0.3s 1 ease-in-out forwards
 }
 
-#floatbar:hover ~ #subhuman, #floatbar:focus ~ #subhuman
+#floatbar:hover ~ #subhuman, #floatbar:focus ~ #subhuman,
 #realtop:hover ~ #subhuman, #realtop:focus ~ #subhuman
 { margin-top: 3.35rem
 }
