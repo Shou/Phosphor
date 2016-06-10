@@ -141,6 +141,7 @@ function loadQuotes(pid) {
 
   $.get(url, "", function(data) {
     var quotesText = $(data).find("#c_post-text").attr("value")
+    quotesText = quotesText.trim()
     insertText(quotesText)
     makePreview()
   })

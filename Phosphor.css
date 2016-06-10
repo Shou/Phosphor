@@ -747,9 +747,11 @@ a
 
 /* {{{ Colors */
 
-::selection, option:checked
-{ background-color: #37474F
-; color: #ECEFF1
+::selection,
+option:checked,
+option:hover
+{ background-color: white
+; color: black
 }
 
 th,
@@ -1457,9 +1459,12 @@ button, .btn_fake, input[type="button"]
 }
 
 #floatbar:hover + #realtop, #floatbar:focus + #realtop,
+{ animation: slide-down 0.3s 1 ease-in-out forwards
+}
+
+#floatbar:hover + #realtop, #floatbar:focus + #realtop,
 #realtop:hover, #realtop:focus
 { position: fixed
-; animation: slide-down 0.3s 1 ease-in-out forwards
 }
 
 #floatbar:hover ~ #subhuman, #floatbar:focus ~ #subhuman,
