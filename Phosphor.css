@@ -73,12 +73,16 @@ body td.c_post, #topic_review .c_desc + td
 
 .c_post img,
 #c_post-preview img,
-#c_post-preview object,
 #topic_review img,
 .c_post video,
+#c_post-preview video,
 .c_post object,
+#c_post-preview object,
+#topic_review object,
 .c_post audio,
-.c_post iframe
+#c_post-preview audio,
+.c_post iframe,
+#c_post-preview iframe
 { max-width: 50rem }
 
 }
@@ -122,12 +126,16 @@ body td.c_post, #topic_review .c_desc + td
 
 .c_post img,
 #c_post-preview img,
-#c_post-preview object,
 #topic_review img,
 .c_post video,
+#c_post-preview video,
 .c_post object,
+#c_post-preview object,
+#topic_review object,
 .c_post audio,
-.c_post iframe
+#c_post-preview audio,
+.c_post iframe,
+#c_post-preview iframe
 { max-width: calc(100% - 1rem) !important }
 
 #fast-reply > dd,
@@ -2506,7 +2514,6 @@ blockquote > code.prettyprint
 #c_post-preview
 { padding: 0 1rem
 ; margin: 0.5rem 0.5rem 1rem 0.5rem
-; max-width: 50rem
 ; max-height: 20em
 ; text-align: left
 ; overflow-y: scroll
