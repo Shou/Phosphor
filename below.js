@@ -18,24 +18,28 @@ var apis = { imgur: { url: "https://api.imgur.com/3/image"
                      }
            }
 
-// Thread ID; is nullable
+// | Thread ID
+// tid :: Nullable String
 var tid = $("[name=t]").attr("value")
-// Page number; nullable
-var pg = location.pathname.split('/')[4].match(/^\d+$/).toString() || null
-// preview XHR limit timeout
+// | Page number
+// pg :: String
+var pg = location.pathname.split('/').splice(4,4).join("")
+// | preview XHR limit timeout
 var pretimeout = null
-// edit-mode post ID; nullable
+// | edit-mode post ID
+// editPID :: Nullable String
 var editPID = null
 
-// preview element
+// | preview element
+// preve :: Element
 var preve = null
-// textarea element
+// | textarea element
 var texte = $("#c_post-text")[0]
          || $("#fast-reply > dd > textarea")[0]
          || $("#quickcompose")[0]
-// relevant textarea container element
+// | relevant textarea container element
 var parnt = $("#c_post")[0] || $("#fast-reply")[0]
-// quick-reply form
+// | quick-reply form
 var qrform = $("form[action$='/post/']")
 
 
