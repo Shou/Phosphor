@@ -37,6 +37,7 @@ var preve = null
 var texte = $("#c_post-text")[0]
          || $("#fast-reply > dd > textarea")[0]
          || $("#quickcompose")[0]
+         || $("#edit_sig #c_post > textarea")[0]
 // | relevant textarea container element
 var parnt = $("#c_post")[0] || $("#fast-reply")[0]
 // | quick-reply form
