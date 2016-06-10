@@ -792,7 +792,8 @@ textarea:focus,
 #foot_links > a:last-child::before,
 #foot_datetime > a,
 #top_menu,
-#conversation
+#conversation,
+.topinfo
 { background-color: #1F1F1F }
 
 .c_sig,
@@ -2120,8 +2121,7 @@ padding:4px 0 4px 20px;
 { margin: 0 !important }
 
 #conversation .c_postinfo
-{ background-color: #101010
-; padding: 0.5rem 1rem
+{ padding: 0.5rem 1rem
 ; align-items: center
 }
 
@@ -2163,9 +2163,6 @@ padding:4px 0 4px 20px;
 ; min-width: initial
 ; width: initial
 }
-
-.topinfo
-{ background-color: #101010 }
 
 .topinfo > .c_username,
 .topinfo > .c_user > .usertitle
