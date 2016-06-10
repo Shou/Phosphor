@@ -1459,10 +1459,10 @@ button, .btn_fake, input[type="button"]
 }
 
 #floatbar:hover + #realtop, #floatbar:focus + #realtop,
-{ animation: slide-down 0.3s 1 ease-in-out forwards
+{ position: fixed
+; animation: slide-down 0.3s 1 ease-in-out forwards
 }
 
-#floatbar:hover + #realtop, #floatbar:focus + #realtop,
 #realtop:hover, #realtop:focus
 { position: fixed
 }
@@ -1475,6 +1475,8 @@ button, .btn_fake, input[type="button"]
 #realtop
 { width: 100%
 ; height: 3.35rem
+; top: 0
+; left: 0
 ; border-bottom-width: 0.1rem
 ; border-bottom-style: solid
 }
