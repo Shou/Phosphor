@@ -2232,17 +2232,11 @@ margin-left:8px;
 
 .profile .c_mark > div
 { max-width: 100% !important
-; transition: 0.3s max-width ease-in-out
 }
 
 .profile .c_mark > div > img
 { max-width: 100% !important
 ; max-height: none !important
-}
-
-.profile .c_mark > div:hover
-{ max-width: 170px !important
-; transition: 0.5s max-width ease-in-out
 }
 
 .profile input[name="status"]
