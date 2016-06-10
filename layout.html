@@ -1,5 +1,6 @@
 <script src="http://shou.github.io/Phosphor/top.js"></script>
 
+<div id="floatbar"></div>
 <div id="realtop">
 <!-- HEADER -->
 <input id="toggle-topmenu" type="checkbox">
@@ -7,17 +8,7 @@
 <!-- TOPMENU -->
 </div>
 
-<script src="http://shou.github.io/Phosphor/mid.js">
-
-var ns = $( "#menu_rcp > a > strong > small"
-          + ", #menu_pm > a > strong > small")
-  , topBar = $("#toggle-topmenu + label")[0]
-
-for (var i = 0, l = ns.length; i < l; i++)
-    if (parseInt(ns[i].textContent) > 0)
-        topBar.classList.add("glow")
-
-</script>
+<script src="http://shou.github.io/Phosphor/mid.js"></script>
 
 <div id="subhuman">
 <!-- NAV -->

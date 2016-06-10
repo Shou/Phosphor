@@ -325,6 +325,11 @@ td.c_username > a
     from { background-color: initial }
 }
 
+@keyframes slide-down {
+  to { top: 0 }
+  from { top: -4rem }
+}
+
 .pulse
 { animation: 1s pulse cubic-bezier(.55,0,0.1,1) infinite alternate }
 
@@ -710,7 +715,7 @@ h1, #top_bar::before,
 
 /* {{{ Z index */
 
-#subhuman, td.c_user
+#subhuman, td.c_user, #floatbar
 { z-index: 1
 ; position: relative
 }
@@ -1443,8 +1448,29 @@ button, .btn_fake, input[type="button"]
 #pm_folderlist li, #ucp_gallery li
 { display: inline }
 
+#floatbar
+{ height: 1rem
+; width: 100%
+; position: fixed
+; top: 0
+; left: 0
+}
+
+#floatbar:hover + #realtop, #floatbar:focus + #realtop,
+#realtop:hover, #realtop:focus
+{ position: fixed
+; animation: slide-down 0.3s 1 ease-in-out forwards
+}
+
+#floatbar:hover ~ #subhuman, #floatbar:focus ~ #subhuman
+#realtop:hover ~ #subhuman, #realtop:focus ~ #subhuman
+{ margin-top: 3.35rem
+}
+
 #realtop
-{ border-bottom-width: 0.1rem
+{ width: 100%
+; height: 3.35rem
+; border-bottom-width: 0.1rem
 ; border-bottom-style: solid
 }
 
