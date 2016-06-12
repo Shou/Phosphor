@@ -725,13 +725,49 @@ h1, #top_bar::before,
 
 #subhuman, td.c_user, #floatbar
 { z-index: 1
-; position: relative
 }
 
 #realtop
 { z-index: 2
-; position: relative
 }
+
+/* }}} */
+
+/* {{{ Position */
+
+input,
+select,
+button,
+.btn_fake,
+td.c_foot a,
+#addpoll,
+label,
+textarea,
+.drop_menu a,
+.meta_menu a,
+.cat-pages a,
+.cat-pages i,
+/* XXX how dangerous is this */
+tr,
+.c_user > div:first-child,
+.c_user > a > div:first-child,
+.c_user > .usertitle,
+.bunk-button,
+.bunk-big-butt,
+#subhuman,
+td.c_user,
+#floatbar,
+#realtop,
+.c_next > a
+{ position: relative }
+
+/* }}} */
+
+/* {{{ Transition */
+
+#foot_datetime > a:hover,
+#foot_links > a:hover::before
+{ transition: .3s all cubic-bezier(.55,0,0.1,1) }
 
 /* }}} */
 
@@ -817,6 +853,7 @@ blockquote > code.prettyprint,
 #acplogin,
 .bunk-big-butt:hover,
 #profile_menu a:hover,
+.c_next > a:hover,
 .cat-topicpages a,
 #addpoll,
 .c_topicfoot > [href$="/old/"]::before,
@@ -843,7 +880,9 @@ input[type="button"]:hover, .c_foot a:hover,
 .meta_menu a,
 .spoiler_toggle,
 .nav-mark,
-#addpoll:hover
+#addpoll:hover,
+#foot_datetime > a:hover,
+#foot_links > a:hover::before
 { background-color: #3D3D3D }
 
 #copyright
@@ -869,7 +908,9 @@ html, body
 .bunk-button:hover,
 #profile_menu a,
 .c_next > a,
-.meta_menu a
+.meta_menu a,
+.c_topicfoot > a:hover::before,
+.c_topicfoot > a > strong:hover::before
 { background-color: #FFECB3 }
 
 #emot_end:hover, #emot_end:focus,
@@ -1041,7 +1082,9 @@ input[type="text"], input[type="password"], input:not([type])
 .c_next > a,
 .meta_menu a,
 #profile_menu a,
-.category h2 > a, .category h2
+.category h2 > a, .category h2,
+.c_topicfoot > a:hover::before,
+.c_topicfoot > a > strong:hover::before
 { color: #101010 }
 
 .cat-pages a:hover,
@@ -1053,7 +1096,8 @@ input[type="text"], input[type="password"], input:not([type])
 
 .bunk-big-butt:hover,
 .meta_menu > ul > li > a:hover,
-#profile_menu a:hover
+#profile_menu a:hover,
+.c_next > a:hover
 { color: #FFECB3 }
 
 .warning
@@ -1148,6 +1192,7 @@ input[type="text"], input[type="password"], input:not([type])
 .cat-pages i::before, .cat-pages i::after,
 .meta_menu > ul > li > a::after, .meta_menu > ul > li > a::before,
 #profile_menu a::before, #profile_menu a::after,
+.c_next > a::before, .c_next > a::after,
 .cat-topicpages a:hover
 { border-color: #FFECB3 }
 
@@ -1163,7 +1208,8 @@ input[type="text"], input[type="password"], input:not([type])
 .bunk-big-butt,
 .bunk-button,
 .meta_menu > ul > li > a,
-#profile_menu a
+#profile_menu a,
+.c_next > a
 { border-color: transparent }
 
 .notice
@@ -1301,14 +1347,10 @@ input, select, button, .btn_fake, td.c_foot a, #addpoll
 ; margin: 0 0.5em
 ; vertical-align: middle
 ; transition: .3s all
-; position: relative
 }
 
 label[for="setskin"]
 { display: none }
-
-label
-{ position: relative }
 
 #main label
 { margin: .5rem }
@@ -1336,7 +1378,6 @@ textarea
 ; transition: .3s all
 ; box-sizing: border-box
 ; outline: none
-; position: relative
 }
 
 input[type="text"], input[type="password"], input:not([type])
@@ -1611,7 +1652,6 @@ button, .btn_fake, input[type="button"]
 .drop_menu a
 { display: block
 ; padding: 1em 2.5em
-; position: relative
 ; transition: 0.5s background-color cubic-bezier(0,0.70,0.85,1)
 }
 
@@ -1723,7 +1763,6 @@ button, .btn_fake, input[type="button"]
 ; border-width: 0.1rem
 ; border-style: solid
 ; text-align: center
-; position: relative
 ; transition: 0.3s all cubic-bezier(.55,0,0.1,1)
 }
 
@@ -1746,10 +1785,6 @@ ul li.cat-pageshead
 { padding: 0
 ; margin: 1rem 10rem -5rem 0
 }
-
-.cat-pages a,
-.cat-pages i
-{ position: relative }
 
 .cat-pages a::before,
 .cat-pages i::before
@@ -1809,10 +1844,6 @@ ul li.cat-pageshead
 ; justify-content: space-between
 ; flex-wrap: wrap
 }
-
-/* XXX how dangerous is this */
-tr
-{ position: relative }
 
 .exclusivebutton .c_desc,
 #edit_profile .c_desc,
@@ -2024,11 +2055,10 @@ padding:4px 0 4px 20px;
 }
 
 .c_user > div:first-child,
-.c_user > a > div:first-child,
+.c_user > a > div:first-child
 { max-width: 14.4rem !important
 ; max-height: 28.8rem !important
 ; min-height: 10rem
-; position: relative
 ; display: inline-flex
 ; margin: 0 !important
 ; overflow: hidden
@@ -2072,7 +2102,6 @@ padding:4px 0 4px 20px;
 ; z-index: 1
 ; width: 14.4rem
 ; min-height: 2.2rem
-; position: relative
 
 ; background-color: #D0D0D0
 
@@ -2428,6 +2457,7 @@ blockquote > code.prettyprint
 .c_next > a,
 #addpoll
 { padding: 1rem 8.9rem
+; transition: 0.3s all cubic-bezier(.55,0,0.1,1)
 }
 
 #addpoll
@@ -3730,14 +3760,14 @@ font-weight:700;
 .c_topicfoot > [href$="/old/"]::before
 { content: "\f04a" }
 
-.c_topicfoot > [href$="/old/"] + a ::before
+.c_topicfoot > [href$="/old/"] + a > strong::before
 { content: "\f233" }
 
 .c_topicfoot > [href$="/new/"]::before
 { content: "\f04e" }
 
 .c_topicfoot > [href$="/old/"]::before,
-.c_topicfoot > [href$="/old/"] + a ::before,
+.c_topicfoot > [href$="/old/"] + a > strong::before,
 .c_topicfoot > [href$="/new/"]::before
 { padding: 0.5em 2em
 ; margin: 0 1em
@@ -3745,6 +3775,7 @@ font-weight:700;
 ; border-bottom-width: 0.25rem
 ; border-bottom-style: solid
 ; display: inline-block
+; transition: .3s all cubic-bezier(.55,0,0.1,1)
 }
 
 .meta_box h3, #meta_welcome strong
@@ -4033,7 +4064,6 @@ padding:0;
 ; margin: 0 0.5rem
 ; transition: .3s all cubic-bezier(.55,0,0.1,1)
 ; display: inline-block
-; position: relative
 }
 
 .bunk-big-butt
@@ -4047,12 +4077,12 @@ padding:0;
 ; margin-right: 0.25rem
 ; display: inline-block
 ; text-align: center
-; position: relative
 }
 
 .bunk-big-butt::before, .bunk-big-butt::after,
 .meta_menu > ul > li > a::before, .meta_menu > ul > li > a::after,
-#profile_menu > li > ul a::before, #profile_menu > li > ul a::after
+#profile_menu > li > ul a::before, #profile_menu > li > ul a::after,
+.c_next > a::before, .c_next > a::after
 { content: ""
 ; border-style: solid
 ; position: absolute
@@ -4062,7 +4092,8 @@ padding:0;
 
 .bunk-big-butt::before,
 .meta_menu > ul > li > a::before,
-#profile_menu > li > ul a::before
+#profile_menu > li > ul a::before,
+.c_next > a::before
 { width: 0
 ; height: 100%
 ; border-width: 0.1rem 0 0.1rem 0
@@ -4073,7 +4104,8 @@ padding:0;
 
 .bunk-big-butt::after,
 .meta_menu > ul > li > a::after,
-#profile_menu > li > ul a::after
+#profile_menu > li > ul a::after,
+.c_next > a::after
 { height: 0
 ; width: 100%
 ; border-width: 0 0.1rem 0 0.1rem
@@ -4084,12 +4116,14 @@ padding:0;
 
 .bunk-big-butt:hover::before,
 .meta_menu > ul > li > a:hover::before,
-#profile_menu > li > ul a:hover::before
+#profile_menu > li > ul a:hover::before,
+.c_next > a:hover::before
 { width: 100% }
 
 .bunk-big-butt:hover::after,
 .meta_menu > ul > li > a:hover::after,
-#profile_menu > li > ul a:hover::after
+#profile_menu > li > ul a:hover::after,
+.c_next > a:hover::after
 { height: 100% }
 
 .usertitle img
