@@ -375,6 +375,7 @@ html, body
 .profile .c_mark > div,
 .c_topicfoot,
 #subhuman,
+#logo,
 #nav,
 #foot_themechooser > form,
 #foot_links > a:first-child::before,
@@ -1266,8 +1267,10 @@ big > big > big > big > big > big > big > big > big > big > big > big > big > bi
 #logo
 { text-align: left
 ; letter-spacing: 0.1em
-; float: left
-; padding: 0.5em 1em
+}
+
+#logo > a
+{ padding: 0.5em 1em
 }
 
 hr
