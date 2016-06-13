@@ -1501,7 +1501,7 @@ button, .btn_fake, input[type="button"]
 { display: inline }
 
 #floatbar
-{ height: 1rem
+{ height: 3.35rem
 ; width: 100%
 ; position: fixed
 ; top: 0
