@@ -910,6 +910,8 @@ html, body
 #profile_menu a,
 .c_next > a,
 .meta_menu a,
+#nav > li > a:hover,
+#submenu > a:hover,
 .c_topicfoot > a:hover::before,
 .c_topicfoot > a > strong:hover::before
 { background-color: #FFECB3 }
@@ -1084,6 +1086,8 @@ input[type="text"], input[type="password"], input:not([type])
 .meta_menu a,
 #profile_menu a,
 .category h2 > a, .category h2,
+#nav > li > a:hover,
+#submenu > a:hover,
 .c_topicfoot > a:hover::before,
 .c_topicfoot > a > strong:hover::before
 { color: #101010 }
@@ -1734,6 +1738,8 @@ button, .btn_fake, input[type="button"]
 ; overflow: hidden
 ; text-overflow: ellipsis
 ; max-width: 50vw
+; padding: .3rem .3rem
+; transition: 0.3s all cubic-bezier(.55,0,0.1,1)
 }
 
 #nav li:first-child
