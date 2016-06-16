@@ -1720,7 +1720,9 @@ button, .btn_fake, input[type="button"]
 }
 
 #submenu > a
-{ padding: 1.5em 1em 1.5em }
+{ padding: 1.5em 1em 1.5em
+; transition: 0.3s all cubic-bezier(.55,0,0.1,1)
+}
 
 #wrap
 { margin: 0 auto 4.35rem
