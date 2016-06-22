@@ -23,8 +23,9 @@ var apis = { imgur: { url: "https://api.imgur.com/3/image"
            }
 
 // | Thread ID
-// tid :: Nullable String
+// tid, fid :: Nullable String
 var tid = $("[name=t]").attr("value")
+  , fid = $("[name=f]").attr("value")
 // | Page number
 // pg :: String
 var pg = location.pathname.split('/').splice(4,4).join("")
@@ -33,6 +34,8 @@ var pretimeout = null
 // | edit-mode post ID
 // editPID :: Nullable String
 var editPID = null
+// worker :: Worker
+var worker = null
 
 // | preview element
 // preve :: Element
@@ -62,8 +65,27 @@ function parseDef(s, d) {
 
 // maybe :: b -> (a -> b) -> Maybe a -> b
 function maybe(a, f, m) {
-  if (m) return f(m)
+  if (m !== null) return f(m)
   else return a
+}
+
+// typeclass Nullable a => Annihilator a
+
+// Twerks for Numbers, Strings, and probably Lists
+// amappend :: Annihilator a => a -> a -> a
+function amappend(x, y) {
+  if (x !== null && y !== null) return x + y
+  else return null
+}
+
+// amconcat :: Annihilator a => [a] -> a
+function amconcat(xs) {
+  if (xs.length === 0) return null
+  else {
+    var acc = xs[0]
+    for (var i = 1, l = xs.length; i < l; i++) acc = amappend(acc, xs[i])
+    return acc
+  }
 }
 
 
@@ -141,7 +163,6 @@ function toggleQuote(e) {
 // TODO multiquotes
 function loadQuotes(pid) {
   var pids = $.zb.get_cache_session("multiquote" + tid).split('|').filter(id)
-    , fid = $("[name=f]").attr("value")
 
   if (pids.indexOf(pid) === -1) pids.push(pid)
 
@@ -157,8 +178,6 @@ function loadQuotes(pid) {
 }
 
 function loadEdit(pid) {
-  var fid = $("[name=f]").attr("value")
-
   var url = $.zb.stat.url + "post/?mode=3&type=1&f=" + fid + "&t=" + tid
           + "&p=" + pid
 
@@ -386,6 +405,30 @@ function insertText(s) {
               + texte.value.substr(se, texte.value.length)
 }
 
+// TODO
+// XXX how to deal with spaces
+//     try prefixes until either a) match b) failure
+// checkMention :: Event -> IO Void
+function checkMention(e) {
+  // why null, why
+  var mentions = maybe([], id, texte.value.match(/@[^@]+/g))
+  for (var i = 0, l = mentions.length; i < l; i++) {
+    var subs = mentions[i].split(' ')
+    console.log(subs)
+    // TODO XHR "loop" over subs list
+    var xhr = new XMLHttpRequest()
+    xhr.onload = function(e) {
+      console.log(e)
+      var o = parseDef(e.responseText)
+      
+      if (o.something) null
+    }
+    xhr.load("GET", _)
+    // TODO
+    //xhr.send()
+  }
+}
+
 // | Close [parent] button
 var cb = $("<input>", { type: "button"
                       , value: "x"
@@ -412,6 +455,13 @@ var ub = $("<label class='btn_fake btn_normal'>\uf093<input type=file hidden mul
 
 
 function main() {
+  worker = new Worker("worker.js")
+  worker.postMessage(amconcat([ $.zb.stat.url, "topic/", tid, "/", pg]))
+  // TODO Make non-anon function for this
+  worker.onmessage = function(e) {
+    console.log(e.data)
+  }
+
   quotePyramid()
 
   // Scroll sync event
@@ -424,6 +474,9 @@ function main() {
 
   // Draft saving event
   $(texte).bind("input focusout", saveDraft)
+
+  // Check mentions
+  $(texte).bind("input focusout", checkMention)
 
   // Quick Reply spawn event
   $(".topic-buttons").bind("click", function(e) {
@@ -462,6 +515,7 @@ function main() {
   // Save state as replying onsubmit to prepare for draft discarding
   $(qrform).bind("submit", function(e) {
     localStorage.reply = true
+    checkMention.call(this, e)
   })
 
   window.addEventListener("dragover", function(e) {
