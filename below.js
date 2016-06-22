@@ -8,6 +8,8 @@ var apis = { imgur: { url: "https://api.imgur.com/3/image"
                     , path: "data"
                     , link: "link"
                     , type: "type"
+                    , error: "error"
+                    , enabled: true
                     }
            , teknik: { url: "https://api.teknik.io/v1/Upload"
                      , key: ""
@@ -15,6 +17,8 @@ var apis = { imgur: { url: "https://api.imgur.com/3/image"
                      , path: "result"
                      , link: "url"
                      , type: "contentType"
+                     , error: "idk"
+                     , enabled: true
                      }
            }
 
@@ -317,12 +321,14 @@ function uploadFiles(files) {
     var api
     var xhr = new XMLHttpRequest()
 
-    if (files[i].type.match(/^image/) && files[i].size < Math.pow(10, 7)) {
+    if (files[i].type.match(/^image/)
+    && files[i].size < Math.pow(10, 7)
+    && apis.imgur.enabled) {
       api = "imgur"
       xhr.open("POST", apis.imgur.url)
       xhr.setRequestHeader("Authorization", "Client-ID " + apis.imgur.key)
 
-    } else {
+    } else if (apis.teknik.enabled) {
       api = "teknik"
       xhr.open("POST", apis.teknik.url)
     }
@@ -330,15 +336,23 @@ function uploadFiles(files) {
     var fd = new FormData()
     fd.append(apis[api].arg, files[i])
 
-    xhr.onload = (function(api) { return function(e) {
+    xhr.onload = (function(api, i) { return function(e) {
       console.info(this.responseText)
       var json = parseDef(this.responseText, null)
       json.api = api
-      maybe(null, insertFile, json)
 
-      done++
+      if (! json[apis[api].error]) {
+        maybe(null, insertFile, json)
+        done++
+
+      } else {
+        // Server-side error, disable API until refresh
+        apis[api].enabled = false
+        uploadFiles([files[i]])
+      }
+
       if (done === files.length) $(ub)[0].classList.remove("pulse")
-    }})(api)
+    }})(api, i)
     xhr.ontimeout = function(e) {
       done++
       if (done === files.length) $(ub)[0].classList.remove("pulse")
