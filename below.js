@@ -538,6 +538,7 @@ function main() {
   window.addEventListener("drop", function(e) {
     e.stopPropagation()
     e.preventDefault()
+    texte.style.backgroundColor = null
   })
 
   // Drag & drop files
