@@ -573,6 +573,9 @@ function main() {
   if (localStorage.reply) {
     draftWrite(tid, null)
     delete localStorage.reply
+
+    // ZB doesn't wipe this automatically for some reason
+    $.zb.set_cache_session("multiquote" + tid, "")
   }
 
   // Open Quick Reply on load if a draft exists
