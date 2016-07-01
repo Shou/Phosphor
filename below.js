@@ -416,25 +416,27 @@ function checkMention(e) {
     var subs = mentions[i].split(' ')
     console.log(subs)
     // TODO XHR "loop" over subs list
-    var request = function(index) {
+    var request = function(index, subnames) {
       var xhr = new XMLHttpRequest()
       xhr.onload = function(e) {
         var o = parseDef(this.responseText)
 
         if (o.ok === 1) console.log("Exact match")
         else if (o.ok === 2) {
-          if (index < subs.length) request(index + 1)
+          if (index < subnames.length) request(index + 1)
           else console.log("Keep typing...")
         }
         else console.log(o.stringify())
       }
 
-      var name = subs.slice(0, index).join(' ')
+      var name = subnames.slice(0, index).join(' ')
       var baseurl = "http://w11.zetaboards.com/bnetmlp/tasks/?mode=1&task=7&name="
       xhr.open("GET", baseurl + encodeURIComponent(name).replace(/%20/g, '+'))
       xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
       xhr.send()
     }
+
+    request(1, subs)
   }
 }
 
