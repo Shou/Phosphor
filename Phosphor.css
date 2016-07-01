@@ -1741,7 +1741,7 @@ button, .btn_fake, input[type="button"]
 ; overflow: hidden
 ; text-overflow: ellipsis
 ; max-width: 50vw
-; padding: .3rem .3rem
+; padding: .2rem .5rem
 ; transition: 0.3s all cubic-bezier(.55,0,0.1,1)
 }
 
@@ -1947,6 +1947,7 @@ width:20px;
 
 .forum
 { justify-content: space-between
+; margin-top: 1rem
 }
 
 .forums tbody tr > td
@@ -1976,7 +1977,7 @@ width:20px;
 }
 
 .c_info
-{ margin: 0 0 2em 0
+{ margin: 0 0 1em 0
 }
 
 td.c_info-v,td.c_info-t,td.c_info-r {
@@ -3433,7 +3434,7 @@ margin-left:10px;
 
 .c_post img, #topic_review img, .c_post video, .c_post object, .c_post audio,
 .c_post iframe
-{ max-width: 50rem
+{ max-width: 100%
 }
 
 .c_post iframe
