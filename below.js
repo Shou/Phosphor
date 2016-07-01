@@ -429,8 +429,9 @@ function checkMention(e) {
         else console.log(o.ok)
       }
 
-      var name = subnames.slice(0, index).join(' ').replace(/^@/, "")
+      console.log(index)
       console.log(subnames)
+      var name = subnames.slice(0, index).join(' ').replace(/^@/, "")
       console.log(name)
       var baseurl = "http://w11.zetaboards.com/bnetmlp/tasks/?mode=1&task=7&name="
       xhr.open("GET", baseurl + encodeURIComponent(name).replace(/%20/g, '+'))
