@@ -423,7 +423,7 @@ function checkMention(e) {
 
         if (o.ok === 1) console.log("Exact match")
         else if (o.ok === 2) {
-          if (index < subnames.length) request(index + 1)
+          if (index < subnames.length) request(index + 1, subnames)
           else console.log("Keep typing...")
         }
         else console.log(o.ok)
