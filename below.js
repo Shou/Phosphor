@@ -422,7 +422,10 @@ function checkMention(e) {
         var o = parseDef(this.responseText)
 
         if (o.ok === 1) console.log("Exact match")
-        else if (o.ok === 2) console.log("Partial match")
+        else if (o.ok === 2) {
+          if (index < subs.length) request(index + 1)
+          else console.log("Keep typing...")
+        }
         else console.log(o.stringify())
       }
 
