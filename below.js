@@ -405,23 +405,33 @@ function insertText(s) {
               + texte.value.substr(se, texte.value.length)
 }
 
+var mentionCache = {}
+
 // TODO
 // XXX how to deal with spaces
 //     try prefixes until either a) match b) failure
 // checkMention :: Event -> IO Void
 function checkMention(e) {
   // why null, why
-  var mentions = maybe([], id, texte.value.match(/@[^@]+/g))
+  var mentions = maybe([], id, texte.value.match(/@[^@\n]+/g))
   for (var i = 0, l = mentions.length; i < l; i++) {
     var subs = mentions[i].split(' ')
     console.log(subs)
-    // TODO XHR "loop" over subs list
     var request = function(index, subnames) {
       var xhr = new XMLHttpRequest()
+
+      console.log(index)
+      console.log(subnames)
+      var name = subnames.slice(0, index).join(' ').replace(/^@/, "")
+      console.log(name)
+      var baseurl = "http://w11.zetaboards.com/bnetmlp/tasks/?mode=1&task=7&name="
+
+      xhr.open("GET", baseurl + encodeURIComponent(name).replace(/%20/g, '+'))
+
       xhr.onload = function(e) {
         var o = parseDef(this.responseText)
 
-        if (o.ok === 1) console.log("Exact match")
+        if (o.ok === 1) mentionCache[name] = true
         else if (o.ok === 2) {
           if (index < subnames.length) request(index + 1, subnames)
           else console.log("Keep typing...")
@@ -429,14 +439,10 @@ function checkMention(e) {
         else console.log(o.ok)
       }
 
-      console.log(index)
-      console.log(subnames)
-      var name = subnames.slice(0, index).join(' ').replace(/^@/, "")
-      console.log(name)
-      var baseurl = "http://w11.zetaboards.com/bnetmlp/tasks/?mode=1&task=7&name="
-      xhr.open("GET", baseurl + encodeURIComponent(name).replace(/%20/g, '+'))
       xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
-      xhr.send()
+
+      if (name in mentionCache) return null
+      else xhr.send()
     }
 
     request(1, subs)
