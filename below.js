@@ -426,7 +426,7 @@ function checkMention(e) {
           if (index < subnames.length) request(index + 1)
           else console.log("Keep typing...")
         }
-        else console.log(o.stringify())
+        else console.log(o.ok)
       }
 
       var name = subnames.slice(0, index).join(' ')
