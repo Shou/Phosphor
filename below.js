@@ -416,16 +416,22 @@ function checkMention(e) {
     var subs = mentions[i].split(' ')
     console.log(subs)
     // TODO XHR "loop" over subs list
-    var xhr = new XMLHttpRequest()
-    xhr.onload = function(e) {
-      console.log(e)
-      var o = parseDef(e.responseText)
-      
-      if (o.something) null
+    var request = function(index) {
+      var xhr = new XMLHttpRequest()
+      xhr.onload = function(e) {
+        var o = parseDef(this.responseText)
+
+        if (o.ok === 1) console.log("Exact match")
+        else if (o.ok === 2) console.log("Partial match")
+        else console.log(o.stringify())
+      }
+
+      var name = subs.slice(0, index).join(' ')
+      var baseurl = "http://w11.zetaboards.com/bnetmlp/tasks/?mode=1&task=7&name="
+      xhr.open("GET", baseurl + encodeURIComponent(name).replace(/%20/g, '+'))
+      xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+      xhr.send()
     }
-    xhr.load("GET", _)
-    // TODO
-    //xhr.send()
   }
 }
 
