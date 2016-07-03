@@ -3330,6 +3330,7 @@ a + .description
 ; width: 100%
 ; overflow: hidden
 ; margin-top: -1rem
+; text-align: justify
 }
 
 .c_sig, .c_nosig
