@@ -486,7 +486,7 @@ function notifyAll(us) {
   console.log("Notifying all " + us.toString())
   var delay = function(i) {
     setTimeout(function() {
-      notify(user)
+      notify(us[i])
     }, i * 5000) // XXX delay because Zetaboards limits(?)
   }
 
