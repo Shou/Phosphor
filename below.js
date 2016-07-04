@@ -503,7 +503,7 @@ function withPMXCSecure(f) {
   var xhr = new XMLHttpRequest()
   xhr.onload = function(e) {
     var p = new DOMParser()
-    var d = p.parseFromString(this.responseText)
+    var d = p.parseFromString(this.responseText, "text/html")
     var mxc = maybe(null, view("value"), d.querySelector("[name=xc]"))
     var msec = maybe(null, view("value"), d.querySelector("[name=secure]"))
 
