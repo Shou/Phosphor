@@ -428,7 +428,7 @@ var mentions = []
 // TODO mentions in localStorage for post
 // checkMention :: Event -> IO Void
 function checkMention(e) {
-  var mentions = []
+  mentions = []
   var mentionsSubs = maybe([], id, texte.value.match(/@[^@\n]+/g))
   for (var i = 0, l = mentionsSubs.length; i < l; i++) {
     var subs = mentionsSubs[i].split(' ')
@@ -447,9 +447,9 @@ function checkMention(e) {
       xhr.onload = function(e) {
         var o = parseDef(this.responseText)
 
+        mentionCache[name] = o.ok
         if (o.ok === 1) {
           mentions.push(name)
-          mentionCache[name] = true
 
         } else if (o.ok === 2) {
           if (index < subnames.length) request(index + 1, subnames)
@@ -460,8 +460,10 @@ function checkMention(e) {
 
       xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
 
-      if (name in mentionCache) return null
-      else xhr.send()
+      if (name in mentionCache) {
+        // Visual feedback
+
+      } else xhr.send()
     }
 
     request(1, subs)
