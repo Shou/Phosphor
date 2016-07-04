@@ -474,8 +474,9 @@ function checkMention(e) {
 function notifyAll(us) {
   console.log("Notifying all " + us.toString())
   for (var i = 0, l = us.length; i < l; i++) {
+    var user = us[i]
     setTimeout(function() {
-      notify(us[i])
+      notify(user)
     }, i * 5000) // XXX delay because Zetaboards limits(?)
   }
 }
@@ -483,7 +484,7 @@ function notifyAll(us) {
 // notify :: Text -> IO Void
 function notify(user) {
   console.log("Notifying " + user)
-  withPMSecure(function(xc, sec) {
+  withPMXCSecure(function(xc, sec) {
     var mention = amconcat(["Mention by ", getUsername()
                            , " in ", getThreadTitle()
                            ])
