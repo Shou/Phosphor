@@ -82,6 +82,12 @@ function amconcat(xs) {
 // Psuedo-curried object attribute viewer
 function view(k) { return function(o) { return o[k] } }
 
+function nub(xs) {
+  return xs.filter(function(x, i) {
+    return xs.indexOf(x) === i
+  })
+}
+
 
 // parseDef :: String -> a -> a
 function parseDef(s, d) {
@@ -629,7 +635,7 @@ function main() {
   // Save state as replying onsubmit to prepare for draft discarding
   $(qrform).bind("submit", function(e) {
     localStorage.reply = true
-    jsonWrite("mentions", mentions)
+    jsonWrite("mentions", nub(mentions))
   })
 
   window.addEventListener("dragover", function(e) {
