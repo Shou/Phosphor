@@ -759,7 +759,8 @@ tr,
 td.c_user,
 #floatbar,
 #realtop,
-.c_next > a
+.c_next > a,
+#c_postbtn
 { position: relative }
 
 /* }}} */
@@ -864,7 +865,8 @@ blockquote > code.prettyprint,
 #pm_compose > tbody > tr:last-child,
 .c_post-attachment,
 .btn_default,
-.btn_normal
+.btn_normal,
+#c_postbtn:hover
 { background-color: #2D2D2D }
 
 [data-desc]:hover::after,
@@ -913,7 +915,8 @@ html, body
 #nav > li > a:hover,
 #submenu > a:hover,
 .c_topicfoot > a:hover::before,
-.c_topicfoot > a > strong:hover::before
+.c_topicfoot > a > strong:hover::before,
+#c_postbtn
 { background-color: #FFECB3 }
 
 #emot_end:hover, #emot_end:focus,
@@ -1089,7 +1092,8 @@ input[type="text"], input[type="password"], input:not([type])
 #nav > li > a:hover,
 #submenu > a:hover,
 .c_topicfoot > a:hover::before,
-.c_topicfoot > a > strong:hover::before
+.c_topicfoot > a > strong:hover::before,
+#c_postbtn
 { color: #101010 }
 
 .cat-pages a:hover,
@@ -1103,7 +1107,8 @@ input[type="text"], input[type="password"], input:not([type])
 .meta_menu > ul > li > a:hover,
 #profile_menu a:hover,
 #toggle-topmenu + label:hover,
-.c_next > a:hover
+.c_next > a:hover,
+#c_postbtn:hover
 { color: #FFECB3 }
 
 .warning
@@ -1199,7 +1204,8 @@ input[type="text"], input[type="password"], input:not([type])
 .meta_menu > ul > li > a::after, .meta_menu > ul > li > a::before,
 #profile_menu a::before, #profile_menu a::after,
 .c_next > a::before, .c_next > a::after,
-.cat-topicpages a:hover
+.cat-topicpages a:hover,
+#c_postbtn [type=submit]::before, #c_postbtn [type=submit]::after
 { border-color: #FFECB3 }
 
 .offline
@@ -1212,6 +1218,7 @@ input[type="text"], input[type="password"], input:not([type])
 { border-color: #7E57C2 }
 
 .bunk-big-butt,
+#c_postbtn,
 .bunk-button,
 .meta_menu > ul > li > a,
 #profile_menu a,
