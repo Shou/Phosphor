@@ -54,15 +54,6 @@ var qrform = $("form[action$='/post/']")
 // id :: a -> a
 function id(x) { return x }
 
-// parseDef :: String -> a -> a
-function parseDef(s, d) {
-  try {
-    return JSON.parse(s)
-  } catch(e) {
-    return d
-  }
-}
-
 // maybe :: b -> (a -> b) -> Maybe a -> b
 function maybe(a, f, m) {
   if (m !== null) return f(m)
@@ -88,6 +79,18 @@ function amconcat(xs) {
   }
 }
 
+// Psuedo-curried object attribute viewer
+function view(k) { return function(o) { return o[k] } }
+
+
+// parseDef :: String -> a -> a
+function parseDef(s, d) {
+  try {
+    return JSON.parse(s)
+  } catch(e) {
+    return d
+  }
+}
 
 // jsonRead :: String -> a -> IO a
 function jsonRead(k, a) {
@@ -146,6 +149,20 @@ function saveDraft() {
   // Don't save edits
   if (! editPID) draftWrite(tid, this.value)
 }
+
+
+// getUsername :: IO (Maybe String)
+function getUsername() {
+  var euser = document.querySelector("#top_info > strong > a")
+  return maybe(null, function(e) { return e.textContent }, euser)
+}
+
+// getThreadTitle :: IO (Maybe String)
+function getThreadTitle() {
+  var etitle = document.querySelector("#topic_viewer > thead")
+  return maybe(null, function(_) { return document.title }, etitle)
+}
+
 
 // quotePyramid :: Elem -> IO ()
 function quotePyramid(s) {
@@ -406,16 +423,15 @@ function insertText(s) {
 }
 
 var mentionCache = {}
+var mentions = []
 
-// TODO
-// XXX how to deal with spaces
-//     try prefixes until either a) match b) failure
+// TODO mentions in localStorage for post
 // checkMention :: Event -> IO Void
 function checkMention(e) {
-  // why null, why
-  var mentions = maybe([], id, texte.value.match(/@[^@\n]+/g))
-  for (var i = 0, l = mentions.length; i < l; i++) {
-    var subs = mentions[i].split(' ')
+  var mentions = []
+  var mentionsSubs = maybe([], id, texte.value.match(/@[^@\n]+/g))
+  for (var i = 0, l = mentionsSubs.length; i < l; i++) {
+    var subs = mentionsSubs[i].split(' ')
     console.log(subs)
     var request = function(index, subnames) {
       var xhr = new XMLHttpRequest()
@@ -431,8 +447,11 @@ function checkMention(e) {
       xhr.onload = function(e) {
         var o = parseDef(this.responseText)
 
-        if (o.ok === 1) mentionCache[name] = true
-        else if (o.ok === 2) {
+        if (o.ok === 1) {
+          mentions.push(name)
+          mentionCache[name] = true
+
+        } else if (o.ok === 2) {
           if (index < subnames.length) request(index + 1, subnames)
           else console.log("Keep typing...")
         }
@@ -447,6 +466,72 @@ function checkMention(e) {
 
     request(1, subs)
   }
+}
+
+// notifyAll :: [Text] -> IO Void
+function notifyAll(us) {
+  console.log("Notifying all " + us.toString())
+  for (var i = 0, l = us.length; i < l; i++) {
+    setTimeout(function() {
+      notify(us[i])
+    }, i * 5000) // XXX delay because Zetaboards limits(?)
+  }
+}
+
+// notify :: Text -> IO Void
+function notify(user) {
+  console.log("Notifying " + user)
+  withPMSecure(function(xc, sec) {
+    var mention = amconcat(["Mention by ", getUsername()
+                           , " in ", getThreadTitle()
+                           ])
+    var content = location.href
+    console.log(mention)
+    pm(user, mention, content, xc, sec, function(e) {
+      console.log(this)
+    })
+  })
+}
+
+// | Do something with the Zetaboards `xc` and `secure` PM data
+// withPMXCSecure :: (String -> String -> IO Void) -> IO Void
+function withPMXCSecure(f) {
+  console.log("With secure...")
+  var xhr = new XMLHttpRequest()
+  xhr.onload = function(e) {
+    var p = new DOMParser()
+    var d = p.parseFromString(this.responseText)
+    var mxc = maybe(null, view("value"), d.querySelector("[name=xc]"))
+    var msec = maybe(null, view("value"), d.querySelector("[name=secure]"))
+
+    maybe(null, function() { f(mxc, msec) }, amappend(mxc, msec))
+  }
+  var url = amconcat([$.zb.stat.url, "msg/?c=2"])
+  xhr.open("GET", url)
+  xhr.send()
+}
+
+// pm :: Text -> Text -> Text -> Text -> Text
+//    -> (Event -> IO Void) -> Maybe Text -> IO Void
+function pm(user, title, post, xc, secure, f, mid) {
+  console.log("Making PM")
+  var xhr = new XMLHttpRequest()
+
+  var url = amconcat([$.zb.stat.url, "msg/?c=3&sd=1"])
+  xhr.open("POST", url)
+
+  xhr.onload = f
+
+  var fd = new FormData()
+
+  fd.append("xc", xc)
+  fd.append("secure", secure)
+  if (mid) fd.append("mid", mid)
+  else fd.append("name", user)
+  fd.append("title", title)
+  fd.append("post", post)
+
+  xhr.send(fd)
 }
 
 // | Close [parent] button
@@ -535,7 +620,7 @@ function main() {
   // Save state as replying onsubmit to prepare for draft discarding
   $(qrform).bind("submit", function(e) {
     localStorage.reply = true
-    checkMention.call(this, e)
+    jsonWrite("mentions", mentions)
   })
 
   window.addEventListener("dragover", function(e) {
@@ -593,6 +678,9 @@ function main() {
   if (localStorage.reply) {
     draftWrite(tid, null)
     delete localStorage.reply
+    notifyAll(jsonRead("mentions", []))
+    console.log("Deleting mentions")
+    delete localStorage.mentions
 
     // ZB doesn't wipe this automatically for some reason
     $.zb.set_cache_session("multiquote" + tid, "")
