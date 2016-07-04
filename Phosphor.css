@@ -3907,7 +3907,18 @@ input[name="mode"][value="2"] + input[name="type"][value="2"] ~ .posting > tbody
 { padding: 0 }
 
 #c_postbtn
-{ padding-top: 2em }
+{ padding-top: 2em
+}
+
+#c_postbtn > td
+{ display: flex
+; width: 100%
+; justify-content: center
+}
+
+#c_postbtn [type=submit]
+{ white-space: pre
+}
 
 #files_upload input,.pm .row1 a,.pm .row2 a, #ucp_gallery button img,
 #findposts td a {
@@ -4092,7 +4103,7 @@ padding:0;
 ; display: inline-block
 }
 
-.bunk-big-butt
+.bunk-big-butt, #c_postbtn [type=submit]
 { border-width: 0.1rem
 ; border-style: solid
 ; font-size: 1.6rem
@@ -4108,7 +4119,8 @@ padding:0;
 .bunk-big-butt::before, .bunk-big-butt::after,
 .meta_menu > ul > li > a::before, .meta_menu > ul > li > a::after,
 #profile_menu > li > ul a::before, #profile_menu > li > ul a::after,
-.c_next > a::before, .c_next > a::after
+.c_next > a::before, .c_next > a::after,
+#c_postbtn [type=submit]::before, #c_postbtn [type=submit]::after
 { content: ""
 ; border-style: solid
 ; position: absolute
@@ -4119,7 +4131,8 @@ padding:0;
 .bunk-big-butt::before,
 .meta_menu > ul > li > a::before,
 #profile_menu > li > ul a::before,
-.c_next > a::before
+.c_next > a::before,
+#c_postbtn [type=submit]::before
 { width: 0
 ; height: 100%
 ; border-width: 0.1rem 0 0.1rem 0
@@ -4131,7 +4144,8 @@ padding:0;
 .bunk-big-butt::after,
 .meta_menu > ul > li > a::after,
 #profile_menu > li > ul a::after,
-.c_next > a::after
+.c_next > a::after,
+#c_postbtn [type=submit]::after
 { height: 0
 ; width: 100%
 ; border-width: 0 0.1rem 0 0.1rem
@@ -4143,13 +4157,15 @@ padding:0;
 .bunk-big-butt:hover::before,
 .meta_menu > ul > li > a:hover::before,
 #profile_menu > li > ul a:hover::before,
-.c_next > a:hover::before
+.c_next > a:hover::before,
+#c_postbtn [type=submit]:hover::before
 { width: 100% }
 
 .bunk-big-butt:hover::after,
 .meta_menu > ul > li > a:hover::after,
 #profile_menu > li > ul a:hover::after,
-.c_next > a:hover::after
+.c_next > a:hover::after,
+#c_postbtn [type=submit]:hover::after
 { height: 100% }
 
 .usertitle img
