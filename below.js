@@ -456,7 +456,6 @@ function checkMention(e) {
           if (index < subnames.length) request(index + 1, subnames)
           else console.log("Keep typing...")
         }
-        else
       }
 
       xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
