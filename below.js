@@ -436,9 +436,11 @@ var mentions = []
 // checkMention :: Event -> IO Void
 function checkMention(e) {
   mentions = []
+
   var quoteRegex = /\[quote(=[^\]]+)\].+\[\/quote\]/g
   var noQuotes = texte.value.replace(quoteRegex, "")
   var mentionsSubs = maybe([], id, noQuotes.match(/@[^@\n]+/g))
+
   for (var i = 0, l = mentionsSubs.length; i < l; i++) {
     var subs = mentionsSubs[i].split(' ')
     console.log(subs)
@@ -472,7 +474,7 @@ function checkMention(e) {
       if (name in mentionCache) {
         if (mentionCache[name] === 1) mentions.push(name)
 
-        else {
+        else if (mentionCache[name] === 2){
           if (index < subnames.length) request(index + 1, subnames)
           else console.log("Keep typing...")
         }
