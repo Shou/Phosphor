@@ -425,7 +425,7 @@ function insertText(s) {
 var mentionCache = {}
 var mentions = []
 
-// TODO mentions in localStorage for post
+// TODO try subnames after a match; user "Math" will override "Mathfreak"
 // checkMention :: Event -> IO Void
 function checkMention(e) {
   mentions = []
@@ -463,6 +463,11 @@ function checkMention(e) {
       if (name in mentionCache) {
         if (mentionCache[name] === 1) mentions.push(name)
 
+        else {
+          if (index < subnames.length) request(index + 1, subnames)
+          else console.log("Keep typing...")
+        }
+
       } else xhr.send()
     }
 
@@ -473,12 +478,13 @@ function checkMention(e) {
 // notifyAll :: [Text] -> IO Void
 function notifyAll(us) {
   console.log("Notifying all " + us.toString())
-  for (var i = 0, l = us.length; i < l; i++) {
-    var user = us[i]
+  var delay = function(i) {
     setTimeout(function() {
       notify(user)
     }, i * 5000) // XXX delay because Zetaboards limits(?)
   }
+
+  for (var i = 0, l = us.length; i < l; i++) delay(i)
 }
 
 // notify :: Text -> IO Void
