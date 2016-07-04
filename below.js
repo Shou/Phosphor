@@ -448,6 +448,7 @@ function checkMention(e) {
         var o = parseDef(this.responseText)
 
         mentionCache[name] = o.ok
+
         if (o.ok === 1) {
           mentions.push(name)
 
@@ -455,13 +456,13 @@ function checkMention(e) {
           if (index < subnames.length) request(index + 1, subnames)
           else console.log("Keep typing...")
         }
-        else console.log(o.ok)
+        else
       }
 
       xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
 
       if (name in mentionCache) {
-        // Visual feedback
+        if (mentionCache[name] === 1) mentions.push(name)
 
       } else xhr.send()
     }
