@@ -431,10 +431,13 @@ function insertText(s) {
 var mentionCache = {}
 var mentions = []
 
-// TODO try subnames after a match; user "Math" will override "Mathfreak"
+// FIXME try subnames after a match; user "Math" will override "Mathfreak"
+// FIXME regex replace quotes is too greedy
 // checkMention :: Event -> IO Void
 function checkMention(e) {
   mentions = []
+  var quoteRegex = /\[quote(=[^\]]+)\].+\[\/quote\]/g
+  var noQuotes = texte.value.replace(quoteRegex, "")
   var mentionsSubs = maybe([], id, texte.value.match(/@[^@\n]+/g))
   for (var i = 0, l = mentionsSubs.length; i < l; i++) {
     var subs = mentionsSubs[i].split(' ')
@@ -575,12 +578,12 @@ var ub = $("<label class='btn_fake btn_normal'>\uf093<input type=file hidden mul
 
 
 function main() {
-  worker = new Worker("worker.js")
-  worker.postMessage(amconcat([ $.zb.stat.url, "topic/", tid, "/", pg]))
+  //worker = new Worker("worker.js")
+  //worker.postMessage(amconcat([ $.zb.stat.url, "topic/", tid, "/", pg]))
   // TODO Make non-anon function for this
-  worker.onmessage = function(e) {
-    console.log(e.data)
-  }
+  //worker.onmessage = function(e) {
+  //  console.log(e.data)
+  //}
 
   quotePyramid()
 
