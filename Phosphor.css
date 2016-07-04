@@ -760,7 +760,7 @@ td.c_user,
 #floatbar,
 #realtop,
 .c_next > a,
-#c_postbtn
+#c_postbtn [type=submit]
 { position: relative }
 
 /* }}} */
@@ -866,7 +866,7 @@ blockquote > code.prettyprint,
 .c_post-attachment,
 .btn_default,
 .btn_normal,
-#c_postbtn:hover
+#c_postbtn [type=submit]:hover
 { background-color: #2D2D2D }
 
 [data-desc]:hover::after,
@@ -916,7 +916,7 @@ html, body
 #submenu > a:hover,
 .c_topicfoot > a:hover::before,
 .c_topicfoot > a > strong:hover::before,
-#c_postbtn
+#c_postbtn [type=submit]
 { background-color: #FFECB3 }
 
 #emot_end:hover, #emot_end:focus,
@@ -1093,7 +1093,7 @@ input[type="text"], input[type="password"], input:not([type])
 #submenu > a:hover,
 .c_topicfoot > a:hover::before,
 .c_topicfoot > a > strong:hover::before,
-#c_postbtn
+#c_postbtn [type=submit]
 { color: #101010 }
 
 .cat-pages a:hover,
@@ -1108,7 +1108,7 @@ input[type="text"], input[type="password"], input:not([type])
 #profile_menu a:hover,
 #toggle-topmenu + label:hover,
 .c_next > a:hover,
-#c_postbtn:hover
+#c_postbtn [type=submit]:hover
 { color: #FFECB3 }
 
 .warning
@@ -1222,7 +1222,8 @@ input[type="text"], input[type="password"], input:not([type])
 .bunk-button,
 .meta_menu > ul > li > a,
 #profile_menu a,
-.c_next > a
+.c_next > a,
+#c_postbtn [type=submit]
 { border-color: transparent }
 
 .notice
