@@ -438,7 +438,7 @@ function checkMention(e) {
   mentions = []
   var quoteRegex = /\[quote(=[^\]]+)\].+\[\/quote\]/g
   var noQuotes = texte.value.replace(quoteRegex, "")
-  var mentionsSubs = maybe([], id, texte.value.match(/@[^@\n]+/g))
+  var mentionsSubs = maybe([], id, noQuotes.match(/@[^@\n]+/g))
   for (var i = 0, l = mentionsSubs.length; i < l; i++) {
     var subs = mentionsSubs[i].split(' ')
     console.log(subs)
