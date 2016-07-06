@@ -88,6 +88,12 @@ function nub(xs) {
   })
 }
 
+function keys(o) {
+  var ks = []
+  for (k in o) ks.push(k)
+  return ks
+}
+
 
 // parseDef :: String -> a -> a
 function parseDef(s, d) {
@@ -474,8 +480,9 @@ function checkMention(e) {
       if (name in mentionCache) {
         if (mentionCache[name] === 1) mentions.push(name)
 
-        else if (mentionCache[name] === 2){
+        else if (mentionCache[name] === 2) {
           if (index < subnames.length) request(index + 1, subnames)
+
           else console.log("Keep typing...")
         }
 
@@ -531,6 +538,36 @@ function withPMXCSecure(f) {
   xhr.send()
 }
 
+// withActiveMembers :: ([String] -> IO Void) -> IO Void
+function withActiveMembers(f) {
+  console.log("With active members...")
+  var us = []
+
+  var request = function(index) {
+    var xhr = new XMLHttpRequest()
+    xhr.onload = function(e) {
+      var p = new DOMParser()
+      var d = p.parseFromString(this.responseText, "text/html")
+      var eus = d.querySelectorAll(".member")
+      var ers = d.querySelectorAll("#member_list_full > tbody > tr > td")
+      var lastDateElem = (x = ers[ers.length - 5]) ? x : null
+      var lastDate = maybe("", view("textContent"), lastDateElem)
+
+      for (var i = 0; i < eus.length; i++) us.push(eus[i].textContent)
+
+      if (eus.length < 50) f(us)
+      else if (lastDate.match(/\d{4}/)) f(us)
+      else if (index < 10) request(index + 1)
+    }
+    var path = "members/" + index + "/?sort=recent_activity&order=d"
+    var url = amconcat([$.zb.stat.url, path])
+    xhr.open("GET", url)
+    xhr.send()
+  }
+
+  request(1)
+}
+
 // pm :: Text -> Text -> Text -> Text -> Text
 //    -> (Event -> IO Void) -> Maybe Text -> IO Void
 function pm(user, title, post, xc, secure, f, mid) {
@@ -552,6 +589,89 @@ function pm(user, title, post, xc, secure, f, mid) {
   fd.append("post", post)
 
   xhr.send(fd)
+}
+
+function formatPaste(e) {
+  var cd = e.originalEvent.clipboardData
+  var text = cd.getData("text")
+
+  if (text.length > 0) e.originalEvent.preventDefault()
+
+  var fs = { "youtube":
+              { "regex": /^https?:\/\/(www.youtube.com\/watch|youtu.be)\S+/ig
+              , "formatter": function(x) {
+                  return "[youtube]" + x + "[/youtube]"
+                }
+              }
+           , "image":
+              { "regex": /^https?:\/\/\S+\.(jpe?g|png|gif|bmp|webp)(\S+)?/ig
+              , "formatter": function(x) {
+                  return "[img]" + x + "[/img]"
+                }
+              }
+           }
+
+  for (k in fs) {
+    var o = fs[k]
+    if (text.match(o.regex)) text = text.replace(o.regex, o.formatter)
+  }
+
+  insertText(text)
+}
+
+var tabIndex = -1
+
+function tabComplete(e) {
+  var oe = e.originalEvent
+
+  // Tab
+  if (oe.which === 9) {
+    e.preventDefault()
+
+    if (tabCompletes.length > 0) {
+      // Loop through
+      tabIndex = (++tabIndex) % tabCompletes.length
+
+      if (tabPos.start && tabPos.end) {
+        var start = texte.value.substr(0, tabPos.start)
+        var end = texte.value.substr(tabPos.end)
+        texte.value = start + tabCompletes[tabIndex] + end
+        tabPos.end = tabPos.start + tabCompletes[tabIndex].length
+      }
+    }
+  }
+}
+
+var tabCompletes = []
+// tabPos :: Object (Nullable Int)
+var tabPos = { start: null, end: null }
+
+// checkTabCompletes :: Event -> IO Void
+function checkTabCompletes(e) {
+  // Skip on tabs
+  if (e.originalEvent.which === 9) return null
+
+  var p = this.selectionStart
+
+  for (var i = p; i > 0; i--) {
+    if (['@'].indexOf(this.value[i]) !== -1) break
+  }
+
+  tabIndex = -1
+  tabCompletes = []
+  tabPos = { start: null, end: null }
+
+  if (this.value[i] === '@') {
+    tabPos = { start: i + 1, end: p }
+    var name = this.value.substr(i + 1, p)
+    keys(mentionCache).map(function(k) {
+      if (k.toLowerCase().indexOf(name.toLowerCase()) === 0) {
+        tabCompletes.push(k)
+      }
+    })
+  }
+
+  console.log("Matches: " + tabCompletes.toString())
 }
 
 // | Close [parent] button
@@ -589,6 +709,19 @@ function main() {
 
   quotePyramid()
 
+  var o = jsonRead("mentionCache", {expires:0})
+  if (o.expires < (new Date()).getTime()) {
+    withActiveMembers(function(us){
+      for (var i = 0, l = us.length; i < l; i++) mentionCache[us[i]] = 1
+
+      var o = { expires: (new Date()).getTime() + 5 * 60 * 1000
+              , cache: mentionCache
+              }
+      jsonWrite("mentionCache", o)
+    })
+
+  } else mentionCache = o.cache
+
   // Scroll sync event
   $(texte).bind("scroll keyup", function(e) {
     scrollEquilibrate(preve, texte)
@@ -602,6 +735,14 @@ function main() {
 
   // Check mentions
   $(texte).bind("input focusout", checkMention)
+
+  // Check tab complete mentions
+  $(texte).bind("keyup", checkTabCompletes)
+
+  // Auto-format pasted text
+  $(texte).bind("paste", formatPaste)
+
+  $(texte).bind("keydown", tabComplete)
 
   // Quick Reply spawn event
   $(".topic-buttons").bind("click", function(e) {
