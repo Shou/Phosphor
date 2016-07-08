@@ -859,6 +859,10 @@ function main() {
   // Pretty-print code tags
   $("code").each(function(_, c) {
     c.classList.add("prettyprint")
+    var lang = c.previousElementSibling.children[0].textContent
+    lang = (x = lang.replace(/^Code: /, "")) ? x : null
+    lang = amconcat(["lang-", lang])
+    c.classList.add(lang)
   })
 }
 
