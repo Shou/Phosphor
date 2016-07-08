@@ -857,7 +857,7 @@ function main() {
   makePreview()
 
   // Pretty-print code tags
-  $("code").each(function(c) {
+  $("code").each(function(i, c) {
     c.classList.add("prettyprint")
   })
 }
