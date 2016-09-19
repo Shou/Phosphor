@@ -1,9 +1,10 @@
 # Phosphor
+
+Modern dark material and responsive CSS3 purist theme for Zetaboards, intended successor of the brighter [Monochrome](https://github.com/Shou/Monochrome), all achieved within the confines of Zetaboard's extensive use of `<table>` and otherwise old-fashioned markup. This theme is complete and no longer under development as forums transition further to modernity with Discourse.
+
 <img src="http://i.imgur.com/TwPsUqe.png" />
 
-Modern dark material and responsive CSS3 purist theme for Zetaboards, intended successor of the brighter [Monochrome](https://github.com/Shou/Monochrome), all achieved within the confines of Zetaboard's extensive use of `<table>` and otherwise old-fashioned markup. Currently undergoing heavy development, it is based on Monochrome's core and already in a bearable state.
-
-## Changes
+## Changes (from Monochrome)
 
 * [New button animations](https://u.teknik.io/Gvpov9.webm)
 * [New input animations](https://u.teknik.io/wYrF9v.webm)
